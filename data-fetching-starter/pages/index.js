@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/Layout'
 import utilStyles from '../styles/utils.module.css'
@@ -15,11 +14,6 @@ const Home = () => (
         <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
       </p>
     </section>
-    <h2>
-      <Link href="/posts/first-post">
-        <a>First Post</a>
-      </Link>
-    </h2>
   </Layout>
 )
 
