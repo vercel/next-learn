@@ -9,7 +9,7 @@
 .headingLg {
   font-size: 1.5rem;
   line-height: 1.4;
-  margin: 0.25rem 0 0.5rem;
+  margin: 1rem 0;
 }
 
 .headingMd {
@@ -23,4 +23,22 @@
 
 .colorInherit {
   color: inherit;
+}
+
+.padding1px {
+  padding-top: 1px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  margin: 0 0 1.25rem;
+}
+
+.lightText {
+  color: #999;
 }
