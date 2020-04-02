@@ -7,9 +7,9 @@ const postsDirectory = path.join(process.cwd(), 'posts')
 export function getSortedPostsData() {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames.map(fileName => {
-    // Remove ".md" from file name to get slug
-    const slug = fileName.replace(/\.md$/, '')
+  const allPostsData = fileNames.map((fileName) => {
+    // Remove ".md" from file name to get id
+    const id = fileName.replace(/\.md$/, '')
 
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, fileName)
@@ -18,10 +18,10 @@ export function getSortedPostsData() {
     // Use gray-matter to parse the post metadata section
     const { data } = matter(fileContents)
 
-    // Combine the data with the slug
+    // Combine the data with the id
     return {
-      slug,
-      ...data
+      id,
+      ...data,
     }
   })
   // Sort posts by date
