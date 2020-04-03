@@ -11,7 +11,13 @@ const Home = ({ allPostsData }) => (
       <title>{siteTitle}</title>
     </Head>
     <section className={utilStyles.headingMd}>
-      <p>[Your Self Introduction]</p>
+      <p>
+        Hello, I’m <strong>Shu</strong>. I write code at{' '}
+        <a href="https://zeit.co">ZEIT</a>, the team behind{' '}
+        <a href="https://nextjs.org/">Next.js</a>. You can contact me via{' '}
+        <a href="https://twitter.com/chibicode">Twitter</a> or{' '}
+        <a href="mailto:chibicode@zeit.co">email</a>.
+      </p>
       <p>
         (This is a sample website - you’ll be building a site like this on{' '}
         <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
