@@ -18,12 +18,12 @@ export function getSortedPostsData() {
     const fileContents = fs.readFileSync(fullPath, 'utf8')
 
     // Use gray-matter to parse the post metadata section
-    const { data } = matter(fileContents)
+    const matterResult = matter(fileContents)
 
     // Combine the data with the id
     return {
       id,
-      ...data
+      ...matterResult.data
     }
   })
   // Sort posts by date
@@ -52,18 +52,18 @@ export async function getPostData(id) {
   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
   // Use gray-matter to parse the post metadata section
-  const { data, content } = matter(fileContents)
+  const matterResult = matter(fileContents)
 
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(html)
-    .process(content)
+    .process(matterResult.content)
   const contentHtml = processedContent.toString()
 
   // Combine the data with the id and contentHtml
   return {
     id,
     contentHtml,
-    ...data
+    ...matterResult.data
   }
 }

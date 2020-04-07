@@ -7,7 +7,7 @@ const postsDirectory = path.join(process.cwd(), 'posts')
 export function getSortedPostsData() {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames.map((fileName) => {
+  const allPostsData = fileNames.map(fileName => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '')
 
@@ -16,12 +16,12 @@ export function getSortedPostsData() {
     const fileContents = fs.readFileSync(fullPath, 'utf8')
 
     // Use gray-matter to parse the post metadata section
-    const { data } = matter(fileContents)
+    const matterResult = matter(fileContents)
 
     // Combine the data with the id
     return {
       id,
-      ...data,
+      ...matterResult.data
     }
   })
   // Sort posts by date
