@@ -13,11 +13,9 @@ export default function Home({ allPostsData }) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>
-          Hello, I’m <strong>Shu</strong>. I write code at{' '}
-          <a href="https://zeit.co">ZEIT</a>, the team behind{' '}
-          <a href="https://nextjs.org/">Next.js</a>. You can contact me via{' '}
-          <a href="https://twitter.com/chibicode">Twitter</a> or{' '}
-          <a href="mailto:chibicode@zeit.co">email</a>.
+          Hello, I’m <strong>Shu</strong>. I’m a software enginer and a
+          translator (English ↔ Japanese). You can contact me via{' '}
+          <a href="https://twitter.com/chibicode">Twitter</a>.
         </p>
         <p>
           (This is a sample website - you’ll be building a site like this on{' '}
