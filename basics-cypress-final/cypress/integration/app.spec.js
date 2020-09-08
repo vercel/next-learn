@@ -21,23 +21,30 @@ describe('App', function () {
   })
 
   it('navigates to a post and verifies header, date and title meta tag', function () {
+    // Get the first post in the list
     cy.get('[data-test*=post]')
       .first()
       .then(post => {
+        // Navigate to the post
         cy.get(post)
           .click()
           .invoke('attr', 'href')
           .then(href => {
+            // Verify the new location matches the href clicked
             cy.location('pathname').should('equal', href)
 
+            // Read the contents of this post from it's markdown file
             cy.readFile(`.${href}.md`).then(markdown => {
+              // Extract the post metadata
               const postMetadata = matter(markdown)
               const { title, date } = postMetadata.data
               const formattedDate = format(parseISO(date), 'LLLL d, yyyy')
 
+              // Verify the title and formatted time
               cy.get('[data-test=post-title]').should('contain', title)
               cy.get('time').should('have.text', formattedDate)
 
+              // Verify the title meta tag
               cy.get("meta[property='og:title']").should(
                 'has.attr',
                 'content',
