@@ -8,7 +8,7 @@ If you see an installation error for the following installation command:
 npm init next-app nextjs-blog --example "https://github.com/vercel/next-learn-starter/tree/master/learn-starter"
 ```
 
-Try removing everything after `--example`:
+Try removing everything after `nextjs-blog`:
 
 ```bash
 npm init next-app nextjs-blog
