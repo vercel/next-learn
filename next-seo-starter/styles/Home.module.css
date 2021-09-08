@@ -1,0 +1,109 @@
+.container {
+  min-height: 100vh;
+  padding: 1rem 0.5rem 0;
+}
+
+.title a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.title a:hover,
+.title a:focus,
+.title a:active {
+  text-decoration: underline;
+}
+
+.title {
+  margin: 0 0 1rem;
+  line-height: 1.15;
+  font-size: 3.6rem;
+}
+
+.title {
+  text-align: center;
+}
+
+.heroImage {
+  margin-bottom: 1rem;
+}
+
+.secondaryHeading {
+  margin: 0 0 1rem;
+}
+
+.input {
+  padding: 0.5rem;
+  width: 300px;
+  margin-bottom: 1rem;
+}
+
+.countries {
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.country {
+  border: 1px solid #000;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.codeSampleBlock {
+  padding: 3rem 0;
+}
+
+.codeSampleBlock p {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.footer {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  margin-left: 0.5rem;
+  max-width: 72px;
+}
+
+.footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 800px) {
+  .countries {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroImage {
+    margin: 0 auto 1rem;
+    max-width: 50vw;
+  }
+
+  .secondaryHeading {
+    text-align: center;
+  }
+
+  .input {
+    margin: 0 auto 1rem;
+    display: block;
+  }
+
+  .countries {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .codeSampleBlock {
+    text-align: center;
+  }
+}
