@@ -1,5 +1,11 @@
-# next-learn-starter
+# Learn Next.js
 
-This repository contains starter templates for [Learn Next.js](https://nextjs.org/learn).
+This repository contains starter templates for [Learn Next.js](https://nextjs.org/learn) courses:
 
-The final result for the basics lesson can be found in the [demo](demo) directory and is available at: [https://next-learn-starter.vercel.app/](https://next-learn-starter.vercel.app/).
+- (Learn Basics and TypeScript)[https://nextjs.org/learn/basics/create-nextjs-app].
+- (Learn SEO)[https://nextjs.org/learn/seo/introduction-to-seo].
+
+The final examples are available on:
+
+- https://next-learn-starter.vercel.app/
+- https://next-seo-starter.vercel.app/
