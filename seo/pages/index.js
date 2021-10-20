@@ -63,7 +63,7 @@ export default function Start({ countries }) {
 
           <ul className={styles.countries}>
             {results.map((country) => (
-              <li key={country.alpha2Code} className={styles.country}>
+              <li key={country.cca2} className={styles.country}>
                 <p>
                   {country.name} - {country.population.toLocaleString()}
                 </p>
@@ -100,12 +100,16 @@ export default function Start({ countries }) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch('https://restcountries.eu/rest/v2/all');
+  const response = await fetch('https://restcountries.com/v3.1/all');
   const countries = await response.json();
 
   return {
     props: {
-      countries,
+      countries: countries.map((country) => ({
+        name: country.name.common,
+        cca2: country.cca2,
+        population: country.population,
+      })),
     },
   };
 }
