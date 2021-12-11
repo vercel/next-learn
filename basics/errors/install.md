@@ -5,7 +5,7 @@
 If you see an installation error for the following installation command:
 
 ```bash
-npm init next-app nextjs-blog --example "https://github.com/vercel/next-learn-starter/tree/master/learn-starter"
+npm init next-app nextjs-blog --example "https://github.com/vercel/next-learn/tree/master/basics/learn-starter"
 ```
 
 Try removing everything after `nextjs-blog`:
