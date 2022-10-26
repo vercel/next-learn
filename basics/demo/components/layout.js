@@ -40,8 +40,7 @@ export default function Layout({ children, home }) {
           </>
         ) : (
           <>
-            <Link href="/">
-              <a>
+            <Link href="/">              
                 <Image
                   priority
                   src="/images/profile.jpg"
@@ -49,11 +48,10 @@ export default function Layout({ children, home }) {
                   height={108}
                   width={108}
                   alt={name}
-                />
-              </a>
+                />              
             </Link>
             <h2 className={utilStyles.headingLg}>
-              <Link href="/">
+              <Link legacyBehavior href="/">
                 <a className={utilStyles.colorInherit}>{name}</a>
               </Link>
             </h2>
@@ -63,8 +61,8 @@ export default function Layout({ children, home }) {
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
+          <Link legacyBehavior href="/">
+            ← Back to home
           </Link>
         </div>
       )}
