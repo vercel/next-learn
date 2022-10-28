@@ -61,7 +61,7 @@ export default function Layout({ children, home }) {
       <main>{children}</main>
       {!home && (
         <div className={styles.backToHome}>
-          <Link legacyBehavior href="/">
+          <Link href="/">
             ← Back to home
           </Link>
         </div>
