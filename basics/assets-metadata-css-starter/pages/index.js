@@ -85,10 +85,8 @@ export default function Home() {
           display: flex;
           justify-content: center;
           align-items: center;
-        }
-        a {
-          color: inherit;
           text-decoration: none;
+          color: inherit;
         }
         code {
           background: #fafafa;
