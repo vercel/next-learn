@@ -1,5 +1,5 @@
-## Next.js Dashboard - App Router Course
+## Next.js App Router Course - Build a Dashboard
 
-This repository contains the starter templates for the [Next.js Dashboard course](), separated by chapters.
+This repository contains the starter templates for the [Next.js App Router Course](), separated by chapters.
 
-See the [course curriculum]() on the Next.js Website.
+For more information, see the [course curriculum]() on the Next.js Website.
