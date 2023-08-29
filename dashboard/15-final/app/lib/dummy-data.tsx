@@ -1,11 +1,26 @@
-export const users = {
-  id: 1,
-  name: "User",
-  email: "user@nextmail.com",
-  password: "123456",
+export type User = {
+  id: number
+  name: string
+  email: string
+  password: string
 }
 
-export const customers = [
+export const users: User[] = [
+  {
+    id: 1,
+    name: "User",
+    email: "user@nextmail.com",
+    password: "123456",
+  },
+]
+
+export type Customer = {
+  id: number
+  name: string
+  email: string
+}
+
+export const customers: Customer[] = [
   {
     id: 1,
     name: "Lee",
@@ -28,29 +43,36 @@ export const customers = [
   },
 ]
 
-export const invoices = [
+export type Invoice = {
+  id: number
+  customerId: number
+  amount: number
+  status: "pending" | "paid"
+}
+
+export const invoices: Invoice[] = [
   {
     id: 1,
     customerId: 1,
-    amount: 100,
+    amount: 10000,
     status: "pending",
   },
   {
     id: 2,
     customerId: 2,
-    amount: 200,
+    amount: 20000,
     status: "pending",
   },
   {
     id: 3,
     customerId: 3,
-    amount: 300,
+    amount: 30000,
     status: "paid",
   },
   {
     id: 4,
     customerId: 4,
-    amount: 400,
+    amount: 40000,
     status: "paid",
   },
 ]
