@@ -1,10 +1,6 @@
-export type User = {
-  id: number
-  name: string
-  email: string
-  password: string
-}
+import { User, Customer, Invoice } from "./definitions"
 
+// This file contains dummy data that you'll be replacing with real data in Chapter 7.
 export const users: User[] = [
   {
     id: 1,
@@ -13,12 +9,6 @@ export const users: User[] = [
     password: "123456",
   },
 ]
-
-export type Customer = {
-  id: number
-  name: string
-  email: string
-}
 
 export const customers: Customer[] = [
   {
@@ -42,13 +32,6 @@ export const customers: Customer[] = [
     email: "delba@nextmail.com",
   },
 ]
-
-export type Invoice = {
-  id: number
-  customerId: number
-  amount: number
-  status: "pending" | "paid"
-}
 
 export const invoices: Invoice[] = [
   {
