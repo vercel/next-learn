@@ -1,4 +1,4 @@
-import { User, Customer, Invoice } from "./definitions"
+import { User, Customer, Invoice } from "./definitions";
 
 // This file contains dummy data that you'll be replacing with real data in Chapter 7.
 export const users: User[] = [
@@ -8,7 +8,7 @@ export const users: User[] = [
     email: "user@nextmail.com",
     password: "123456",
   },
-]
+];
 
 export const customers: Customer[] = [
   {
@@ -31,31 +31,31 @@ export const customers: Customer[] = [
     name: "Delba",
     email: "delba@nextmail.com",
   },
-]
+];
 
 export const invoices: Invoice[] = [
   {
     id: 1,
     customerId: 1,
-    amount: 10000,
+    amount: 15795,
     status: "pending",
   },
   {
     id: 2,
     customerId: 2,
-    amount: 20000,
+    amount: 20348,
     status: "pending",
   },
   {
     id: 3,
     customerId: 3,
-    amount: 30000,
+    amount: 3040,
     status: "paid",
   },
   {
     id: 4,
     customerId: 4,
-    amount: 40000,
+    amount: 44800,
     status: "paid",
   },
-]
+];
