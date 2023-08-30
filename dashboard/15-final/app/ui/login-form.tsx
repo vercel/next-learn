@@ -18,7 +18,9 @@ export default function LoginForm() {
   return (
     <div className="mt-40 flex h-screen flex-col items-center space-y-6">
       <BackgroundBlur />
-      <img className="h-6 w-auto" src="/logo.svg" alt="Next.js Logo" />
+      <a href="/">
+        <img className="h-6 w-auto" src="/logo.svg" alt="Next.js Logo" />
+      </a>
       <p className="text-center font-semibold text-zinc-900">
         Log in to your dashboard
       </p>
