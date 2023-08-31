@@ -1,4 +1,4 @@
-import { User, Customer, Invoice } from "./definitions";
+import { User, Customer, Invoice, Revenue } from "./definitions";
 
 // This file contains dummy data that you'll be replacing with real data in Chapter 7.
 export const users: User[] = [
@@ -58,4 +58,19 @@ export const invoices: Invoice[] = [
     amount: 44800,
     status: "paid",
   },
+];
+
+export const revenue: Revenue[] = [
+  { month: "Jan", revenue: 2000 },
+  { month: "Feb", revenue: 1800 },
+  { month: "Mar", revenue: 2200 },
+  { month: "Apr", revenue: 2500 },
+  { month: "May", revenue: 2300 },
+  { month: "Jun", revenue: 3200 },
+  { month: "Jul", revenue: 3500 },
+  { month: "Aug", revenue: 3700 },
+  { month: "Sep", revenue: 2500 },
+  { month: "Oct", revenue: 2800 },
+  { month: "Nov", revenue: 3000 },
+  { month: "Dec", revenue: 4800 },
 ];
