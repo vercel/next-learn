@@ -9,7 +9,7 @@ export default function DashboardOverview() {
   const numberOfCustomers = customers.length;
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
       <Card title="Collected" value={totalPaidInvoices} color="green" />
       <Card title="Pending" value={totalPendingInvoices} color="red" />
       <Card title="Total Invoices" value={numberOfInvoices} />
