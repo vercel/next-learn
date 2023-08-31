@@ -7,7 +7,7 @@ export default function Example() {
     return customerName ? customerName.name : null;
   }
   return (
-    <div className="w-screen">
+    <div className="w-full">
       <div className="w-full flex items-center justify-between">
         <h1 className="text-base font-semibold text-gray-900">Invoices</h1>
         <Link
