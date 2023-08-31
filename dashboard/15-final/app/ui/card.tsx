@@ -4,7 +4,6 @@ import {
   UserGroupIcon,
   InboxIcon,
 } from "@heroicons/react/24/outline";
-import clsx from "clsx";
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -28,7 +27,9 @@ export default function Card({
     <div className="flex justify-between rounded-xl border bg-white p-6 shadow-sm">
       <div>
         <h3 className="text-sm font-medium">{title}</h3>
-        <p className="mt-2 text-3xl font-semibold tracking-wide">{value}</p>
+        <p className="mt-2 truncate text-2xl font-semibold tracking-wide md:text-3xl">
+          {value}
+        </p>
         <p className="mt-1.5 text-sm text-zinc-400">+00% since last month</p>
       </div>
       {Icon ? (
