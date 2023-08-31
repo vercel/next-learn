@@ -1,10 +1,14 @@
-import Search from "../ui/search";
+import TopNav from "@/app/ui/dashboard-topnav";
+import SideNav from "../ui/dashboard-sidenav";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <Search />
-      <div>{children}</div>
+    <div className="flex h-screen">
+      <SideNav />
+      <div className="flex-grow">
+        <TopNav />
+        <div className="p-4 sm:p-20">{children}</div>
+      </div>
     </div>
-  )
+  );
 }
