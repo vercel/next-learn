@@ -1,25 +1,38 @@
+import {
+  BanknotesIcon,
+  ClockIcon,
+  UserGroupIcon,
+  InboxIcon,
+} from "@heroicons/react/24/outline";
 import clsx from "clsx";
+
+const iconMap = {
+  collected: BanknotesIcon,
+  customers: UserGroupIcon,
+  pending: ClockIcon,
+  invoices: InboxIcon,
+};
+
 export default function Card({
   title,
   value,
-  color,
+  type,
 }: {
   title: string;
   value: number | string;
-  color?: "green" | "red";
+  type: "invoices" | "customers" | "pending" | "collected";
 }) {
+  const Icon = iconMap[type];
+
   return (
-    <div
-      className={clsx("rounded-md border border-t-4 bg-white p-4 shadow-sm", {
-        "border-t-blue-400": !color,
-        "border-t-green-400": color === "green",
-        "border-t-red-400": color === "red",
-      })}
-    >
-      <h3 className="text-sm text-zinc-400">{title}</h3>
-      <p className="mt-2 text-3xl font-semibold leading-10 tracking-tight">
-        {value}
-      </p>
+    <div className="flex justify-between rounded-lg border bg-white p-6 shadow-sm">
+      <div>
+        <h3 className="text-sm font-semibold text-zinc-400">{title}</h3>
+        <p className="mt-3 text-3xl font-semibold">{value}</p>
+      </div>
+      {Icon ? (
+        <Icon className="h-5 w-5 text-zinc-700" aria-label={type} />
+      ) : null}
     </div>
   );
 }
