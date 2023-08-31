@@ -1,7 +1,9 @@
+import Search from "../ui/search";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <div>Dashboard layout</div>
+      <Search />
       <div>{children}</div>
     </div>
   )
