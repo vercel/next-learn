@@ -1,6 +1,11 @@
 import { Revenue } from "@/app/lib/definitions";
 import { generateYAxis } from "@/app/lib/calculations";
 
+// This component is representational only.
+// For data visualization components, check out:
+// https://www.chartjs.org/
+// https://airbnb.io/visx/
+// https://www.tremor.so/
 export default function RevenueChart({ revenue }: { revenue: Revenue[] }) {
   const chartHeight = 350;
   const { yAxisLabels, topLabel } = generateYAxis(revenue);

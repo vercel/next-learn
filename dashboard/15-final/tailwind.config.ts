@@ -16,9 +16,6 @@ const config: Config = {
       gridTemplateColumns: {
         "13": "repeat(13, minmax(0, 1fr))",
       },
-      transitionProperty: {
-        width: "width",
-      },
     },
   },
   plugins: [],
