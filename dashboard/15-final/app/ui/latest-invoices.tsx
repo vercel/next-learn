@@ -37,7 +37,13 @@ export default function LatestInvoices({
                 </p>
               </div>
             </div>
-            <p className="text-lg font-medium">+ ${invoice.amount / 100}</p>
+            <p className="text-lg font-medium">
+              +{" "}
+              {(invoice.amount / 100).toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}
+            </p>
           </div>
         );
       })}

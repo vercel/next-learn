@@ -2,7 +2,7 @@ import { Revenue } from "@/app/lib/definitions";
 import { generateYAxis } from "@/app/lib/calculations";
 
 // This component is representational only.
-// For data visualization components, check out:
+// For data visualization UI, check out:
 // https://www.chartjs.org/
 // https://airbnb.io/visx/
 // https://www.tremor.so/
@@ -11,9 +11,7 @@ export default function RevenueChart({ revenue }: { revenue: Revenue[] }) {
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
 
   if (!revenue || revenue.length === 0) {
-    return (
-      <p className="mt-4 font-semibold text-zinc-400">No data available.</p>
-    );
+    return <p className="mt-4 text-zinc-400">No data available.</p>;
   }
 
   return (
