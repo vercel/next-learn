@@ -12,7 +12,7 @@ export default function LatestInvoices({
   const lastFiveInvoices = findLatestInvoices(invoices);
 
   return (
-    <div className="rounded-xl border p-6 shadow-sm md:col-span-3">
+    <div className="w-full rounded-xl border p-6 shadow-sm md:col-span-4 lg:col-span-3">
       <h2 className="font-semibold">Latest Invoices</h2>
 
       {lastFiveInvoices.map((invoice) => {
@@ -22,7 +22,7 @@ export default function LatestInvoices({
         return (
           <div
             key={invoice.id}
-            className="mt-8 flex items-center justify-between"
+            className="mt-8 flex flex-row items-center justify-between"
           >
             <div className="flex items-center">
               <img
@@ -30,9 +30,11 @@ export default function LatestInvoices({
                 alt={customer?.name || ""}
                 className="mr-4 h-8 w-8 rounded-full"
               />
-              <div>
+              <div className="min-w-0">
                 <p className="font-semibold">{customer?.name}</p>
-                <p className="text-sm text-gray-500">{customer?.email}</p>
+                <p className="truncate text-sm text-gray-500">
+                  {customer?.email}
+                </p>
               </div>
             </div>
             <p className="text-lg font-medium">+ ${invoice.amount / 100}</p>
