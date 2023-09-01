@@ -13,23 +13,27 @@ export const users: User[] = [
 export const customers: Customer[] = [
   {
     id: 1,
-    name: "Lee",
-    email: "lee@nextmail.com",
+    name: "Ada Lovelace",
+    email: "ada@earlycomputing.com",
+    imageUrl: "/customers/ada-lovelace.png",
   },
   {
     id: 2,
-    name: "Michael",
-    email: "michael@nextmail.com",
+    name: "Grace Hopper",
+    email: "grace@personalcomputers.com",
+    imageUrl: "/customers/grace-hopper.png",
   },
   {
     id: 3,
-    name: "Steph",
-    email: "steph@nextmail.com",
+    name: "Hedy Lammar",
+    email: "hedy@wifi.com",
+    imageUrl: "/customers/hedy-lammar.png",
   },
   {
     id: 4,
-    name: "Delba",
-    email: "delba@nextmail.com",
+    name: "Margaret Hamilton",
+    email: "margaret@nasa.com",
+    imageUrl: "/customers/margaret-hamilton.png",
   },
 ];
 
@@ -97,5 +101,5 @@ export const revenue: Revenue[] = [
   { month: "Sep", revenue: 2500 },
   { month: "Oct", revenue: 2800 },
   { month: "Nov", revenue: 3000 },
-  { month: "Dec", revenue: 9000 },
+  { month: "Dec", revenue: 4800 },
 ];

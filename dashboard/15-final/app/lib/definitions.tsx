@@ -12,6 +12,7 @@ export type Customer = {
   id: number;
   name: string;
   email: string;
+  imageUrl: string;
 };
 
 export type Invoice = {
