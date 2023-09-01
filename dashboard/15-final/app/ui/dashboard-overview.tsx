@@ -3,7 +3,6 @@ import { invoices, customers, revenue } from "@/app/lib/dummy-data";
 import { calculateInvoices } from "@/app/lib/calculations";
 import RevenueChart from "@/app/ui/revenue-chart";
 import LatestInvoices from "@/app/ui/latest-invoices";
-import Chart from "@/app/ui/x";
 
 export default function DashboardOverview() {
   const totalPaidInvoices = calculateInvoices(invoices, "paid");
