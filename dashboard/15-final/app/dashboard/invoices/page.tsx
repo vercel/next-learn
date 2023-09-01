@@ -1,3 +1,9 @@
+import Table from "@/app/ui/table";
+
 export default function Page() {
-  return <div>List of invoices</div>
+  return (
+    <div>
+      <Table />
+    </div>
+  )
 }
