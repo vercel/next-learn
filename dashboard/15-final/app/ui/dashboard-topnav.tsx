@@ -2,8 +2,8 @@ import Search from "./search";
 
 export default function TopNav() {
   return (
-    <div className="h-16 border-b flex items-center">
+    <div className="flex h-16 items-center border-b">
       <Search />
     </div>
-  )
+  );
 }

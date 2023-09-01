@@ -1,4 +1,4 @@
-import { User, Customer, Invoice } from "./definitions";
+import { User, Customer, Invoice, Revenue } from "./definitions";
 
 // This file contains dummy data that you'll be replacing with real data in Chapter 7.
 export const users: User[] = [
@@ -13,23 +13,27 @@ export const users: User[] = [
 export const customers: Customer[] = [
   {
     id: 1,
-    name: "Lee",
-    email: "lee@nextmail.com",
+    name: "Ada Lovelace",
+    email: "ada@earlycomputing.com",
+    imageUrl: "/customers/ada-lovelace.png",
   },
   {
     id: 2,
-    name: "Michael",
-    email: "michael@nextmail.com",
+    name: "Grace Hopper",
+    email: "grace@personalcomputers.com",
+    imageUrl: "/customers/grace-hopper.png",
   },
   {
     id: 3,
-    name: "Steph",
-    email: "steph@nextmail.com",
+    name: "Hedy Lammar",
+    email: "hedy@wifi.com",
+    imageUrl: "/customers/hedy-lammar.png",
   },
   {
     id: 4,
-    name: "Delba",
-    email: "delba@nextmail.com",
+    name: "Margaret Hamilton",
+    email: "margaret@nasa.com",
+    imageUrl: "/customers/margaret-hamilton.png",
   },
 ];
 
@@ -38,28 +42,64 @@ export const invoices: Invoice[] = [
     id: 1,
     customerId: 1,
     amount: 15795,
-    date: "2021-01-01",
     status: "pending",
+    date: "2023-12-01",
   },
   {
     id: 2,
     customerId: 2,
     amount: 20348,
-    date: "2021-02-01",
     status: "pending",
+    date: "2023-11-01",
   },
   {
     id: 3,
     customerId: 3,
     amount: 3040,
-    date: "2021-03-01",
     status: "paid",
+    date: "2023-10-01",
   },
   {
     id: 4,
     customerId: 4,
     amount: 44800,
-    date: "2021-04-01",
     status: "paid",
+    date: "2023-09-01",
   },
+  {
+    id: 5,
+    customerId: 1,
+    amount: 34577,
+    status: "pending",
+    date: "2023-08-01",
+  },
+  {
+    id: 6,
+    customerId: 2,
+    amount: 54246,
+    status: "pending",
+    date: "2023-07-01",
+  },
+  {
+    id: 7,
+    customerId: 3,
+    amount: 8945,
+    status: "paid",
+    date: "2023-06-01",
+  },
+];
+
+export const revenue: Revenue[] = [
+  { month: "Jan", revenue: 2000 },
+  { month: "Feb", revenue: 1800 },
+  { month: "Mar", revenue: 2200 },
+  { month: "Apr", revenue: 2500 },
+  { month: "May", revenue: 2300 },
+  { month: "Jun", revenue: 3200 },
+  { month: "Jul", revenue: 3500 },
+  { month: "Aug", revenue: 3700 },
+  { month: "Sep", revenue: 2500 },
+  { month: "Oct", revenue: 2800 },
+  { month: "Nov", revenue: 3000 },
+  { month: "Dec", revenue: 4800 },
 ];

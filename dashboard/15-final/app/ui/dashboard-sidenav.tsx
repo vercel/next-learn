@@ -47,7 +47,7 @@ export default function SideNav() {
             )}
           >
             <TabIcon className="h-6 w-6 md:mr-2" />
-            <div className="hidden md:block">{tab.name}</div>
+            <p className="hidden md:block">{tab.name}</p>
           </Link>
         );
       })}
