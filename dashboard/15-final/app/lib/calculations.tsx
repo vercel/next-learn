@@ -13,6 +13,18 @@ export const calculateInvoices = (
     });
 };
 
+// Once a database is connected, we can use SQL to query the database directly
+// This will be more efficient than querying all invoices and then filtering them
+// E.g. "SELECT * FROM invoices
+// ORDER BY date DESC
+// LIMIT 5;"
+export const findLatestInvoices = (invoices: Invoice[]) => {
+  return [...invoices]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 5);
+};
+
+export const generateYAxis = (revenue: Revenue[]) => {
   // Calculate what labels we need to display on the y-axis
   // based on highest record and in 1000s
   const yAxisLabels = [];
