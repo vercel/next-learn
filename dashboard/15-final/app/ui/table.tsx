@@ -50,7 +50,7 @@ export default function Example() {
                       {invoice.id}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{getNameById(invoice.customerId)}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{invoice.amount.toLocaleString("en-US", {style: "currency", currency: "USD"})}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{(invoice.amount / 100).toLocaleString("en-US", {style: "currency", currency: "USD"})}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{invoice.status}</td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{invoice.date}</td>        
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
