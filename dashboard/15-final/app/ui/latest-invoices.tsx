@@ -22,7 +22,7 @@ export default function LatestInvoices({
         return (
           <div
             key={invoice.id}
-            className="mt-8 flex flex-row items-center justify-between"
+            className="mt-8 flex  flex-row items-center justify-between"
           >
             <div className="flex items-center">
               <img
@@ -31,13 +31,13 @@ export default function LatestInvoices({
                 className="mr-4 h-8 w-8 rounded-full"
               />
               <div className="min-w-0">
-                <p className="font-semibold">{customer?.name}</p>
-                <p className="truncate text-sm text-gray-500">
+                <p className="truncate font-semibold">{customer?.name}</p>
+                <p className="hidden text-sm text-gray-500 sm:block">
                   {customer?.email}
                 </p>
               </div>
             </div>
-            <p className="text-lg font-medium">
+            <p className="truncate font-medium sm:text-lg">
               +{" "}
               {(invoice.amount / 100).toLocaleString("en-US", {
                 style: "currency",
