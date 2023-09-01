@@ -4,7 +4,7 @@ import SideNav from "../ui/dashboard-sidenav";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen overflow-hidden">
-      <div className="w-10 md:w-64">
+      <div className="w-14 md:w-64">
         <SideNav />
       </div>
       <div className="flex-grow overflow-y-auto">
