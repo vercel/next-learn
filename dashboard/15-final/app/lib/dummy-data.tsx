@@ -72,5 +72,5 @@ export const revenue: Revenue[] = [
   { month: "Sep", revenue: 2500 },
   { month: "Oct", revenue: 2800 },
   { month: "Nov", revenue: 3000 },
-  { month: "Dec", revenue: 4800 },
+  { month: "Dec", revenue: 9000 },
 ];
