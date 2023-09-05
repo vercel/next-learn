@@ -22,7 +22,7 @@ export default function SideNav() {
   ];
 
   return (
-    <div className="flex h-full w-12 flex-col border-r p-1 md:w-72 md:p-4">
+    <div className="flex h-full w-full flex-col border-r p-1 md:p-4">
       <Link href="/">
         <Image
           priority
