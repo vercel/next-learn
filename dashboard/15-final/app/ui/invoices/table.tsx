@@ -107,9 +107,12 @@ export default function Table() {
                       {renderInvoiceStatus(invoice.status)}
                     </td>
                     <td className="flex justify-end gap-2 whitespace-nowrap py-4 pl-3 pr-6 text-sm">
-                      <button className="rounded-md border p-1">
+                      <Link
+                        href={`/dashboard/invoices/${invoice.id}/edit`}
+                        className="rounded-md border p-1"
+                      >
                         <PencilSquareIcon className="w-4" />
-                      </button>
+                      </Link>
                       <DeleteInvoice id={invoice.id} />
                     </td>
                     {/* <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
