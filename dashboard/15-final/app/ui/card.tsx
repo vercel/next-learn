@@ -28,13 +28,13 @@ export default function Card({
       <div className="flex justify-between ">
         <h3 className="text-sm font-medium">{title}</h3>
         {Icon ? (
-          <Icon className="h-5 w-5 text-zinc-700" aria-label={type} />
+          <Icon className="h-5 w-5 text-gray-700" aria-label={type} />
         ) : null}
       </div>
       <p className="mt-2 truncate text-2xl font-semibold tracking-wide md:text-3xl">
         {value}
       </p>
-      <p className="mt-1.5 text-sm text-zinc-400">+00% since last month</p>
+      <p className="mt-1.5 text-sm text-gray-400">+00% since last month</p>
     </div>
   );
 }
