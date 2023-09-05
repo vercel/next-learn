@@ -45,7 +45,7 @@ export default function Table() {
       </div>
       <div className="mt-8">
         <div className="overflow-x-auto">
-          <div className="rounded-md border">
+          <div className="overflow-hidden rounded-md border">
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50 text-left text-sm">
                 <tr>
@@ -76,7 +76,7 @@ export default function Table() {
                   </th> */}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 bg-white text-gray-500">
+              <tbody className="divide-y divide-gray-200 text-gray-500">
                 {invoices.map((invoice) => (
                   <tr key={invoice.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
