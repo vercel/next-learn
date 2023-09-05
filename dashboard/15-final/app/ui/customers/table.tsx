@@ -37,12 +37,13 @@ export default function CustomersTable() {
                 {customers.map((customer) => (
                   <tr key={customer.id}>
                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
-                      <Image
-                        src={customer.imageUrl}
-                        alt={customer.name}
-                        width={32}
-                        height={32}
-                        className="rounded-full"/>
+                        <div className="flex w-7 flex-none items-center">
+                          <img
+                            src={customer.imageUrl}
+                            alt={customer.name}
+                            className="h-7 w-full flex-none rounded-full"
+                          />
+                        </div>
                     </td>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                       {customer.name}
