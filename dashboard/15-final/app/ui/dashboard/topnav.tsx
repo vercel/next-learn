@@ -1,4 +1,4 @@
-import Search from "./search";
+import Search from "@/app/ui/dashboard/search";
 
 export default function TopNav() {
   return (

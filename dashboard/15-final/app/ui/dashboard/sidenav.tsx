@@ -17,8 +17,8 @@ export default function SideNav() {
 
   const tabs = [
     { name: "Home", href: "/dashboard", icon: HomeIcon },
-    { name: "Customers", href: "/dashboard/customers", icon: UserGroupIcon },
     { name: "Invoices", href: "/dashboard/invoices", icon: InboxIcon },
+    { name: "Customers", href: "/dashboard/customers", icon: UserGroupIcon },
   ];
 
   return (
