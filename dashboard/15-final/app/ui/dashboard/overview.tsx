@@ -1,8 +1,8 @@
-import Card from "@/app/ui/card";
+import Card from "@/app/ui/dashboard/card";
 import { invoices, customers, revenue } from "@/app/lib/dummy-data";
 import { calculateInvoices } from "@/app/lib/calculations";
-import RevenueChart from "@/app/ui/revenue-chart";
-import LatestInvoices from "@/app/ui/latest-invoices";
+import RevenueChart from "@/app/ui/dashboard/revenue-chart";
+import LatestInvoices from "@/app/ui/dashboard/latest-invoices";
 
 export default function DashboardOverview() {
   const totalPaidInvoices = calculateInvoices(invoices, "paid");
