@@ -1,6 +1,5 @@
 import { invoices, customers } from "@/app/lib/dummy-data";
 import { Customer } from "@/app/lib/definitions";
-import Table from "@/app/ui/table";
 
 import Link from "next/link";
 import {

@@ -1,6 +1,5 @@
 import { customers, invoices } from "@/app/lib/dummy-data";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function CustomersTable() {
   function totalInvoices(customerId: number) {
