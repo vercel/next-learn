@@ -11,16 +11,16 @@ export default function RevenueChart({ revenue }: { revenue: Revenue[] }) {
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
 
   if (!revenue || revenue.length === 0) {
-    return <p className="mt-4 text-zinc-400">No data available.</p>;
+    return <p className="mt-4 text-gray-400">No data available.</p>;
   }
 
   return (
     <div className="rounded-xl border p-6 shadow-sm md:col-span-5">
       <h2 className="font-semibold">Revenue</h2>
-      <div className="sm:grid-cols-13 mt-4 grid grid-cols-12 items-end gap-2 md:gap-4">
+      <div className="mt-4 grid grid-cols-12 items-end gap-2 sm:grid-cols-13 md:gap-4">
         {/* y-axis */}
         <div
-          className="mb-6 hidden flex-col justify-between text-sm text-zinc-400 sm:flex"
+          className="mb-6 hidden flex-col justify-between text-sm text-gray-400 sm:flex"
           style={{ height: `${chartHeight}px` }}
         >
           {yAxisLabels.map((label, index) => (
@@ -38,7 +38,7 @@ export default function RevenueChart({ revenue }: { revenue: Revenue[] }) {
               }}
             ></div>
             {/* x-axis */}
-            <p className="-rotate-90 text-sm text-zinc-400 sm:rotate-0">
+            <p className="-rotate-90 text-sm text-gray-400 sm:rotate-0">
               {month.month}
             </p>
           </div>
