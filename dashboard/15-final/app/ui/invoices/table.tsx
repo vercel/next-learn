@@ -46,7 +46,7 @@ export default function InvoicesTable() {
       </div>
       <div className="mt-8">
         <div className="overflow-x-auto">
-          <div className="rounded-md border">
+          <div className="overflow-hidden rounded-md border">
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50 text-left text-sm">
                 <tr>
@@ -77,7 +77,7 @@ export default function InvoicesTable() {
                   </th> */}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 bg-white text-gray-500">
+              <tbody className="divide-y divide-gray-200 text-gray-500">
                 {invoices.map((invoice) => (
                   <tr key={invoice.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
@@ -108,9 +108,12 @@ export default function InvoicesTable() {
                       {renderInvoiceStatus(invoice.status)}
                     </td>
                     <td className="flex justify-end gap-2 whitespace-nowrap py-4 pl-3 pr-6 text-sm">
-                      <button className="rounded-md border p-1">
+                      <Link
+                        href={`/dashboard/invoices/${invoice.id}/edit`}
+                        className="rounded-md border p-1"
+                      >
                         <PencilSquareIcon className="w-4" />
-                      </button>
+                      </Link>
                       <DeleteInvoice id={invoice.id} />
                     </td>
                     {/* <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
