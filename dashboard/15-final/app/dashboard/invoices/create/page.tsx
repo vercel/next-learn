@@ -1,5 +1,5 @@
-import AddInvoiceForm from "@/app/ui/invoices/add-invoice-form";
+import InvoiceForm from "@/app/ui/invoices/form";
 
 export default function Page() {
-  return <AddInvoiceForm />;
+  return <InvoiceForm type="new" />;
 }
