@@ -4,6 +4,9 @@ import { Invoice } from "@/app/lib/definitions";
 import { customers } from "@/app/lib/dummy-data";
 import { useState, FormEvent } from "react";
 
+// import { addOrUpdateInvoice } from "@/app/lib/actions";
+// export const dynamic = "force-dynamic";
+
 export default function InvoiceForm({
   type,
   invoice,
@@ -11,7 +14,7 @@ export default function InvoiceForm({
   type: "new" | "edit";
   invoice?: Invoice;
 }) {
-  // TO DO: Replace state with a Server Action
+  // TO DO: Replace state and handleSubmit with a Server Action
   const customer = customers.find(
     (customer) => customer.id === invoice?.customerId,
   );
