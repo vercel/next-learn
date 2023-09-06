@@ -31,10 +31,7 @@ function renderInvoiceStatus(status: string) {
   }
 }
 
-export default function InvoicesTable(searchParams: {
-    q: string;
-    page: string;
-  }) {
+export default function InvoicesTable(searchParams: {q: string, page: string}) {
   const searchTerm = searchParams.q ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
@@ -63,7 +60,6 @@ export default function InvoicesTable(searchParams: {
   }
 
   const totalPages = Math.ceil(filteredInvoices.length / ITEMS_PER_PAGE);
-  const pageNumbers = Array.from({ length: totalPages }).map((_, index) => index + 1);
 
   return (
     <div className="w-full">
