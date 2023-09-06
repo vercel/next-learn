@@ -13,6 +13,7 @@
     "test": "npm run lint && npm run prettier:check"
   },
   "devDependencies": {
+    "@vercel/style-guide": "^5.0.1",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "eslint-config-prettier": "9.0.0",
