@@ -31,7 +31,14 @@ function renderInvoiceStatus(status: string) {
   }
 }
 
-export default function InvoicesTable(searchParams: {q: string, page: string}) {
+export default function InvoicesTable({
+  searchParams,
+}: {
+  searchParams: {
+    q: string;
+    page: string;
+  };
+}) {
   const searchTerm = searchParams.q ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
