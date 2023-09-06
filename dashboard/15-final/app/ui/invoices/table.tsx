@@ -27,6 +27,17 @@ function renderInvoiceStatus(status: string) {
   }
 }
 
+function formatDateToLocal(dateStr: string, locale: string = "en-US") {
+  const date = new Date(dateStr);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  };
+  const formatter = new Intl.DateTimeFormat(locale, options);
+  return formatter.format(date);
+}
+
 export default function InvoicesTable() {
   function getCustomerById(customerId: number): Customer | null {
     const customer = customers.find((customer) => customer.id === customerId);
@@ -72,9 +83,6 @@ export default function InvoicesTable() {
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
                     <span className="sr-only">Edit</span>
                   </th>
-                  {/* <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span className="sr-only">View</span>
-                  </th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 text-gray-500">
@@ -102,7 +110,7 @@ export default function InvoicesTable() {
                       })}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
-                      {invoice.date}
+                      {formatDateToLocal(invoice.date)}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       {renderInvoiceStatus(invoice.status)}
@@ -116,14 +124,6 @@ export default function InvoicesTable() {
                       </Link>
                       <DeleteInvoice id={invoice.id} />
                     </td>
-                    {/* <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                      <Link
-                        href={`/dashboard/invoices/${invoice.id}`}
-                        className="text-blue-600 hover:text-blue-900"
-                      >
-                        View<span className="sr-only">, {invoice.id}</span>
-                      </Link>
-                    </td> */}
                   </tr>
                 ))}
               </tbody>
