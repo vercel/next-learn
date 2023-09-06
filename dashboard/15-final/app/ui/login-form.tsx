@@ -19,13 +19,10 @@ export default function LoginForm() {
     <div className="relative mx-auto mt-40 p-4">
       <BackgroundBlur />
 
-      <div className="mx-auto flex max-w-sm flex-col items-center space-y-6 rounded-xl border bg-white px-12 py-12 shadow-sm">
+      <div className="mx-auto flex w-full flex-col items-center space-y-2 rounded-xl border bg-white px-4 py-6 shadow-sm sm:max-w-sm sm:space-y-4 sm:px-8 sm:py-12">
         <a href="/">
-          <img className="h-6" src="/logo.svg" alt="Next.js Logo" />
+          <img className="w-10" src="/logo.svg" alt="Next.js Logo" />
         </a>
-        <p className="text-sm font-semibold text-gray-900">
-          Log in to your dashboard
-        </p>
         <div className="w-full">
           <form onSubmit={handleSubmit}>
             <div>
