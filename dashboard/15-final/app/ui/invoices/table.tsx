@@ -1,16 +1,16 @@
-import { invoices, customers } from "@/app/lib/dummy-data";
-import { Customer } from "@/app/lib/definitions";
+import { invoices, customers } from '@/app/lib/dummy-data';
+import { Customer } from '@/app/lib/definitions';
 
-import Link from "next/link";
+import Link from 'next/link';
 import {
   PencilSquareIcon,
   ClockIcon,
   CheckCircleIcon,
-} from "@heroicons/react/24/outline";
-import DeleteInvoice from "@/app/ui/invoices/delete-invoice-button";
+} from '@heroicons/react/24/outline';
+import DeleteInvoice from '@/app/ui/invoices/delete-invoice-button';
 
 function renderInvoiceStatus(status: string) {
-  if (status === "pending") {
+  if (status === 'pending') {
     return (
       <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
         <ClockIcon className="mr-1 w-4 text-red-700" />
@@ -93,9 +93,9 @@ export default function InvoicesTable() {
                       {getCustomerById(invoice.customerId)?.email}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
-                      {(invoice.amount / 100).toLocaleString("en-US", {
-                        style: "currency",
-                        currency: "USD",
+                      {(invoice.amount / 100).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
                       })}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">

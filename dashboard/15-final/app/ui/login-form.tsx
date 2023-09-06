@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import BackgroundBlur from "@/app/ui/background-blur";
-import React, { useState } from "react";
+import BackgroundBlur from '@/app/ui/background-blur';
+import React, { useState } from 'react';
 
 // This component contains basic logic for a React Form.
 // We'll be updating it in Chapter 8 - Adding Authentication.
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,6 +18,7 @@ export default function LoginForm() {
   return (
     <div className="mt-40 flex h-screen flex-col items-center space-y-6">
       <BackgroundBlur />
+      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
       <a href="/">
         <img className="h-6 w-auto" src="/logo.svg" alt="Next.js Logo" />
       </a>

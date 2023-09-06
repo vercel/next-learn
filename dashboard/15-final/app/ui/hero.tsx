@@ -1,4 +1,4 @@
-import BackgroundBlur from "@/app/ui/background-blur";
+import BackgroundBlur from '@/app/ui/background-blur';
 
 export default function Hero() {
   return (

@@ -1,11 +1,8 @@
 {
   "private": true,
-  "engines": {
-    "node": ">=18"
-  },
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
     "start": "next start"
   },
   "dependencies": {
@@ -21,5 +18,8 @@
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
     "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

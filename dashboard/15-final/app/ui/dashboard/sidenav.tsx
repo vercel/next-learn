@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
 import {
   UserGroupIcon,
   HomeIcon,
   InboxIcon,
   PowerIcon,
-} from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
+} from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function SideNav() {
   const pathname = usePathname();
 
   const tabs = [
-    { name: "Home", href: "/dashboard", icon: HomeIcon },
-    { name: "Invoices", href: "/dashboard/invoices", icon: InboxIcon },
-    { name: "Customers", href: "/dashboard/customers", icon: UserGroupIcon },
+    { name: 'Home', href: '/dashboard', icon: HomeIcon },
+    { name: 'Invoices', href: '/dashboard/invoices', icon: InboxIcon },
+    { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
   ];
 
   return (
@@ -40,9 +40,9 @@ export default function SideNav() {
             key={i}
             href={tab.href}
             className={clsx(
-              "mb-2 flex rounded p-2 font-semibold hover:bg-gray-100 hover:text-blue-600",
+              'mb-2 flex rounded p-2 font-semibold hover:bg-gray-100 hover:text-blue-600',
               {
-                "bg-gray-100 text-blue-600": pathname === tab.href,
+                'bg-gray-100 text-blue-600': pathname === tab.href,
               },
             )}
           >

@@ -3,7 +3,7 @@ import {
   ClockIcon,
   UserGroupIcon,
   InboxIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline';
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -19,7 +19,7 @@ export default function Card({
 }: {
   title: string;
   value: number | string;
-  type: "invoices" | "customers" | "pending" | "collected";
+  type: 'invoices' | 'customers' | 'pending' | 'collected';
 }) {
   const Icon = iconMap[type];
 

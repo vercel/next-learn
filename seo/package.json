@@ -1,11 +1,8 @@
 {
   "private": true,
-  "engines": {
-    "node": ">=18"
-  },
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
     "start": "next start"
   },
   "dependencies": {
@@ -16,5 +13,8 @@
     "react-dom": "18.2.0",
     "react-modal": "^3.16.1",
     "react-syntax-highlighter": "^15.5.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
