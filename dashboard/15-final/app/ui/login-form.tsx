@@ -18,6 +18,7 @@ export default function LoginForm() {
   return (
     <div className="mt-40 flex h-screen flex-col items-center space-y-6">
       <BackgroundBlur />
+      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
       <a href="/">
         <img className="h-6 w-auto" src="/logo.svg" alt="Next.js Logo" />
       </a>
