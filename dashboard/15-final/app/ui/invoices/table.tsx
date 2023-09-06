@@ -1,3 +1,5 @@
+"use client";
+
 import { invoices, customers } from "@/app/lib/dummy-data";
 import { Customer } from "@/app/lib/definitions";
 
@@ -6,8 +8,14 @@ import {
   PencilSquareIcon,
   ClockIcon,
   CheckCircleIcon,
+  MagnifyingGlassIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from "@heroicons/react/24/outline";
 import DeleteInvoice from "@/app/ui/invoices/delete-invoice-button";
+import { useState } from "react";
+
+const ITEMS_PER_PAGE = 10;
 
 function renderInvoiceStatus(status: string) {
   if (status === "pending") {
@@ -28,10 +36,35 @@ function renderInvoiceStatus(status: string) {
 }
 
 export default function InvoicesTable() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const filteredInvoices = invoices.filter(invoice => {
+    const customer = getCustomerById(invoice.customerId);
+
+    const invoiceMatches = Object.values(invoice).some(value =>
+      value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const customerMatches = customer && Object.values(customer).some(value =>
+      value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return invoiceMatches || customerMatches;
+  });
+
+  const paginatedInvoices = filteredInvoices.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   function getCustomerById(customerId: number): Customer | null {
     const customer = customers.find((customer) => customer.id === customerId);
     return customer ? customer : null;
   }
+
+  const totalPages = Math.ceil(filteredInvoices.length / ITEMS_PER_PAGE);
+  const pageNumbers = Array.from({ length: totalPages }).map((_, index) => index + 1);
 
   return (
     <div className="w-full">
@@ -44,7 +77,17 @@ export default function InvoicesTable() {
           Add Invoice
         </Link>
       </div>
-      <div className="mt-8">
+      <div className="relative flex items-center py-2 px-2 mt-8">
+        <MagnifyingGlassIcon className="h-5 text-gray-400" />
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          className="absolute pl-8 bg-transparent inset-0 border p-2 w-full rounded-md border-gray-300 text-sm"
+        />
+      </div>
+      <div className="mt-4">
         <div className="overflow-x-auto">
           <div className="overflow-hidden rounded-md border">
             <table className="min-w-full divide-y divide-gray-300">
@@ -72,13 +115,10 @@ export default function InvoicesTable() {
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
                     <span className="sr-only">Edit</span>
                   </th>
-                  {/* <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span className="sr-only">View</span>
-                  </th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 text-gray-500">
-                {invoices.map((invoice) => (
+                {paginatedInvoices.map((invoice) => (
                   <tr key={invoice.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                       {invoice.id}
@@ -116,20 +156,35 @@ export default function InvoicesTable() {
                       </Link>
                       <DeleteInvoice id={invoice.id} />
                     </td>
-                    {/* <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                      <Link
-                        href={`/dashboard/invoices/${invoice.id}`}
-                        className="text-blue-600 hover:text-blue-900"
-                      >
-                        View<span className="sr-only">, {invoice.id}</span>
-                      </Link>
-                    </td> */}
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
+      </div>
+      <div className="flex items-center justify-end mt-4">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className="border border-gray-300 rounded-l-md h-8 w-8 flex items-center justify-center"
+        >
+          <ChevronLeftIcon className="w-4" />
+        </button>
+        <>
+          {pageNumbers.map(page => (
+            <button onClick={()=>{setCurrentPage(page)}} className={`${currentPage === page ? 'bg-blue-600 text-white border-blue-600' : 'border-gray-300'} border-y border-r text-sm h-8 w-8 flex items-center justify-center`} key={page}>
+              {page}
+            </button>
+          ))}
+        </>
+        <button
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(filteredInvoices.length / ITEMS_PER_PAGE)))}
+          disabled={currentPage === Math.ceil(filteredInvoices.length / ITEMS_PER_PAGE)}
+          className="border border-gray-300 rounded-r-md border-l-0 h-8 w-8 flex items-center justify-center"
+        >
+          <ChevronRightIcon className="w-4" />
+        </button>
       </div>
     </div>
   );
