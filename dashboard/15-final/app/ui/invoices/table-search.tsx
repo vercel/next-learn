@@ -23,17 +23,17 @@ export default function TableSearch({ disabled }: { disabled?: boolean }) {
   }
 
   return (
-    <div className="relative mb-5 max-w-md">
+    <div className="relative max-w-md flex-grow">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
-      <div className="relative flex items-center py-2 px-2 mt-8">
+      <div className="relative flex items-center px-2 py-2">
         <MagnifyingGlassIcon className="h-5 text-gray-400" />
         <input
           type="text"
           placeholder="Search..."
           onChange={(e) => handleSearch(e.target.value)}
-          className="absolute pl-8 bg-transparent inset-0 border p-2 w-full rounded-md border-gray-300 text-sm"
+          className="absolute inset-0 w-full rounded-md border border-gray-300 bg-transparent p-2 pl-8 text-sm"
         />
       </div>
       {isPending && <LoadingIcon />}
@@ -43,9 +43,9 @@ export default function TableSearch({ disabled }: { disabled?: boolean }) {
 
 function LoadingIcon() {
   return (
-    <div className="absolute right-0 top-0 bottom-0 flex items-center justify-center">
+    <div className="absolute bottom-0 right-0 top-0 flex items-center justify-center">
       <svg
-        className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-700"
+        className="-ml-1 mr-3 h-5 w-5 animate-spin text-gray-700"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

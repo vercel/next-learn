@@ -5,11 +5,11 @@ import Link from 'next/link';
 import {
   PencilSquareIcon,
   ClockIcon,
-  CheckCircleIcon
-} from "@heroicons/react/24/outline";
-import DeleteInvoice from "@/app/ui/invoices/delete-invoice-button";
-import TableSearch from "./table-search";
-import PaginationButtons from "./pagination";
+  CheckCircleIcon,
+} from '@heroicons/react/24/outline';
+import DeleteInvoice from '@/app/ui/invoices/delete-invoice-button';
+import TableSearch from './table-search';
+import PaginationButtons from './pagination';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -42,23 +42,27 @@ export default function InvoicesTable({
   const searchTerm = searchParams.q ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
-  const filteredInvoices = invoices.filter(invoice => {
+  const filteredInvoices = invoices.filter((invoice) => {
     const customer = getCustomerById(invoice.customerId);
 
-    const invoiceMatches = Object.values(invoice).some(value =>
-      value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    const invoiceMatches = Object.values(invoice).some(
+      (value) =>
+        value?.toString().toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
-    const customerMatches = customer && Object.values(customer).some(value =>
-      value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const customerMatches =
+      customer &&
+      Object.values(customer).some(
+        (value) =>
+          value?.toString().toLowerCase().includes(searchTerm.toLowerCase()),
+      );
 
     return invoiceMatches || customerMatches;
-  }); 
+  });
 
   const paginatedInvoices = filteredInvoices.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+    currentPage * ITEMS_PER_PAGE,
   );
 
   function getCustomerById(customerId: number): Customer | null {
@@ -79,7 +83,10 @@ export default function InvoicesTable({
           Add Invoice
         </Link>
       </div>
-      <TableSearch/>
+      <div className="mt-8 flex items-center justify-between">
+        <TableSearch />
+        <PaginationButtons totalPages={totalPages} currentPage={currentPage} />
+      </div>
       <div className="mt-4">
         <div className="overflow-x-auto">
           <div className="overflow-hidden rounded-md border">
@@ -156,7 +163,6 @@ export default function InvoicesTable({
           </div>
         </div>
       </div>
-      <PaginationButtons totalPages={totalPages} currentPage={currentPage} />
     </div>
   );
 }

@@ -1,8 +1,9 @@
 'use client';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { usePathname, useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import clsx from 'clsx';
+import Link from 'next/link';
 
 export default function PaginationButtons({
   totalPages,
@@ -11,48 +12,60 @@ export default function PaginationButtons({
   totalPages: number;
   currentPage: number;
 }) {
-  const { replace } = useRouter();
   const pathname = usePathname();
-  const [isPending, startTransition] = useTransition();
+  const searchParams = useSearchParams();
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-  function onPageChange(page: number) {
-    const params = new URLSearchParams(window.location.search);
-    params.set('page', page.toString());
+  const createPageUrl = (pageNumber) => {
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    newSearchParams.set('page', pageNumber);
+    return `${pathname}?${newSearchParams.toString()}`;
+  };
 
-    startTransition(() => {
-      replace(`${pathname}?${params.toString()}`);
-    });
-  }
+  const PreviousTag = currentPage === 1 ? 'p' : Link;
+  const NextTag = currentPage === totalPages ? 'p' : Link;
 
   return (
-    <div className="flex items-center justify-end mt-4">
-        <button
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="border border-gray-300 rounded-l-md h-8 w-8 flex items-center justify-center"
-        >
-          <ChevronLeftIcon className="w-4" />
-        </button>
-        <>
-          {pageNumbers.map((page) => (
-        <button
-          key={page}
-          onClick={() => onPageChange(page)}
-          className={`${currentPage === page ? 'bg-blue-600 text-white border-blue-600' : 'border-gray-300'} border-y border-r text-sm h-8 w-8 flex items-center justify-center`}
-          disabled={page === currentPage}
-        >
-          {page}
-        </button>
-      ))}
-        </>
-        <button
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="border border-gray-300 rounded-r-md border-l-0 h-8 w-8 flex items-center justify-center"
-        >
-          <ChevronRightIcon className="w-4" />
-        </button>
+    <div className="flex items-center justify-end">
+      <PreviousTag
+        href={createPageUrl(currentPage - 1)}
+        className={clsx(
+          'flex h-8 w-8 items-center justify-center rounded-l-md border border-gray-300',
+          {
+            'text-gray-300': currentPage === 1,
+          },
+        )}
+      >
+        <ChevronLeftIcon className="w-4" />
+      </PreviousTag>
+      {pageNumbers.map((page) => {
+        const PageTag = page === currentPage ? 'p' : Link;
+        return (
+          <PageTag
+            key={page}
+            href={createPageUrl(page)}
+            className={clsx(
+              'flex h-8 w-8 items-center justify-center border-y border-r border-gray-300 text-sm',
+              {
+                'border-blue-600 bg-blue-600 text-white': currentPage === page,
+              },
+            )}
+          >
+            {page}
+          </PageTag>
+        );
+      })}
+      <NextTag
+        href={createPageUrl(currentPage + 1)}
+        className={clsx(
+          'flex h-8 w-8 items-center justify-center rounded-r-md border border-l-0 border-gray-300',
+          {
+            'text-gray-300': currentPage === totalPages,
+          },
+        )}
+      >
+        <ChevronRightIcon className="w-4" />
+      </NextTag>
     </div>
   );
 }
