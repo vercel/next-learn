@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Invoice } from "@/app/lib/definitions";
-import { customers } from "@/app/lib/dummy-data";
-import { useState, FormEvent } from "react";
+import { Invoice } from '@/app/lib/definitions';
+import { customers } from '@/app/lib/dummy-data';
+import { useState, FormEvent } from 'react';
 
 // import { addOrUpdateInvoice } from "@/app/lib/actions";
 // export const dynamic = "force-dynamic";
@@ -11,7 +11,7 @@ export default function InvoiceForm({
   type,
   invoice,
 }: {
-  type: "new" | "edit";
+  type: 'new' | 'edit';
   invoice?: Invoice;
 }) {
   // TO DO: Replace state and handleSubmit with a Server Action
@@ -20,11 +20,11 @@ export default function InvoiceForm({
   );
   const initialCustomer = customer ? customer.id : 0;
   const initialAmount = invoice?.amount ? invoice.amount / 100 : 0;
-  const initialStatus = invoice?.status || "pending";
+  const initialStatus = invoice?.status || 'pending';
 
   const [selectedCustomer, setSelectedCustomer] = useState(initialCustomer);
   const [amount, setAmount] = useState<number>(initialAmount);
-  const [status, setStatus] = useState<"pending" | "paid">(initialStatus);
+  const [status, setStatus] = useState<'pending' | 'paid'>(initialStatus);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,18 +37,18 @@ export default function InvoiceForm({
         // These would be generated on the server
         id: 1, // Record ID will be automatically incremented
         status: status, // Default status for a new invoice
-        date: new Date().toISOString().split("T")[0],
+        date: new Date().toISOString().split('T')[0],
       };
 
       // TODO: Add this invoice to the database
-      console.log("New Invoice:", newInvoice);
+      console.log('New Invoice:', newInvoice);
     }
   };
 
   return (
     <div className="mx-auto max-w-md p-4">
       <h2 className="mb-6 text-xl font-semibold text-gray-900">
-        {type === "new" ? "New Invoice" : "Edit Invoice"}
+        {type === 'new' ? 'New Invoice' : 'Edit Invoice'}
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -89,7 +89,7 @@ export default function InvoiceForm({
           </div>
         </div>
 
-        {type === "edit" ? (
+        {type === 'edit' ? (
           <div className="mb-4">
             <label
               className="mb-2 block text-sm font-semibold"
@@ -103,7 +103,7 @@ export default function InvoiceForm({
               onChange={(e) => {
                 const value = e.target.value;
 
-                if (value === "paid" || value === "pending") {
+                if (value === 'paid' || value === 'pending') {
                   setStatus(value);
                 }
               }}

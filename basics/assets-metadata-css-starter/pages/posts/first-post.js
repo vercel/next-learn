@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function FirstPost() {
   return (
@@ -8,5 +8,5 @@ export default function FirstPost() {
         <Link href="/">Back to home</Link>
       </h2>
     </>
-  )
+  );
 }

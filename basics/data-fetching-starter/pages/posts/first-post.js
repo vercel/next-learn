@@ -1,6 +1,6 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import Layout from '../../components/layout'
+import Head from 'next/head';
+import Link from 'next/link';
+import Layout from '../../components/layout';
 
 export default function FirstPost() {
   return (
@@ -13,5 +13,5 @@ export default function FirstPost() {
         <Link href="/">Back to home</Link>
       </h2>
     </Layout>
-  )
+  );
 }
