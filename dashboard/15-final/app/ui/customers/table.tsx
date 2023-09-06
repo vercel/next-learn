@@ -1,13 +1,10 @@
 import { customers, invoices } from "@/app/lib/dummy-data";
-import Image from "next/image";
+import {
+  countCustomerInvoices,
+  calculateCustomerInvoices,
+} from "@/app/lib/calculations";
 
 export default function CustomersTable() {
-  function totalInvoices(customerId: number) {
-    const customerInvoices = invoices.filter((invoice) => {
-      return invoice.customerId === customerId
-    });
-    return customerInvoices.length;
-  };
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -15,7 +12,7 @@ export default function CustomersTable() {
       </div>
       <div className="mt-8">
         <div className="overflow-x-auto">
-          <div className="rounded-md border">
+          <div className="overflow-hidden rounded-md border">
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50 text-left text-sm">
                 <tr>
@@ -31,19 +28,25 @@ export default function CustomersTable() {
                   <th scope="col" className="px-3 py-3.5 font-semibold">
                     Total Invoices
                   </th>
+                  <th scope="col" className="px-3 py-3.5 font-semibold">
+                    Total Pending
+                  </th>
+                  <th scope="col" className="px-3 py-3.5 font-semibold">
+                    Total Paid
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white text-gray-500">
                 {customers.map((customer) => (
                   <tr key={customer.id}>
-                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
-                        <div className="flex w-7 flex-none items-center">
-                          <img
-                            src={customer.imageUrl}
-                            alt={customer.name}
-                            className="h-7 w-full flex-none rounded-full"
-                          />
-                        </div>
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
+                      <div className="flex w-7 flex-none items-center">
+                        <img
+                          src={customer.imageUrl}
+                          alt={customer.name}
+                          className="h-7 w-full flex-none rounded-full"
+                        />
+                      </div>
                     </td>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                       {customer.name}
@@ -52,7 +55,17 @@ export default function CustomersTable() {
                       {customer.email}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
-                      {totalInvoices(customer.id)}
+                      {countCustomerInvoices(invoices, customer.id)}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm">
+                      {calculateCustomerInvoices(
+                        invoices,
+                        "pending",
+                        customer.id,
+                      )}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm">
+                      {calculateCustomerInvoices(invoices, "paid", customer.id)}
                     </td>
                   </tr>
                 ))}
