@@ -10,8 +10,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-import Image from "next/image";
-
 export default function SideNav() {
   const pathname = usePathname();
 
@@ -24,13 +22,11 @@ export default function SideNav() {
   return (
     <div className="flex h-full w-full flex-col border-r p-1 md:p-4">
       <Link href="/">
-        <Image
+        <img
           priority
           src="/logo.svg"
-          height={100}
-          width={100}
           alt="Logo"
-          className="mb-6 mt-4"
+          className="mb-6 mt-4 w-full sm:w-8"
         />
       </Link>
       {tabs.map((tab, i) => {
