@@ -23,7 +23,7 @@ export default function SideNav() {
     <div className="flex h-full flex-col justify-between border-r px-2 py-4">
       <div>
         <Link href="/">
-          <img priority src="/logo.svg" alt="Logo" className="mb-4 ml-1 w-8" />
+          <img src="/logo.svg" alt="Logo" className="mb-4 ml-1 w-8" />
         </Link>
         {tabs.map((tab, i) => {
           const TabIcon = tab.icon;
