@@ -18,13 +18,13 @@ export default function InvoiceForm({
   const customer = customers.find(
     (customer) => customer.id === invoice?.customerId,
   );
-  const [selectedCustomer, setSelectedCustomer] = useState(
-    customer ? customer.id : 0,
-  );
-  const [amount, setAmount] = useState(
-    invoice?.amount ? invoice.amount / 100 : 0,
-  );
-  const [status, setStatus] = useState(invoice?.status || "pending");
+  const initialCustomer = customer ? customer.id : 0;
+  const initialAmount = invoice?.amount ? invoice.amount / 100 : 0;
+  const initialStatus = invoice?.status || "pending";
+
+  const [selectedCustomer, setSelectedCustomer] = useState(initialCustomer);
+  const [amount, setAmount] = useState<number>(initialAmount);
+  const [status, setStatus] = useState<"pending" | "paid">(initialStatus);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export default function InvoiceForm({
     if (selectedCustomer && amount) {
       const newInvoice: Invoice = {
         customerId: selectedCustomer,
-        amount: parseInt(amount) * 100, // Convert to cents
+        amount: amount * 100, // Convert to cents
 
         // These would be generated on the server
         id: 1, // Record ID will be automatically incremented
@@ -83,7 +83,7 @@ export default function InvoiceForm({
               type="number"
               value={amount}
               placeholder="00.00"
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => setAmount(Number(e.target.value))}
               className="block w-full rounded-md border-0 py-1.5 pl-7 text-sm leading-6 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400"
             />
           </div>
@@ -91,11 +91,22 @@ export default function InvoiceForm({
 
         {type === "edit" ? (
           <div className="mb-4">
-            <label className="mb-2 block text-sm font-semibold">Status</label>
+            <label
+              className="mb-2 block text-sm font-semibold"
+              htmlFor="status"
+            >
+              Status
+            </label>
             <select
               id="status"
               className="block w-full rounded-md border-0 py-1.5 pl-3 text-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-200"
-              onChange={(e) => setStatus(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+
+                if (value === "paid" || value === "pending") {
+                  setStatus(value);
+                }
+              }}
               value={status}
             >
               <option value="pending">Pending</option>
