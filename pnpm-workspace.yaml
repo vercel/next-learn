@@ -1,4 +1,4 @@
 packages:
-  - "basics/**/*"
-  - "dashboard/**/*"
-  - "seo/*"
+  - 'basics/**/*'
+  - 'dashboard/**/*'
+  - 'seo/*'

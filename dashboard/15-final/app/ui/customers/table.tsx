@@ -1,8 +1,8 @@
-import { customers, invoices } from "@/app/lib/dummy-data";
+import { customers, invoices } from '@/app/lib/dummy-data';
 import {
   countCustomerInvoices,
   calculateCustomerInvoices,
-} from "@/app/lib/calculations";
+} from '@/app/lib/calculations';
 
 export default function CustomersTable() {
   return (
@@ -60,12 +60,12 @@ export default function CustomersTable() {
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       {calculateCustomerInvoices(
                         invoices,
-                        "pending",
+                        'pending',
                         customer.id,
                       )}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
-                      {calculateCustomerInvoices(invoices, "paid", customer.id)}
+                      {calculateCustomerInvoices(invoices, 'paid', customer.id)}
                     </td>
                   </tr>
                 ))}

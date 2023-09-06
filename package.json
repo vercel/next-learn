@@ -2,9 +2,6 @@
   "name": "15-final",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=18"
-  },
   "scripts": {
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
     "prettier": "prettier --write --ignore-unknown .",
@@ -19,5 +16,8 @@
     "eslint-config-prettier": "9.0.0",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.5.4"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

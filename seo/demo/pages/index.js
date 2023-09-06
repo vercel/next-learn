@@ -1,17 +1,17 @@
-import { useState } from "react"
-import Head from "next/head"
-import dynamic from "next/dynamic"
+import { useState } from 'react';
+import Head from 'next/head';
+import dynamic from 'next/dynamic';
 
-import styles from "../styles/Home.module.css"
-import Image from "next/image"
+import styles from '../styles/Home.module.css';
+import Image from 'next/image';
 
-const CodeSampleModal = dynamic(() => import("../components/CodeSampleModal"), {
-  ssr: false
-})
+const CodeSampleModal = dynamic(() => import('../components/CodeSampleModal'), {
+  ssr: false,
+});
 
 export default function Start({ countries }) {
-  const [results, setResults] = useState(countries)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [results, setResults] = useState(countries);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div>
@@ -46,29 +46,29 @@ export default function Start({ countries }) {
             placeholder="Country search..."
             className={styles.input}
             onChange={async (e) => {
-              const { value } = e.currentTarget
+              const { value } = e.currentTarget;
               // Dynamically load libraries
-              const Fuse = (await import("fuse.js")).default
-              const _ = (await import("lodash")).default
+              const Fuse = (await import('fuse.js')).default;
+              const _ = (await import('lodash')).default;
 
               const fuse = new Fuse(countries, {
-                keys: ["name"],
-                threshold: 0.3
-              })
+                keys: ['name'],
+                threshold: 0.3,
+              });
 
               const searchResult = fuse
                 .search(value)
-                .map((result) => result.item)
+                .map((result) => result.item);
 
               const updatedResults = searchResult.length
                 ? searchResult
-                : countries
-              setResults(updatedResults)
+                : countries;
+              setResults(updatedResults);
 
               // Fake analytics hit
               console.info({
-                searchedAt: _.now()
-              })
+                searchedAt: _.now(),
+              });
             }}
           />
 
@@ -109,12 +109,12 @@ export default function Start({ countries }) {
         </a>
       </footer>
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps() {
-  const response = await fetch("https://restcountries.com/v3.1/all")
-  const countries = await response.json()
+  const response = await fetch('https://restcountries.com/v3.1/all');
+  const countries = await response.json();
 
   return {
     props: {
@@ -123,6 +123,6 @@ export async function getServerSideProps() {
         cca2: country.cca2,
         population: country.population,
       })),
-    }
-  }
+    },
+  };
 }

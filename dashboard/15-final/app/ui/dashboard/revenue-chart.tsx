@@ -1,5 +1,5 @@
-import { Revenue } from "@/app/lib/definitions";
-import { generateYAxis } from "@/app/lib/calculations";
+import { Revenue } from '@/app/lib/definitions';
+import { generateYAxis } from '@/app/lib/calculations';
 
 // This component is representational only.
 // For data visualization UI, check out:
@@ -17,7 +17,7 @@ export default function RevenueChart({ revenue }: { revenue: Revenue[] }) {
   return (
     <div className="rounded-xl border p-6 shadow-sm md:col-span-5">
       <h2 className="font-semibold">Revenue</h2>
-      <div className="mt-4 grid grid-cols-12 items-end gap-2 sm:grid-cols-13 md:gap-4">
+      <div className="sm:grid-cols-13 mt-4 grid grid-cols-12 items-end gap-2 md:gap-4">
         {/* y-axis */}
         <div
           className="mb-6 hidden flex-col justify-between text-sm text-gray-400 sm:flex"

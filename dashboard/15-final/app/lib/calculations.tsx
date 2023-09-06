@@ -1,30 +1,30 @@
-import { Invoice, Revenue } from "./definitions";
+import { Invoice, Revenue } from './definitions';
 
 export const calculateAllInvoices = (
   invoices: Invoice[],
-  status: "pending" | "paid",
+  status: 'pending' | 'paid',
 ) => {
   return invoices
     .filter((invoice) => !status || invoice.status === status)
     .reduce((total, invoice) => total + invoice.amount / 100, 0)
-    .toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
+    .toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
     });
 };
 
 export const calculateCustomerInvoices = (
   invoices: Invoice[],
-  status: "pending" | "paid",
+  status: 'pending' | 'paid',
   customerId: number,
 ) => {
   return invoices
     .filter((invoice) => invoice.customerId === customerId)
     .filter((invoice) => !status || invoice.status === status)
     .reduce((total, invoice) => total + invoice.amount / 100, 0)
-    .toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
+    .toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
     });
 };
 

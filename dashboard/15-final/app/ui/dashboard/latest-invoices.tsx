@@ -1,6 +1,6 @@
 // InvoiceList.tsx
-import { Customer, Invoice } from "@/app/lib/definitions";
-import { findLatestInvoices } from "@/app/lib/calculations";
+import { Customer, Invoice } from '@/app/lib/definitions';
+import { findLatestInvoices } from '@/app/lib/calculations';
 
 export default function LatestInvoices({
   invoices,
@@ -26,8 +26,8 @@ export default function LatestInvoices({
           >
             <div className="flex items-center">
               <img
-                src={customer?.imageUrl || ""}
-                alt={customer?.name || ""}
+                src={customer?.imageUrl || ''}
+                alt={customer?.name || ''}
                 className="mr-4 h-8 w-8 rounded-full"
               />
               <div className="min-w-0">
@@ -38,10 +38,10 @@ export default function LatestInvoices({
               </div>
             </div>
             <p className="truncate font-medium sm:text-lg">
-              +{" "}
-              {(invoice.amount / 100).toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
+              +{' '}
+              {(invoice.amount / 100).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
               })}
             </p>
           </div>
