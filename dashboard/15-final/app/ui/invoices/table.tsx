@@ -72,9 +72,6 @@ export default function InvoicesTable() {
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
                     <span className="sr-only">Edit</span>
                   </th>
-                  {/* <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span className="sr-only">View</span>
-                  </th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 text-gray-500">
@@ -116,14 +113,6 @@ export default function InvoicesTable() {
                       </Link>
                       <DeleteInvoice id={invoice.id} />
                     </td>
-                    {/* <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                      <Link
-                        href={`/dashboard/invoices/${invoice.id}`}
-                        className="text-blue-600 hover:text-blue-900"
-                      >
-                        View<span className="sr-only">, {invoice.id}</span>
-                      </Link>
-                    </td> */}
                   </tr>
                 ))}
               </tbody>

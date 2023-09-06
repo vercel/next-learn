@@ -12,7 +12,7 @@ export default function CustomersTable() {
       </div>
       <div className="mt-8">
         <div className="overflow-x-auto">
-          <div className="rounded-md border">
+          <div className="overflow-hidden rounded-md border">
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50 text-left text-sm">
                 <tr>
