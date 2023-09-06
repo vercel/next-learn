@@ -1,5 +1,6 @@
 import { invoices, customers } from "@/app/lib/dummy-data";
 import { Customer } from "@/app/lib/definitions";
+
 import Link from "next/link";
 import {
   PencilSquareIcon,
@@ -26,7 +27,7 @@ function renderInvoiceStatus(status: string) {
   }
 }
 
-export default function Table() {
+export default function InvoicesTable() {
   function getCustomerById(customerId: number): Customer | null {
     const customer = customers.find((customer) => customer.id === customerId);
     return customer ? customer : null;
