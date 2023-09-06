@@ -84,6 +84,13 @@ export const invoices: Invoice[] = [
     id: 7,
     customerId: 3,
     amount: 8945,
+    status: "pending",
+    date: "2023-06-01",
+  },
+  {
+    id: 8,
+    customerId: 4,
+    amount: 32545,
     status: "paid",
     date: "2023-06-01",
   },

@@ -1,5 +1,6 @@
 import { invoices, customers } from "@/app/lib/dummy-data";
 import { Customer } from "@/app/lib/definitions";
+
 import Link from "next/link";
 import {
   PencilSquareIcon,
@@ -26,7 +27,7 @@ function renderInvoiceStatus(status: string) {
   }
 }
 
-export default function Table() {
+export default function InvoicesTable() {
   function getCustomerById(customerId: number): Customer | null {
     const customer = customers.find((customer) => customer.id === customerId);
     return customer ? customer : null;
@@ -45,7 +46,7 @@ export default function Table() {
       </div>
       <div className="mt-8">
         <div className="overflow-x-auto">
-          <div className="rounded-md border">
+          <div className="overflow-hidden rounded-md border">
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50 text-left text-sm">
                 <tr>
@@ -71,12 +72,9 @@ export default function Table() {
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
                     <span className="sr-only">Edit</span>
                   </th>
-                  {/* <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span className="sr-only">View</span>
-                  </th> */}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 bg-white text-gray-500">
+              <tbody className="divide-y divide-gray-200 text-gray-500">
                 {invoices.map((invoice) => (
                   <tr key={invoice.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
@@ -107,19 +105,14 @@ export default function Table() {
                       {renderInvoiceStatus(invoice.status)}
                     </td>
                     <td className="flex justify-end gap-2 whitespace-nowrap py-4 pl-3 pr-6 text-sm">
-                      <button className="rounded-md border p-1">
+                      <Link
+                        href={`/dashboard/invoices/${invoice.id}/edit`}
+                        className="rounded-md border p-1"
+                      >
                         <PencilSquareIcon className="w-4" />
-                      </button>
+                      </Link>
                       <DeleteInvoice id={invoice.id} />
                     </td>
-                    {/* <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                      <Link
-                        href={`/dashboard/invoices/${invoice.id}`}
-                        className="text-blue-600 hover:text-blue-900"
-                      >
-                        View<span className="sr-only">, {invoice.id}</span>
-                      </Link>
-                    </td> */}
                   </tr>
                 ))}
               </tbody>

@@ -1,10 +1,25 @@
 import { Invoice, Revenue } from "./definitions";
 
-export const calculateInvoices = (
+export const calculateAllInvoices = (
   invoices: Invoice[],
   status: "pending" | "paid",
 ) => {
   return invoices
+    .filter((invoice) => !status || invoice.status === status)
+    .reduce((total, invoice) => total + invoice.amount / 100, 0)
+    .toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+};
+
+export const calculateCustomerInvoices = (
+  invoices: Invoice[],
+  status: "pending" | "paid",
+  customerId: number,
+) => {
+  return invoices
+    .filter((invoice) => invoice.customerId === customerId)
     .filter((invoice) => !status || invoice.status === status)
     .reduce((total, invoice) => total + invoice.amount / 100, 0)
     .toLocaleString("en-US", {
@@ -18,6 +33,14 @@ export const calculateInvoices = (
 // E.g. "SELECT * FROM invoices
 // ORDER BY date DESC
 // LIMIT 5;"
+
+export const countCustomerInvoices = (
+  invoices: Invoice[],
+  customerId: number,
+) => {
+  return invoices.filter((invoice) => invoice.customerId === customerId).length;
+};
+
 export const findLatestInvoices = (invoices: Invoice[]) => {
   return [...invoices]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
