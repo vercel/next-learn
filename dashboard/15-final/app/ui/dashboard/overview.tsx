@@ -1,12 +1,12 @@
 import Card from "@/app/ui/dashboard/card";
 import { invoices, customers, revenue } from "@/app/lib/dummy-data";
-import { calculateInvoices } from "@/app/lib/calculations";
+import { calculateAllInvoices } from "@/app/lib/calculations";
 import RevenueChart from "@/app/ui/dashboard/revenue-chart";
 import LatestInvoices from "@/app/ui/dashboard/latest-invoices";
 
 export default function DashboardOverview() {
-  const totalPaidInvoices = calculateInvoices(invoices, "paid");
-  const totalPendingInvoices = calculateInvoices(invoices, "pending");
+  const totalPaidInvoices = calculateAllInvoices(invoices, "paid");
+  const totalPendingInvoices = calculateAllInvoices(invoices, "pending");
   const numberOfInvoices = invoices.length;
   const numberOfCustomers = customers.length;
 
