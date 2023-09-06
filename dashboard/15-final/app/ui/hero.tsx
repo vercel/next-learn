@@ -19,11 +19,8 @@ export default function Hero() {
         </a>
       </div>
 
-      <div className="mx-auto mt-12 w-full px-4 lg:w-2/3">
-        <img
-          src="https://vercel.com/_next/image?url=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Finsights%2Fanalytics_dashboard.png&w=3840&q=75&dpl=dpl_9Tp4gaAJ1QFc4eSRJ99UwWvWgZ73"
-          alt="Dashboard image"
-        />
+      <div className="mx-auto mt-12 w-full px-20 lg:w-2/3">
+        <img src="/hero.png" alt="Dashboard image" />
       </div>
     </>
   );
