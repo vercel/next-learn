@@ -22,12 +22,12 @@ export default function PaginationButtons({
     return `${pathname}?${newSearchParams.toString()}`;
   };
 
-  const PreviousTag = currentPage === 1 ? 'p' : Link;
-  const NextTag = currentPage === totalPages ? 'p' : Link;
+  const PreviousPageTag = currentPage === 1 ? 'p' : Link;
+  const NextPageTag = currentPage === totalPages ? 'p' : Link;
 
   return (
     <div className="flex items-center justify-end">
-      <PreviousTag
+      <PreviousPageTag
         href={createPageUrl(currentPage - 1)}
         className={clsx(
           'flex h-8 w-8 items-center justify-center rounded-l-md border border-gray-300',
@@ -37,7 +37,7 @@ export default function PaginationButtons({
         )}
       >
         <ChevronLeftIcon className="w-4" />
-      </PreviousTag>
+      </PreviousPageTag>
       {pageNumbers.map((page) => {
         const PageTag = page === currentPage ? 'p' : Link;
         return (
@@ -55,7 +55,7 @@ export default function PaginationButtons({
           </PageTag>
         );
       })}
-      <NextTag
+      <NextPageTag
         href={createPageUrl(currentPage + 1)}
         className={clsx(
           'flex h-8 w-8 items-center justify-center rounded-r-md border border-l-0 border-gray-300',
@@ -65,7 +65,7 @@ export default function PaginationButtons({
         )}
       >
         <ChevronRightIcon className="w-4" />
-      </NextTag>
+      </NextPageTag>
     </div>
   );
 }

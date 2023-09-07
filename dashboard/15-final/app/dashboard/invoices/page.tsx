@@ -4,7 +4,7 @@ export default function Page({
   searchParams,
 }: {
   searchParams: {
-    q: string;
+    query: string;
     page: string;
   };
 }) {

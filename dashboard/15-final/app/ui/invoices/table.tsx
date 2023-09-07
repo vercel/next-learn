@@ -35,7 +35,7 @@ export default function InvoicesTable({
   searchParams,
 }: {
   searchParams: {
-    q: string;
+    query: string;
     page: string;
   };
 }) {

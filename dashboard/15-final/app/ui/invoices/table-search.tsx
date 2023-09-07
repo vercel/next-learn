@@ -1,16 +1,17 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 
-export default function TableSearch({ disabled }: { disabled?: boolean }) {
+export default function TableSearch() {
   const { replace } = useRouter();
+  const searchParams = useSearchParams()!;
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
   function handleSearch(term: string) {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchParams);
     if (term) {
       params.set('q', term);
     } else {
