@@ -3,6 +3,7 @@ import {
   countCustomerInvoices,
   calculateCustomerInvoices,
 } from '@/app/lib/calculations';
+import Image from 'next/image';
 
 export default function CustomersTable() {
   return (
@@ -41,10 +42,12 @@ export default function CustomersTable() {
                   <tr key={customer.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                       <div className="flex w-7 flex-none items-center">
-                        <img
+                        <Image
                           src={customer.imageUrl}
                           alt={customer.name}
-                          className="h-7 w-full flex-none rounded-full"
+                          className="rounded-full"
+                          width={28}
+                          height={28}
                         />
                       </div>
                     </td>

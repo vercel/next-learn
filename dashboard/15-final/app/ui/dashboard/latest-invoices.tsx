@@ -1,6 +1,7 @@
 // InvoiceList.tsx
 import { Customer, Invoice } from '@/app/lib/definitions';
 import { findLatestInvoices } from '@/app/lib/calculations';
+import Image from 'next/image';
 
 export default function LatestInvoices({
   invoices,
@@ -22,13 +23,15 @@ export default function LatestInvoices({
         return (
           <div
             key={invoice.id}
-            className="mt-8 flex  flex-row items-center justify-between"
+            className="mt-8 flex flex-row items-center justify-between"
           >
             <div className="flex items-center">
-              <img
+              <Image
                 src={customer?.imageUrl || ''}
                 alt={customer?.name || ''}
-                className="mr-4 h-8 w-8 rounded-full"
+                className="mr-4 rounded-full"
+                width={32}
+                height={32}
               />
               <div className="min-w-0">
                 <p className="truncate font-semibold">{customer?.name}</p>

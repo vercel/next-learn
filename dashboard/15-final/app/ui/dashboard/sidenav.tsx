@@ -7,10 +7,9 @@ import {
   PowerIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-
-import Image from 'next/image';
 
 export default function SideNav() {
   const pathname = usePathname();
@@ -22,40 +21,41 @@ export default function SideNav() {
   ];
 
   return (
-    <div className="flex h-full w-full flex-col border-r p-1 md:p-4">
-      <Link href="/">
-        <Image
-          priority
-          src="/logo.svg"
-          height={100}
-          width={100}
-          alt="Logo"
-          className="mb-6 mt-4"
-        />
-      </Link>
-      {tabs.map((tab, i) => {
-        const TabIcon = tab.icon;
-        return (
-          <Link
-            key={i}
-            href={tab.href}
-            className={clsx(
-              'mb-2 flex rounded p-2 font-semibold hover:bg-gray-100 hover:text-blue-600',
-              {
-                'bg-gray-100 text-blue-600': pathname === tab.href,
-              },
-            )}
-          >
-            <TabIcon className="h-6 w-6 md:mr-2" />
-            <p className="hidden md:block">{tab.name}</p>
-          </Link>
-        );
-      })}
+    <div className="flex h-full flex-col justify-between border-r px-2 py-4">
+      <div>
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            className="mb-4 ml-1"
+            width={32}
+            height={32}
+          />
+        </Link>
+        {tabs.map((tab, i) => {
+          const TabIcon = tab.icon;
+          return (
+            <Link
+              key={i}
+              href={tab.href}
+              className={clsx(
+                'mt-2 flex gap-2 rounded-md p-2 font-semibold hover:bg-gray-50 hover:text-blue-600',
+                {
+                  'bg-gray-50 text-blue-600': pathname === tab.href,
+                },
+              )}
+            >
+              <TabIcon className="w-6" />
+              <p className="hidden md:block">{tab.name}</p>
+            </Link>
+          );
+        })}
+      </div>
       <Link
         href="/login"
-        className="mt-auto flex rounded p-2 font-semibold hover:text-blue-600"
+        className="flex gap-2 rounded p-2 font-semibold hover:text-blue-600"
       >
-        <PowerIcon className="h-6 w-6 md:mr-2" />
+        <PowerIcon className="w-6" />
         <div className="hidden md:block">Sign Out</div>
       </Link>
     </div>
