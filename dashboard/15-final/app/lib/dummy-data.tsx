@@ -15,25 +15,25 @@ export const customers: Customer[] = [
     id: 1,
     name: 'Ada Lovelace',
     email: 'ada@lovelace.com',
-    imageUrl: '/customers/ada-lovelace.png',
+    image_url: '/customers/ada-lovelace.png',
   },
   {
     id: 2,
     name: 'Grace Hopper',
     email: 'grace@hopper.com',
-    imageUrl: '/customers/grace-hopper.png',
+    image_url: '/customers/grace-hopper.png',
   },
   {
     id: 3,
     name: 'Hedy Lammar',
     email: 'hedy@lammar.com',
-    imageUrl: '/customers/hedy-lammar.png',
+    image_url: '/customers/hedy-lammar.png',
   },
   {
     id: 4,
     name: 'Margaret Hamilton',
     email: 'margaret@hamilton.com',
-    imageUrl: '/customers/margaret-hamilton.png',
+    image_url: '/customers/margaret-hamilton.png',
   },
 ];
 

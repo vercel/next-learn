@@ -12,7 +12,7 @@ export type Customer = {
   id: number;
   name: string;
   email: string;
-  imageUrl: string;
+  image_url: string;
 };
 
 export type Invoice = {

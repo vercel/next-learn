@@ -1,8 +1,7 @@
-import { customers } from '@/app/lib/dummy-data';
 import { Customer } from '@/app/lib/definitions';
 import Link from 'next/link';
 import Image from 'next/image';
-import { seedInvoices } from '@/app/lib/seed'
+import { seedInvoices, seedCustomers } from '@/app/lib/seed'
 
 import {
   PencilSquareIcon,
@@ -53,16 +52,24 @@ export default async function InvoicesTable({
     page: string;
   };
 }) {
-  let data;
+  let invoicesData;
+  let customersData;
 
   try {
-    data = await sql`SELECT * FROM invoices`
+    invoicesData = await sql`SELECT * FROM invoices`
   } catch (e: any) {
     await seedInvoices()
-    data = await sql`SELECT * FROM invoices`
+    invoicesData = await sql`SELECT * FROM invoices`
+  }
+  try {
+    customersData = await sql`SELECT * FROM customers`
+  } catch (e: any) {
+    await seedCustomers()
+    customersData = await sql`SELECT * FROM customers`
   }
 
-  const invoices = data.rows;
+  const invoices = invoicesData.rows;
+  const customers = customersData.rows;
   const searchTerm = searchParams.query ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
