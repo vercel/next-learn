@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
 import {
   UserGroupIcon,
   HomeIcon,
   InboxIcon,
   PowerIcon,
-} from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
+} from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 export default function SideNav() {
   const pathname = usePathname();
 
   const tabs = [
-    { name: "Home", href: "/dashboard", icon: HomeIcon },
-    { name: "Invoices", href: "/dashboard/invoices", icon: InboxIcon },
-    { name: "Customers", href: "/dashboard/customers", icon: UserGroupIcon },
+    { name: 'Home', href: '/dashboard', icon: HomeIcon },
+    { name: 'Invoices', href: '/dashboard/invoices', icon: InboxIcon },
+    { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
   ];
 
   return (

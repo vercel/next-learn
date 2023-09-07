@@ -1,8 +1,8 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 export default function Search() {
   async function submitForm(formData: FormData) {
-    "use server";
+    'use server';
     // TODO: Implement search
   }
   return (

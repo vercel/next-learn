@@ -1,0 +1,24 @@
+{
+  "name": "15-final",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
+    "prettier": "prettier --write --ignore-unknown .",
+    "prettier:check": "prettier --check --ignore-unknown .",
+    "start": "next start",
+    "test": "npm run lint && npm run prettier:check"
+  },
+  "devDependencies": {
+    "@vercel/style-guide": "^5.0.1",
+    "eslint": "8.48.0",
+    "eslint-config-next": "13.4.19",
+    "eslint-config-prettier": "9.0.0",
+    "prettier": "3.0.3",
+    "prettier-plugin-tailwindcss": "0.5.4"
+  },
+  "packageManager": "pnpm@8.7.0",
+  "engines": {
+    "node": ">=18"
+  }
+}
