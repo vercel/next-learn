@@ -35,6 +35,7 @@ export default function CustomersTable() {
                     </th>
                   </tr>
                 </thead>
+
                 <tbody className="divide-y divide-gray-200 bg-white text-gray-500">
                   {customers.map((customer) => (
                     <tr key={customer.id}>

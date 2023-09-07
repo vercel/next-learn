@@ -8,6 +8,10 @@ import {
   CheckCircleIcon,
 } from '@heroicons/react/24/outline';
 import DeleteInvoice from '@/app/ui/invoices/delete-button';
+import TableSearch from './table-search';
+import PaginationButtons from './pagination';
+
+const ITEMS_PER_PAGE = 10;
 
 function renderInvoiceStatus(status: string) {
   if (status === 'pending') {
@@ -38,11 +42,46 @@ function formatDateToLocal(dateStr: string, locale: string = 'en-US') {
   return formatter.format(date);
 }
 
-export default function InvoicesTable() {
+export default function InvoicesTable({
+  searchParams,
+}: {
+  searchParams: {
+    query: string;
+    page: string;
+  };
+}) {
+  const searchTerm = searchParams.query ?? '';
+  const currentPage = parseInt(searchParams.page ?? '1');
+
+  const filteredInvoices = invoices.filter((invoice) => {
+    const customer = getCustomerById(invoice.customerId);
+
+    const invoiceMatches = Object.values(invoice).some(
+      (value) =>
+        value?.toString().toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+
+    const customerMatches =
+      customer &&
+      Object.values(customer).some(
+        (value) =>
+          value?.toString().toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+
+    return invoiceMatches || customerMatches;
+  });
+
+  const paginatedInvoices = filteredInvoices.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE,
+  );
+
   function getCustomerById(customerId: number): Customer | null {
     const customer = customers.find((customer) => customer.id === customerId);
     return customer ? customer : null;
   }
+
+  const totalPages = Math.ceil(filteredInvoices.length / ITEMS_PER_PAGE);
 
   return (
     <div className="w-full">
@@ -55,7 +94,11 @@ export default function InvoicesTable() {
           Add Invoice
         </Link>
       </div>
-      <div className="mt-8 flow-root">
+      <div className="mt-8 flex items-center justify-between">
+        <TableSearch />
+        <PaginationButtons totalPages={totalPages} currentPage={currentPage} />
+      </div>
+      <div className="mt-4 flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden rounded-md border">
@@ -80,7 +123,6 @@ export default function InvoicesTable() {
                     <th scope="col" className="px-3 py-3.5 font-semibold">
                       Status
                     </th>
-
                     <th
                       scope="col"
                       className="relative py-3.5 pl-3 pr-4 sm:pr-6"
@@ -90,7 +132,7 @@ export default function InvoicesTable() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 text-gray-500">
-                  {invoices.map((invoice) => (
+                  {paginatedInvoices.map((invoice) => (
                     <tr key={invoice.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                         {invoice.id}

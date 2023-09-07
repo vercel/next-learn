@@ -94,6 +94,55 @@ export const invoices: Invoice[] = [
     status: 'paid',
     date: '2023-06-01',
   },
+  {
+    id: 9,
+    customerId: 3,
+    amount: 1250,
+    status: 'paid',
+    date: '2023-06-02',
+  },
+  {
+    id: 10,
+    customerId: 1,
+    amount: 8945,
+    status: 'paid',
+    date: '2023-06-01',
+  },
+  {
+    id: 11,
+    customerId: 2,
+    amount: 500,
+    status: 'paid',
+    date: '2023-08-01',
+  },
+  {
+    id: 12,
+    customerId: 3,
+    amount: 8945,
+    status: 'paid',
+    date: '2023-06-01',
+  },
+  {
+    id: 13,
+    customerId: 3,
+    amount: 8945,
+    status: 'paid',
+    date: '2023-06-01',
+  },
+  {
+    id: 14,
+    customerId: 4,
+    amount: 8945,
+    status: 'paid',
+    date: '2023-10-01',
+  },
+  {
+    id: 15,
+    customerId: 3,
+    amount: 1000,
+    status: 'paid',
+    date: '2022-06-12',
+  },
 ];
 
 export const revenue: Revenue[] = [
