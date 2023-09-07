@@ -22,8 +22,6 @@ export default function LoginForm() {
       <BackgroundBlur />
 
       <div className="mx-auto flex w-full flex-col items-center space-y-2 rounded-xl border bg-white px-4 py-6 shadow-sm sm:max-w-sm sm:space-y-4 sm:px-8 sm:py-12">
-
-        
         <Link href="/">
           <Image width={40} height={40} src="/logo.png" alt="Next.js Logo" />
         </Link>

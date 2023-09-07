@@ -40,8 +40,7 @@ export default function LatestInvoices({
                 </p>
               </div>
             </div>
-            <p className="truncate font-medium sm:text-lg">
-              +{' '}
+            <p className="truncate font-medium">
               {(invoice.amount / 100).toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'USD',
