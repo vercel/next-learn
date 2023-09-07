@@ -7,7 +7,7 @@ import {
   ClockIcon,
   CheckCircleIcon,
 } from '@heroicons/react/24/outline';
-import DeleteInvoice from '@/app/ui/invoices/delete-invoice-button';
+import DeleteInvoice from '@/app/ui/invoices/delete-button';
 
 function renderInvoiceStatus(status: string) {
   if (status === 'pending') {

@@ -18,12 +18,6 @@ export default function CustomersTable() {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-50 text-left text-sm">
                   <tr>
-                    <th
-                      scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                    >
-                      <span className="sr-only">Profile</span>
-                    </th>
                     <th scope="col" className="px-3.5 py-3.5  sm:pl-6">
                       Name
                     </th>
@@ -45,18 +39,16 @@ export default function CustomersTable() {
                   {customers.map((customer) => (
                     <tr key={customer.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
-                        <div className="flex w-7 flex-none items-center">
+                        <div className="flex items-center gap-3">
                           <Image
                             src={customer.imageUrl}
-                            alt={customer.name}
                             className="rounded-full"
+                            alt={customer.name}
                             width={28}
                             height={28}
                           />
+                          <p>{customer.name}</p>
                         </div>
-                      </td>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
-                        {customer.name}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
                         {customer.email}
