@@ -31,7 +31,7 @@ export default function InvoiceForm({
 
     if (selectedCustomer && amount) {
       const newInvoice: Invoice = {
-        customerId: selectedCustomer,
+        customer_id: selectedCustomer,
         amount: amount * 100, // Convert to cents
 
         // These would be generated on the server

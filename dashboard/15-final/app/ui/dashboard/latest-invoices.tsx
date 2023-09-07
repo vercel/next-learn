@@ -18,7 +18,7 @@ export default function LatestInvoices({
 
       {lastFiveInvoices.map((invoice) => {
         const customer = customers.find(
-          (customer) => customer.id === invoice.customerId,
+          (customer) => customer.id === invoice.customer_id,
         );
         return (
           <div

@@ -1,7 +1,9 @@
-import { invoices, customers } from '@/app/lib/dummy-data';
+import { customers } from '@/app/lib/dummy-data';
 import { Customer } from '@/app/lib/definitions';
 import Link from 'next/link';
 import Image from 'next/image';
+import { seedInvoices } from '@/app/lib/seed'
+
 import {
   PencilSquareIcon,
   ClockIcon,
@@ -10,6 +12,7 @@ import {
 import DeleteInvoice from '@/app/ui/invoices/delete-invoice-button';
 import TableSearch from './table-search';
 import PaginationButtons from './pagination';
+import { sql } from '@vercel/postgres';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -42,7 +45,7 @@ function formatDateToLocal(dateStr: string, locale: string = 'en-US') {
   return formatter.format(date);
 }
 
-export default function InvoicesTable({
+export default async function InvoicesTable({
   searchParams,
 }: {
   searchParams: {
@@ -50,11 +53,21 @@ export default function InvoicesTable({
     page: string;
   };
 }) {
+  let data;
+
+  try {
+    data = await sql`SELECT * FROM invoices`
+  } catch (e: any) {
+    await seedInvoices()
+    data = await sql`SELECT * FROM invoices`
+  }
+
+  const invoices = data.rows;
   const searchTerm = searchParams.query ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
   const filteredInvoices = invoices.filter((invoice) => {
-    const customer = getCustomerById(invoice.customerId);
+    const customer = getCustomerById(invoice.customer_id);
 
     const invoiceMatches = Object.values(invoice).some(
       (value) =>
@@ -70,6 +83,7 @@ export default function InvoicesTable({
 
     return invoiceMatches || customerMatches;
   });
+
 
   const paginatedInvoices = filteredInvoices.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -136,19 +150,19 @@ export default function InvoicesTable({
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       <div className="flex items-center gap-3">
-                        <Image
+                        {/* <Image
                           src={`${getCustomerById(invoice.customerId)
                             ?.imageUrl}`}
                           className="rounded-full"
                           alt="Customer Image"
                           width={28}
                           height={28}
-                        />
-                        <p>{getCustomerById(invoice.customerId)?.name}</p>
+                        /> */}
+                        <p>{getCustomerById(invoice.customer_id)?.name}</p>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
-                      {getCustomerById(invoice.customerId)?.email}
+                      {getCustomerById(invoice.customer_id)?.email}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       {(invoice.amount / 100).toLocaleString('en-US', {

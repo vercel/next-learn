@@ -19,7 +19,7 @@ export const calculateCustomerInvoices = (
   customerId: number,
 ) => {
   return invoices
-    .filter((invoice) => invoice.customerId === customerId)
+    .filter((invoice) => invoice.customer_id === customerId)
     .filter((invoice) => !status || invoice.status === status)
     .reduce((total, invoice) => total + invoice.amount / 100, 0)
     .toLocaleString('en-US', {
