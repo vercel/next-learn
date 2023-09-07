@@ -93,7 +93,7 @@ export const invoices: Invoice[] = [
     amount: 32545,
     status: 'paid',
     date: '2023-06-01',
-  }
+  },
 ];
 
 export const revenue: Revenue[] = [

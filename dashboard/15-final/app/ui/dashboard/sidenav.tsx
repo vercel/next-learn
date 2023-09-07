@@ -24,7 +24,13 @@ export default function SideNav() {
     <div className="flex h-full flex-col justify-between border-r px-2 py-4">
       <div>
         <Link href="/">
-          <Image src="/logo.png" alt="Logo" className="mb-4 ml-1" width={32} height={32} />
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            className="mb-4 ml-1"
+            width={32}
+            height={32}
+          />
         </Link>
         {tabs.map((tab, i) => {
           const TabIcon = tab.icon;
@@ -33,9 +39,9 @@ export default function SideNav() {
               key={i}
               href={tab.href}
               className={clsx(
-                "mt-2 flex gap-2 rounded-md p-2 font-semibold hover:bg-gray-50 hover:text-blue-600",
+                'mt-2 flex gap-2 rounded-md p-2 font-semibold hover:bg-gray-50 hover:text-blue-600',
                 {
-                  "bg-gray-50 text-blue-600": pathname === tab.href,
+                  'bg-gray-50 text-blue-600': pathname === tab.href,
                 },
               )}
             >
