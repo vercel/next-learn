@@ -34,7 +34,6 @@ export default function Card({
       <p className="mt-2 truncate text-2xl font-semibold tracking-wide md:text-3xl">
         {value}
       </p>
-      <p className="mt-1.5 text-sm text-gray-400">+00% since last month</p>
     </div>
   );
 }
