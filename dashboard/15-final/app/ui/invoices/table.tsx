@@ -1,7 +1,7 @@
 import { invoices, customers } from '@/app/lib/dummy-data';
 import { Customer } from '@/app/lib/definitions';
-
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   PencilSquareIcon,
   ClockIcon,
@@ -27,12 +27,12 @@ function renderInvoiceStatus(status: string) {
   }
 }
 
-function formatDateToLocal(dateStr: string, locale: string = "en-US") {
+function formatDateToLocal(dateStr: string, locale: string = 'en-US') {
   const date = new Date(dateStr);
   const options: Intl.DateTimeFormatOptions = {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
   };
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);
@@ -93,9 +93,13 @@ export default function InvoicesTable() {
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       <div className="flex items-center gap-3">
-                        <img
-                          src={getCustomerById(invoice.customerId)?.imageUrl}
-                          className="h-7 w-7 rounded-full"
+                        <Image
+                          src={`${getCustomerById(invoice.customerId)
+                            ?.imageUrl}`}
+                          className="rounded-full"
+                          alt="Customer Image"
+                          width={28}
+                          height={28}
                         />
                         <p>{getCustomerById(invoice.customerId)?.name}</p>
                       </div>

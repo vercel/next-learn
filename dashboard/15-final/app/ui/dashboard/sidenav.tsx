@@ -7,6 +7,7 @@ import {
   PowerIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
@@ -23,7 +24,7 @@ export default function SideNav() {
     <div className="flex h-full flex-col justify-between border-r px-2 py-4">
       <div>
         <Link href="/">
-          <img src="/logo.svg" alt="Logo" className="mb-4 ml-1 w-8" />
+          <Image src="/logo.png" alt="Logo" className="mb-4 ml-1" width={32} height={32} />
         </Link>
         {tabs.map((tab, i) => {
           const TabIcon = tab.icon;

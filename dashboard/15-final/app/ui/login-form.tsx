@@ -2,6 +2,8 @@
 
 import BackgroundBlur from '@/app/ui/background-blur';
 import React, { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 // This component contains basic logic for a React Form.
 // We'll be updating it in Chapter 8 - Adding Authentication.
@@ -20,9 +22,11 @@ export default function LoginForm() {
       <BackgroundBlur />
 
       <div className="mx-auto flex w-full flex-col items-center space-y-2 rounded-xl border bg-white px-4 py-6 shadow-sm sm:max-w-sm sm:space-y-4 sm:px-8 sm:py-12">
-        <a href="/">
-          <img className="w-10" src="/logo.svg" alt="Next.js Logo" />
-        </a>
+
+        
+        <Link href="/">
+          <Image width={40} height={40} src="/logo.png" alt="Next.js Logo" />
+        </Link>
         <div className="w-full">
           <form onSubmit={handleSubmit}>
             <div>
