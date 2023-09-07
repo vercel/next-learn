@@ -13,9 +13,9 @@ export default function TableSearch() {
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
     if (term) {
-      params.set('q', term);
+      params.set('query', term);
     } else {
-      params.delete('q');
+      params.delete('query');
     }
 
     startTransition(() => {

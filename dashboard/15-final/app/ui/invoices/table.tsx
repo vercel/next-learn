@@ -39,7 +39,7 @@ export default function InvoicesTable({
     page: string;
   };
 }) {
-  const searchTerm = searchParams.q ?? '';
+  const searchTerm = searchParams.query ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
   const filteredInvoices = invoices.filter((invoice) => {
