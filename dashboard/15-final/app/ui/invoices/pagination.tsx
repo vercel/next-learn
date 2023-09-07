@@ -16,9 +16,9 @@ export default function PaginationButtons({
   const searchParams = useSearchParams();
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-  const createPageUrl = (pageNumber) => {
+  const createPageUrl = (pageNumber: number) => {
     const newSearchParams = new URLSearchParams(searchParams.toString());
-    newSearchParams.set('page', pageNumber);
+    newSearchParams.set('page', pageNumber.toString());
     return `${pathname}?${newSearchParams.toString()}`;
   };
 
