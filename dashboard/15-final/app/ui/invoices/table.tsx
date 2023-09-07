@@ -94,7 +94,7 @@ export default function InvoicesTable({
           Add Invoice
         </Link>
       </div>
-      <div className="mt-8 flex items-center justify-between">
+      <div className="mt-8 flex items-center justify-between gap-2">
         <TableSearch />
         <PaginationButtons totalPages={totalPages} currentPage={currentPage} />
       </div>
