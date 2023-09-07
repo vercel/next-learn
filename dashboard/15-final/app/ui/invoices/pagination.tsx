@@ -26,11 +26,11 @@ export default function PaginationButtons({
   const NextPageTag = currentPage === totalPages ? 'p' : Link;
 
   return (
-    <div className="flex items-center justify-end">
+    <div className="inline-flex -space-x-px">
       <PreviousPageTag
         href={createPageUrl(currentPage - 1)}
         className={clsx(
-          'flex h-8 w-8 items-center justify-center rounded-l-md border border-gray-300',
+          'flex h-9 w-9 items-center justify-center rounded-l-md ring-1 ring-inset ring-gray-300',
           {
             'text-gray-300': currentPage === 1,
           },
@@ -45,9 +45,10 @@ export default function PaginationButtons({
             key={page}
             href={createPageUrl(page)}
             className={clsx(
-              'flex h-8 w-8 items-center justify-center border-y border-r border-gray-300 text-sm',
+              'flex h-9 w-9 items-center justify-center text-sm ring-1 ring-inset ring-gray-300',
               {
-                'border-blue-600 bg-blue-600 text-white': currentPage === page,
+                'z-10 bg-blue-600 text-white ring-blue-600':
+                  currentPage === page,
               },
             )}
           >
@@ -58,7 +59,7 @@ export default function PaginationButtons({
       <NextPageTag
         href={createPageUrl(currentPage + 1)}
         className={clsx(
-          'flex h-8 w-8 items-center justify-center rounded-r-md border border-l-0 border-gray-300',
+          'flex h-9 w-9 items-center justify-center rounded-r-md ring-1 ring-inset ring-gray-300',
           {
             'text-gray-300': currentPage === totalPages,
           },
