@@ -13,7 +13,7 @@ export default function Hero() {
           dapibus consectetur. Duis quis eros euismod.
         </p>
         <a href="/login">
-          <button className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700">
+          <button className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800">
             Log in
           </button>
         </a>
