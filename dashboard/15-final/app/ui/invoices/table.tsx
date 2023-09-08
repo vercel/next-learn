@@ -11,7 +11,7 @@ import {
 import DeleteInvoice from '@/app/ui/invoices/delete-invoice-button';
 import TableSearch from './table-search';
 import PaginationButtons from './pagination';
-import { sql } from '@vercel/postgres';
+import { fetchData } from '@/app/lib/fetch-data';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -52,24 +52,10 @@ export default async function InvoicesTable({
     page: string;
   };
 }) {
-  let invoicesData;
-  let customersData;
 
-  try {
-    invoicesData = await sql`SELECT * FROM invoices`
-  } catch (e: any) {
-    await seedInvoices()
-    invoicesData = await sql`SELECT * FROM invoices`
-  }
-  try {
-    customersData = await sql`SELECT * FROM customers`
-  } catch (e: any) {
-    await seedCustomers()
-    customersData = await sql`SELECT * FROM customers`
-  }
+  const invoices = await fetchData('invoices', seedInvoices);
+  const customers = await fetchData('customers', seedCustomers);
 
-  const invoices = invoicesData.rows;
-  const customers = customersData.rows;
   const searchTerm = searchParams.query ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
