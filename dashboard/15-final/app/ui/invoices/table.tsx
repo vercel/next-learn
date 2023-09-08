@@ -157,14 +157,13 @@ export default async function InvoicesTable({
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       <div className="flex items-center gap-3">
-                        {/* <Image
-                          src={`${getCustomerById(invoice.customerId)
-                            ?.imageUrl}`}
+                        <Image
+                          src={getCustomerById(invoice.customer_id)?.image_url}
                           className="rounded-full"
                           alt="Customer Image"
                           width={28}
                           height={28}
-                        /> */}
+                        />
                         <p>{getCustomerById(invoice.customer_id)?.name}</p>
                       </div>
                     </td>

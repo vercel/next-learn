@@ -38,7 +38,7 @@ export const countCustomerInvoices = (
   invoices: Invoice[],
   customerId: number,
 ) => {
-  return invoices.filter((invoice) => invoice.customerId === customerId).length;
+  return invoices.filter((invoice) => invoice.customer_id === customerId).length;
 };
 
 export const findLatestInvoices = (invoices: Invoice[]) => {

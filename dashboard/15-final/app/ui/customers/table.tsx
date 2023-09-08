@@ -1,11 +1,30 @@
-import { customers, invoices } from '@/app/lib/dummy-data';
 import {
   countCustomerInvoices,
   calculateCustomerInvoices,
 } from '@/app/lib/calculations';
+import { seedInvoices, seedCustomers } from '@/app/lib/seed';
+import { sql } from '@vercel/postgres';
 import Image from 'next/image';
 
-export default function CustomersTable() {
+export default async function CustomersTable() {
+  let invoicesData;
+  let customersData;
+
+  try {
+    invoicesData = await sql`SELECT * FROM invoices`
+  } catch (e: any) {
+    await seedInvoices()
+    invoicesData = await sql`SELECT * FROM invoices`
+  }
+  try {
+    customersData = await sql`SELECT * FROM customers`
+  } catch (e: any) {
+    await seedCustomers()
+    customersData = await sql`SELECT * FROM customers`
+  }
+
+  const invoices = invoicesData.rows;
+  const customers = customersData.rows;
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -43,7 +62,7 @@ export default function CustomersTable() {
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                       <div className="flex w-7 flex-none items-center">
                         <Image
-                          src={customer.imageUrl}
+                          src={customer.image_url}
                           alt={customer.name}
                           className="rounded-full"
                           width={28}
