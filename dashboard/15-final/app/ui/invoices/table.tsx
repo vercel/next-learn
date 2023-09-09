@@ -1,4 +1,4 @@
-import { Customer } from '@/app/lib/definitions';
+import { Customer, Invoice } from '@/app/lib/definitions';
 import Link from 'next/link';
 import Image from 'next/image';
 import { seedInvoices, seedCustomers } from '@/app/lib/seed'
@@ -53,13 +53,13 @@ export default async function InvoicesTable({
   };
 }) {
 
-  const invoices = await fetchData('invoices', seedInvoices);
-  const customers = await fetchData('customers', seedCustomers);
+  const invoices = await fetchData('invoices', seedInvoices) as Invoice[];
+  const customers = await fetchData('customers', seedCustomers) as Customer[];
 
   const searchTerm = searchParams.query ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
-  const filteredInvoices = invoices.filter((invoice) => {
+  const filteredInvoices = invoices?.filter((invoice) => {
     const customer = getCustomerById(invoice.customer_id);
 
     const invoiceMatches = Object.values(invoice).some(
@@ -78,13 +78,13 @@ export default async function InvoicesTable({
   });
 
 
-  const paginatedInvoices = filteredInvoices.slice(
+  const paginatedInvoices = filteredInvoices?.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE,
   );
 
   function getCustomerById(customerId: number): Customer | null {
-    const customer = customers.find((customer) => customer.id === customerId);
+    const customer = customers?.find((customer) => customer.id === customerId);
     return customer ? customer : null;
   }
 
@@ -136,7 +136,7 @@ export default async function InvoicesTable({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 text-gray-500">
-                {paginatedInvoices.map((invoice) => (
+                {paginatedInvoices?.map((invoice) => (
                   <tr key={invoice.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                       {invoice.id}
@@ -144,7 +144,7 @@ export default async function InvoicesTable({
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       <div className="flex items-center gap-3">
                         <Image
-                          src={getCustomerById(invoice.customer_id)?.image_url}
+                          src={getCustomerById(invoice.customer_id)?.image_url || ''}
                           className="rounded-full"
                           alt="Customer Image"
                           width={28}

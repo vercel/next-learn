@@ -2,13 +2,14 @@ import {
   countCustomerInvoices,
   calculateCustomerInvoices,
 } from '@/app/lib/calculations';
+import { Customer, Invoice } from '@/app/lib/definitions';
 import { fetchData } from '@/app/lib/fetch-data';
 import { seedInvoices, seedCustomers } from '@/app/lib/seed';
 import Image from 'next/image';
 
 export default async function CustomersTable() {
-  const invoices = await fetchData('invoices', seedInvoices);
-  const customers = await fetchData('customers', seedCustomers);
+  const invoices = await fetchData('invoices', seedInvoices) as Invoice[];
+  const customers = await fetchData('customers', seedCustomers) as Customer[];
 
   return (
     <div className="w-full">
@@ -42,7 +43,7 @@ export default async function CustomersTable() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white text-gray-500">
-                {customers.map((customer) => (
+                {customers?.map((customer) => (
                   <tr key={customer.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                       <div className="flex w-7 flex-none items-center">

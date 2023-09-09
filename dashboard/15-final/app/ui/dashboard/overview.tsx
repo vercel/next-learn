@@ -4,11 +4,12 @@ import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { seedCustomers, seedInvoices, seedRevenue } from '@/app/lib/seed';
 import { fetchData } from '@/app/lib/fetch-data';
+import { Invoice, Customer, Revenue } from '@/app/lib/definitions';
 
 export default async function DashboardOverview() {
-  const invoices = await fetchData('invoices', seedInvoices);
-  const customers = await fetchData('customers', seedCustomers);
-  const revenue = await fetchData('revenue', seedRevenue);
+  const invoices = await fetchData('invoices', seedInvoices) as Invoice[];
+  const customers = await fetchData('customers', seedCustomers) as Customer[];
+  const revenue = await fetchData('revenue', seedRevenue) as Revenue[];
 
   const totalPaidInvoices = calculateAllInvoices(invoices, 'paid');
   const totalPendingInvoices = calculateAllInvoices(invoices, 'pending');
