@@ -1,5 +1,6 @@
 import BackgroundBlur from '@/app/ui/background-blur';
 import Image from 'next/image';
+import HeroImage from '@/public/hero.png';
 
 export default function Page() {
   return (
@@ -19,12 +20,9 @@ export default function Page() {
           </button>
         </a>
       </div>
-      <Image
-        src="/hero.png"
-        height={1300}
-        width={880}
-        alt="Dashboard Hero Image"
-      />
+      <div className="w-full sm:w-1/2">
+        <Image src={HeroImage} alt="Dashboard Hero Image" placeholder="blur" />
+      </div>
     </main>
   );
 }
