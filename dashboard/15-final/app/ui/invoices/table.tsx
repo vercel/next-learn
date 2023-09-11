@@ -11,6 +11,7 @@ import TableSearch from './table-search';
 import PaginationButtons from './pagination';
 import { sql } from '@vercel/postgres';
 
+
 const ITEMS_PER_PAGE = 10;
 
 function renderInvoiceStatus(status: string) {
@@ -50,46 +51,41 @@ export default async function InvoicesTable({
     page: string;
   };
 }) {
-
-  const invoicesData = await sql`SELECT * FROM invoices`;
-  const invoices = invoicesData.rows as Invoice[];
-
-  const customersData = await sql`SELECT * FROM customers`;
-  const customers = customersData.rows as Customer[];
-
   const searchTerm = searchParams.query ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
-  const filteredInvoices = invoices?.filter((invoice) => {
-    const customer = getCustomerById(invoice.customer_id);
+  // Use SQL's ILIKE for case-insensitive search and JOIN for combining tables.
+  const invoicesData = await sql`
+    SELECT 
+      invoices.*, 
+      customers.name AS customer_name, 
+      customers.email AS customer_email, 
+      customers.image_url AS customer_image
+    FROM 
+      invoices
+    JOIN 
+      customers ON invoices.customer_id = customers.id
+    WHERE 
+      invoices.id::text ILIKE ${`%${searchTerm}%`} OR
+      customers.name ILIKE ${`%${searchTerm}%`} OR
+      customers.email ILIKE ${`%${searchTerm}%`} OR
+      invoices.amount::text ILIKE ${`%${searchTerm}%`} OR
+      invoices.date::text ILIKE ${`%${searchTerm}%`} OR
+      invoices.status ILIKE ${`%${searchTerm}%`}
+    LIMIT ${ITEMS_PER_PAGE}
+    OFFSET ${(currentPage - 1) * ITEMS_PER_PAGE}
+  `;
 
-    const invoiceMatches = Object.values(invoice).some(
-      (value) =>
-        value?.toString().toLowerCase().includes(searchTerm.toLowerCase()),
-    );
+  const invoices = invoicesData.rows;
 
-    const customerMatches =
-      customer &&
-      Object.values(customer).some(
-        (value) =>
-          value?.toString().toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-
-    return invoiceMatches || customerMatches;
-  });
-
-
-  const paginatedInvoices = filteredInvoices?.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE,
-  );
-
-  function getCustomerById(customerId: number): Customer | null {
-    const customer = customers?.find((customer) => customer.id === customerId);
-    return customer ? customer : null;
-  }
-
-  const totalPages = Math.ceil(filteredInvoices.length / ITEMS_PER_PAGE);
+ const { rows: countRows } = await sql`
+  SELECT COUNT(*) 
+  FROM invoices 
+  LEFT JOIN customers ON invoices.customer_id = customers.id 
+  WHERE (invoices.id::text ILIKE ${`%${searchTerm}%`} OR customers.name ILIKE ${`%${searchTerm}%`} OR customers.email ILIKE ${`%${searchTerm}%`})
+`;
+const totalCount = countRows[0].count;
+const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   return (
     <div className="w-full">
@@ -137,7 +133,7 @@ export default async function InvoicesTable({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 text-gray-500">
-                {paginatedInvoices?.map((invoice) => (
+                {invoices?.map((invoice) => (
                   <tr key={invoice.id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                       {invoice.id}
@@ -145,17 +141,17 @@ export default async function InvoicesTable({
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       <div className="flex items-center gap-3">
                         <Image
-                          src={getCustomerById(invoice.customer_id)?.image_url || ''}
+                          src={invoice.customer_image || ''}
                           className="rounded-full"
                           alt="Customer Image"
                           width={28}
                           height={28}
                         />
-                        <p>{getCustomerById(invoice.customer_id)?.name}</p>
+                        <p>{invoice.customer_name}</p>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
-                      {getCustomerById(invoice.customer_id)?.email}
+                      {invoice.customer_email}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       {(invoice.amount / 100).toLocaleString('en-US', {
