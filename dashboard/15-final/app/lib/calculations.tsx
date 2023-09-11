@@ -1,3 +1,4 @@
+import { sql } from '@vercel/postgres';
 import { Invoice, Revenue } from './definitions';
 
 export const calculateAllInvoices = (
@@ -41,10 +42,11 @@ export const countCustomerInvoices = (
   return invoices.filter((invoice) => invoice.customer_id === customerId).length;
 };
 
-export const findLatestInvoices = (invoices: Invoice[]) => {
-  return [...invoices]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 5);
+export const findLatestInvoices = async (invoices: Invoice[]) => {
+  const latestInvoices = await sql`SELECT * FROM invoices
+    ORDER BY date DESC
+    LIMIT 5;`;
+  return latestInvoices.rows as Invoice[];
 };
 
 export const generateYAxis = (revenue: Revenue[]) => {

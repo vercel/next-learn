@@ -3,14 +3,14 @@ import { Customer, Invoice } from '@/app/lib/definitions';
 import { findLatestInvoices } from '@/app/lib/calculations';
 import Image from 'next/image';
 
-export default function LatestInvoices({
+export default async function LatestInvoices({
   invoices,
   customers,
 }: {
   invoices: Invoice[];
   customers: Customer[];
 }) {
-  const lastFiveInvoices = findLatestInvoices(invoices);
+  const lastFiveInvoices = await findLatestInvoices(invoices);
 
   return (
     <div className="w-full rounded-xl border p-6 shadow-sm md:col-span-4 lg:col-span-3">
