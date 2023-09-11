@@ -1,8 +1,6 @@
 import { Customer, Invoice } from '@/app/lib/definitions';
 import Link from 'next/link';
 import Image from 'next/image';
-import { seedInvoices, seedCustomers } from '@/app/lib/seed'
-
 import {
   PencilSquareIcon,
   ClockIcon,
@@ -11,7 +9,7 @@ import {
 import DeleteInvoice from '@/app/ui/invoices/delete-invoice-button';
 import TableSearch from './table-search';
 import PaginationButtons from './pagination';
-import { fetchData } from '@/app/lib/fetch-data';
+import { sql } from '@vercel/postgres';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -53,8 +51,11 @@ export default async function InvoicesTable({
   };
 }) {
 
-  const invoices = await fetchData('invoices', seedInvoices) as Invoice[];
-  const customers = await fetchData('customers', seedCustomers) as Customer[];
+  const invoicesData = await sql`SELECT * FROM invoices`;
+  const invoices = invoicesData.rows as Invoice[];
+
+  const customersData = await sql`SELECT * FROM customers`;
+  const customers = customersData.rows as Customer[];
 
   const searchTerm = searchParams.query ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');

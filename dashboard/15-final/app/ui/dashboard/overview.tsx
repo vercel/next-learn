@@ -2,14 +2,18 @@ import Card from '@/app/ui/dashboard/card';
 import { calculateAllInvoices } from '@/app/lib/calculations';
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
-import { seedCustomers, seedInvoices, seedRevenue } from '@/app/lib/seed';
-import { fetchData } from '@/app/lib/fetch-data';
-import { Invoice, Customer, Revenue } from '@/app/lib/definitions';
+import { sql } from '@vercel/postgres';
+import { Customer, Invoice, Revenue } from '@/app/lib/definitions';
 
 export default async function DashboardOverview() {
-  const invoices = await fetchData('invoices', seedInvoices) as Invoice[];
-  const customers = await fetchData('customers', seedCustomers) as Customer[];
-  const revenue = await fetchData('revenue', seedRevenue) as Revenue[];
+  const invoicesData = await sql`SELECT * FROM invoices`;
+  const invoices = invoicesData.rows as Invoice[];
+
+  const customersData = await sql`SELECT * FROM customers`;
+  const customers = customersData.rows as Customer[];
+
+  const revenueData = await sql`SELECT * FROM revenue`;
+  const revenue = revenueData.rows as Revenue[];
 
   const totalPaidInvoices = calculateAllInvoices(invoices, 'paid');
   const totalPendingInvoices = calculateAllInvoices(invoices, 'pending');

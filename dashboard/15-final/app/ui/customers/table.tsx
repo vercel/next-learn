@@ -3,13 +3,15 @@ import {
   calculateCustomerInvoices,
 } from '@/app/lib/calculations';
 import { Customer, Invoice } from '@/app/lib/definitions';
-import { fetchData } from '@/app/lib/fetch-data';
-import { seedInvoices, seedCustomers } from '@/app/lib/seed';
+import { sql } from '@vercel/postgres';
 import Image from 'next/image';
 
 export default async function CustomersTable() {
-  const invoices = await fetchData('invoices', seedInvoices) as Invoice[];
-  const customers = await fetchData('customers', seedCustomers) as Customer[];
+  const invoicesData = await sql`SELECT * FROM invoices`;
+  const invoices = invoicesData.rows as Invoice[];
+
+  const customersData = await sql`SELECT * FROM customers`;
+  const customers = customersData.rows as Customer[];
 
   return (
     <div className="w-full">
