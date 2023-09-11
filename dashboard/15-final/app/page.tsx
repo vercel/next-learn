@@ -1,14 +1,15 @@
 import BackgroundBlur from '@/app/ui/background-blur';
+import Image from 'next/image';
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-4xl">
-      <div className="mx-auto mt-20 flex max-w-2xl flex-col items-center space-y-6 p-2">
+    <main className="flex flex-col gap-4 lg:h-screen lg:flex-row lg:items-center lg:justify-end">
+      <div className="min-w-xl my-8 flex flex-col items-start gap-4 px-4 lg:max-w-xl lg:gap-6">
         <BackgroundBlur />
-        <h1 className="z-10 text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Welcome to Next.js!
+        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+          Next.js Dashboard
         </h1>
-        <p className="text-center leading-6 text-gray-900">
+        <p className="leading-6 text-gray-900">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vulputate
           dapibus consectetur. Duis quis eros euismod.
         </p>
@@ -18,6 +19,12 @@ export default function Page() {
           </button>
         </a>
       </div>
+      <Image
+        src="/hero.png"
+        height={1300}
+        width={880}
+        alt="Dashboard Hero Image"
+      />
     </main>
   );
 }
