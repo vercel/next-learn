@@ -1,7 +1,7 @@
-import { sql } from '@vercel/postgres';
-import { invoices, customers, revenue } from './dummy-data';
+const { sql } = require('@vercel/postgres');
+const { invoices, customers, revenue } = require('../app/lib/dummy-data.js');
 
-export async function seedInvoices() {
+async function seedInvoices() {
   try {
     // Create the "invoices" table if it doesn't exist
     const createTable = await sql`
@@ -18,11 +18,13 @@ export async function seedInvoices() {
 
     // Insert data into the "invoices" table
     const insertedInvoices = await Promise.all(
-      invoices.map((invoice) => sql`
+      invoices.map(
+        (invoice) => sql`
         INSERT INTO invoices (id, customer_id, amount, status, date)
         VALUES (${invoice.id}, ${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
         ON CONFLICT (id) DO NOTHING;
-      `)
+      `,
+      ),
     );
 
     console.log(`Seeded ${insertedInvoices.length} invoices`);
@@ -37,7 +39,7 @@ export async function seedInvoices() {
   }
 }
 
-export async function seedCustomers() {
+async function seedCustomers() {
   try {
     // Create the "invoices" table if it doesn't exist
     const createTable = await sql`
@@ -53,11 +55,13 @@ export async function seedCustomers() {
 
     // Insert data into the "customers" table
     const insertedCustomers = await Promise.all(
-      customers.map((customer) => sql`
+      customers.map(
+        (customer) => sql`
         INSERT INTO customers (id, name, email, image_url)
         VALUES (${customer.id}, ${customer.name}, ${customer.email}, ${customer.image_url})
         ON CONFLICT (id) DO NOTHING;
-      `)
+      `,
+      ),
     );
 
     console.log(`Seeded ${insertedCustomers.length} customers`);
@@ -72,7 +76,7 @@ export async function seedCustomers() {
   }
 }
 
-export async function seedRevenue() {
+async function seedRevenue() {
   try {
     // Create the "revenue" table if it doesn't exist
     const createTable = await sql`
@@ -86,11 +90,13 @@ export async function seedRevenue() {
 
     // Insert data into the "revenue" table
     const insertedRevenue = await Promise.all(
-      revenue.map((rev) => sql`
+      revenue.map(
+        (rev) => sql`
         INSERT INTO revenue (month, revenue)
         VALUES (${rev.month}, ${rev.revenue})
         ON CONFLICT (month) DO NOTHING;      
-      `)
+      `,
+      ),
     );
 
     console.log(`Seeded ${insertedRevenue.length} revenue`);
@@ -104,3 +110,9 @@ export async function seedRevenue() {
     throw error;
   }
 }
+
+(async () => {
+  await seedCustomers();
+  await seedInvoices();
+  await seedRevenue();
+})();

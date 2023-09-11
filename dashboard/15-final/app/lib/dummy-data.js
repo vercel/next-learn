@@ -1,7 +1,5 @@
-import { User, Customer, Invoice, Revenue } from './definitions';
-
 // This file contains dummy data that you'll be replacing with real data in Chapter 7.
-export const users: User[] = [
+const users = [
   {
     id: 1,
     name: 'User',
@@ -10,7 +8,7 @@ export const users: User[] = [
   },
 ];
 
-export const customers: Customer[] = [
+const customers = [
   {
     id: 1,
     name: 'Ada Lovelace',
@@ -37,7 +35,7 @@ export const customers: Customer[] = [
   },
 ];
 
-export const invoices: Invoice[] = [
+const invoices = [
   {
     id: 1,
     customer_id: 1,
@@ -145,7 +143,7 @@ export const invoices: Invoice[] = [
   },
 ];
 
-export const revenue: Revenue[] = [
+const revenue = [
   { month: 'Jan', revenue: 2000 },
   { month: 'Feb', revenue: 1800 },
   { month: 'Mar', revenue: 2200 },
@@ -159,3 +157,10 @@ export const revenue: Revenue[] = [
   { month: 'Nov', revenue: 3000 },
   { month: 'Dec', revenue: 4800 },
 ];
+
+module.exports = {
+  users,
+  customers,
+  invoices,
+  revenue
+};
