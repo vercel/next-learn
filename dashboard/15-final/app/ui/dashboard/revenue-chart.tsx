@@ -15,7 +15,7 @@ export default function RevenueChart({ revenue }: { revenue: Revenue[] }) {
   }
 
   return (
-    <div className="rounded-xl border p-6 shadow-sm shadow-sm md:col-span-5">
+    <div className="rounded-xl border p-6 shadow-sm md:col-span-5">
       <h2 className="font-semibold">Revenue</h2>
       <div className="sm:grid-cols-13 mt-4 grid grid-cols-12 items-end gap-2 md:gap-4">
         {/* y-axis */}
@@ -23,13 +23,13 @@ export default function RevenueChart({ revenue }: { revenue: Revenue[] }) {
           className="mb-6 hidden flex-col justify-between text-sm text-gray-400 sm:flex"
           style={{ height: `${chartHeight}px` }}
         >
-          {yAxisLabels.map((label, index) => (
-            <p key={index}>{label}</p>
+          {yAxisLabels.map((label) => (
+            <p key={label}>{label}</p>
           ))}
         </div>
 
-        {revenue.map((month, index) => (
-          <div key={index} className="flex flex-col items-center gap-2">
+        {revenue.map((month) => (
+          <div key={month.month} className="flex flex-col items-center gap-2">
             {/* bars */}
             <div
               className="w-full rounded-md bg-blue-300"
