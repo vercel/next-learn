@@ -16,9 +16,9 @@ export async function fetchAllRevenue() {
 }
 
 export async function fetchFilteredInvoices(
-  searchTerm,
-  currentPage,
-  ITEMS_PER_PAGE,
+  searchTerm: string,
+  currentPage: number,
+  ITEMS_PER_PAGE: number,
 ) {
   const invoicesData = await sql`
     SELECT 
