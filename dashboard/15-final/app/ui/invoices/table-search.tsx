@@ -2,13 +2,16 @@
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 
 export default function TableSearch() {
   const { replace } = useRouter();
   const searchParams = useSearchParams()!;
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
+
+  const currentQuery = searchParams.get('query') || '';
+  const [inputValue, setInputValue] = useState(currentQuery);
 
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
@@ -33,7 +36,11 @@ export default function TableSearch() {
         <input
           type="text"
           placeholder="Search..."
-          onChange={(e) => handleSearch(e.target.value)}
+          value={inputValue}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+            handleSearch(e.target.value);
+          }}
           className="absolute inset-0 w-full rounded-md border border-gray-300 bg-transparent p-2 pl-8 text-sm"
         />
       </div>
