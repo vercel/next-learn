@@ -1,5 +1,3 @@
-import { invoices, customers } from '@/app/lib/dummy-data';
-import { Customer } from '@/app/lib/definitions';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -10,6 +8,10 @@ import {
 import DeleteInvoice from '@/app/ui/invoices/delete-button';
 import TableSearch from './table-search';
 import PaginationButtons from './pagination';
+import {
+  fetchFilteredInvoices,
+  fetchInvoiceCountBySearchTerm,
+} from '@/app/lib/data-fetches';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -42,7 +44,7 @@ function formatDateToLocal(dateStr: string, locale: string = 'en-US') {
   return formatter.format(date);
 }
 
-export default function InvoicesTable({
+export default async function InvoicesTable({
   searchParams,
 }: {
   searchParams: {
@@ -53,35 +55,14 @@ export default function InvoicesTable({
   const searchTerm = searchParams.query ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
-  const filteredInvoices = invoices.filter((invoice) => {
-    const customer = getCustomerById(invoice.customerId);
-
-    const invoiceMatches = Object.values(invoice).some(
-      (value) =>
-        value?.toString().toLowerCase().includes(searchTerm.toLowerCase()),
-    );
-
-    const customerMatches =
-      customer &&
-      Object.values(customer).some(
-        (value) =>
-          value?.toString().toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-
-    return invoiceMatches || customerMatches;
-  });
-
-  const paginatedInvoices = filteredInvoices.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE,
+  const invoices = await fetchFilteredInvoices(
+    searchTerm,
+    currentPage,
+    ITEMS_PER_PAGE,
   );
 
-  function getCustomerById(customerId: number): Customer | null {
-    const customer = customers.find((customer) => customer.id === customerId);
-    return customer ? customer : null;
-  }
-
-  const totalPages = Math.ceil(filteredInvoices.length / ITEMS_PER_PAGE);
+  const totalCount = await fetchInvoiceCountBySearchTerm(searchTerm);
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   return (
     <div className="w-full">
@@ -132,7 +113,7 @@ export default function InvoicesTable({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 text-gray-500">
-                  {paginatedInvoices.map((invoice) => (
+                  {invoices?.map((invoice) => (
                     <tr key={invoice.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                         {invoice.id}
@@ -140,18 +121,17 @@ export default function InvoicesTable({
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
                         <div className="flex items-center gap-3">
                           <Image
-                            src={`${getCustomerById(invoice.customerId)
-                              ?.imageUrl}`}
+                            src={`${invoice.customer_image}`}
                             className="rounded-full"
                             alt="Customer Image"
                             width={28}
                             height={28}
                           />
-                          <p>{getCustomerById(invoice.customerId)?.name}</p>
+                          <p>{invoice.customer_name}</p>
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
-                        {getCustomerById(invoice.customerId)?.email}
+                        {invoice.customer_email}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
                         {(invoice.amount / 100).toLocaleString('en-US', {

@@ -1,11 +1,15 @@
-import { customers, invoices } from '@/app/lib/dummy-data';
 import {
   countCustomerInvoices,
   calculateCustomerInvoices,
 } from '@/app/lib/calculations';
+import { Customer, Invoice } from '@/app/lib/definitions';
+import { fetchAllCustomers, fetchAllInvoices } from '@/app/lib/data-fetches';
 import Image from 'next/image';
 
-export default function CustomersTable() {
+export default async function CustomersTable() {
+  const invoices = (await fetchAllInvoices()) as Invoice[];
+  const customers = (await fetchAllCustomers()) as Customer[];
+
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -42,7 +46,7 @@ export default function CustomersTable() {
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-black sm:pl-6">
                         <div className="flex items-center gap-3">
                           <Image
-                            src={customer.imageUrl}
+                            src={customer.image_url}
                             className="rounded-full"
                             alt={customer.name}
                             width={28}

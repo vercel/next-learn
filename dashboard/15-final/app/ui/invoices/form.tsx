@@ -16,7 +16,7 @@ export default function InvoiceForm({
 }) {
   // TO DO: Replace state and handleSubmit with a Server Action
   const customer = customers.find(
-    (customer) => customer.id === invoice?.customerId,
+    (customer) => customer.id === invoice?.customer_id,
   );
   const initialCustomer = customer ? customer.id : 0;
   const initialAmount = invoice?.amount ? invoice.amount / 100 : 0;
@@ -31,7 +31,7 @@ export default function InvoiceForm({
 
     if (selectedCustomer && amount) {
       const newInvoice: Invoice = {
-        customerId: selectedCustomer,
+        customer_id: selectedCustomer,
         amount: amount * 100, // Convert to cents
 
         // These would be generated on the server

@@ -1,4 +1,5 @@
 import { Invoice, Revenue } from './definitions';
+import { fetchLatestInvoices } from './data-fetches';
 
 export const calculateAllInvoices = (
   invoices: Invoice[],
@@ -19,7 +20,7 @@ export const calculateCustomerInvoices = (
   customerId: number,
 ) => {
   return invoices
-    .filter((invoice) => invoice.customerId === customerId)
+    .filter((invoice) => invoice.customer_id === customerId)
     .filter((invoice) => !status || invoice.status === status)
     .reduce((total, invoice) => total + invoice.amount / 100, 0)
     .toLocaleString('en-US', {
@@ -38,13 +39,12 @@ export const countCustomerInvoices = (
   invoices: Invoice[],
   customerId: number,
 ) => {
-  return invoices.filter((invoice) => invoice.customerId === customerId).length;
+  return invoices.filter((invoice) => invoice.customer_id === customerId)
+    .length;
 };
 
-export const findLatestInvoices = (invoices: Invoice[]) => {
-  return [...invoices]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 5);
+export const findLatestInvoices = async () => {
+  return await fetchLatestInvoices();
 };
 
 export const generateYAxis = (revenue: Revenue[]) => {

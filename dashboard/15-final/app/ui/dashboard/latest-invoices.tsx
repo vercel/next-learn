@@ -3,14 +3,14 @@ import { Customer, Invoice } from '@/app/lib/definitions';
 import { findLatestInvoices } from '@/app/lib/calculations';
 import Image from 'next/image';
 
-export default function LatestInvoices({
+export default async function LatestInvoices({
   invoices,
   customers,
 }: {
   invoices: Invoice[];
   customers: Customer[];
 }) {
-  const lastFiveInvoices = findLatestInvoices(invoices);
+  const lastFiveInvoices = await findLatestInvoices();
 
   return (
     <div className="w-full rounded-xl border p-6 shadow-sm md:col-span-4 lg:col-span-3">
@@ -18,7 +18,7 @@ export default function LatestInvoices({
 
       {lastFiveInvoices.map((invoice) => {
         const customer = customers.find(
-          (customer) => customer.id === invoice.customerId,
+          (customer) => customer.id === invoice.customer_id,
         );
         return (
           <div
@@ -27,7 +27,7 @@ export default function LatestInvoices({
           >
             <div className="flex items-center">
               <Image
-                src={customer?.imageUrl || ''}
+                src={customer?.image_url || ''}
                 alt={customer?.name || ''}
                 className="mr-4 rounded-full"
                 width={32}
