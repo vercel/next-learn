@@ -43,7 +43,7 @@ export async function fetchFilteredInvoices(
   return invoicesData.rows;
 }
 
-export async function getInvoiceCountBySearchTerm(searchTerm: string) {
+export async function fetchInvoiceCountBySearchTerm(searchTerm: string) {
   const { rows: countRows } = await sql`
   SELECT COUNT(*) 
   FROM invoices 
@@ -53,7 +53,7 @@ export async function getInvoiceCountBySearchTerm(searchTerm: string) {
   return countRows[0].count;
 }
 
-export async function getInvoiceById(id: number | null) {
+export async function fetchInvoiceById(id: number | null) {
   return await sql`SELECT * from INVOICES where id=${id}`;
 }
 

@@ -10,7 +10,7 @@ import TableSearch from './table-search';
 import PaginationButtons from './pagination';
 import {
   fetchFilteredInvoices,
-  getInvoiceCountBySearchTerm,
+  fetchInvoiceCountBySearchTerm,
 } from '@/app/lib/data-fetches';
 
 const ITEMS_PER_PAGE = 10;
@@ -61,7 +61,7 @@ export default async function InvoicesTable({
     ITEMS_PER_PAGE,
   );
 
-  const totalCount = await getInvoiceCountBySearchTerm(searchTerm);
+  const totalCount = await fetchInvoiceCountBySearchTerm(searchTerm);
   const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   return (
