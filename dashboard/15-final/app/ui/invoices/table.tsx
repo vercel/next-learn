@@ -53,7 +53,10 @@ export default async function InvoicesTable({
   };
 }) {
   const searchTerm = searchParams.query ?? '';
-  const currentPage = parseInt(searchParams.page ?? '1');
+  let currentPage = 1;
+  if (!searchTerm) {
+    currentPage = parseInt(searchParams.page ?? '1');
+  }
 
   const invoices = await fetchFilteredInvoices(
     searchTerm,
