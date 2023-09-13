@@ -46,7 +46,7 @@ export default function InvoiceForm({
   };
 
   return (
-    <div className="mx-auto max-w-md p-4">
+    <div className="mx-auto max-w-sm rounded-lg border px-6 py-8 shadow-sm">
       <h2 className="mb-6 text-xl font-semibold text-gray-900">
         {type === 'new' ? 'New Invoice' : 'Edit Invoice'}
       </h2>
@@ -84,7 +84,7 @@ export default function InvoiceForm({
               value={amount}
               placeholder="00.00"
               onChange={(e) => setAmount(Number(e.target.value))}
-              className="block w-full rounded-md border-0 py-1.5 pl-7 text-sm leading-6 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400"
+              className="block w-full rounded-md border-0 py-1.5 pl-7 text-sm leading-6 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400"
             />
           </div>
         </div>

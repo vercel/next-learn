@@ -34,14 +34,15 @@ export default function LatestInvoices({
                 height={32}
               />
               <div className="min-w-0">
-                <p className="truncate font-semibold">{customer?.name}</p>
+                <p className="truncate text-sm font-semibold md:text-base">
+                  {customer?.name}
+                </p>
                 <p className="hidden text-sm text-gray-500 sm:block">
                   {customer?.email}
                 </p>
               </div>
             </div>
-            <p className="truncate font-medium sm:text-lg">
-              +{' '}
+            <p className="truncate text-sm font-medium md:text-base">
               {(invoice.amount / 100).toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'USD',
