@@ -4,6 +4,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { usePathname, useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function PaginationButtons({
   totalPages,
@@ -12,6 +14,7 @@ export default function PaginationButtons({
   totalPages: number;
   currentPage: number;
 }) {
+  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
@@ -21,6 +24,11 @@ export default function PaginationButtons({
     newSearchParams.set('page', pageNumber.toString());
     return `${pathname}?${newSearchParams.toString()}`;
   };
+
+  useEffect(() => {
+    const newUrl = createPageUrl(currentPage);
+    router.push(newUrl);
+  }, [currentPage]);
 
   const PreviousPageTag = currentPage === 1 ? 'p' : Link;
   const NextPageTag = currentPage === totalPages ? 'p' : Link;
