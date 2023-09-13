@@ -10,7 +10,7 @@ export default async function LatestInvoices({
   invoices: Invoice[];
   customers: Customer[];
 }) {
-  const lastFiveInvoices = await findLatestInvoices(invoices);
+  const lastFiveInvoices = await findLatestInvoices();
 
   return (
     <div className="w-full rounded-xl border p-6 shadow-sm md:col-span-4 lg:col-span-3">
