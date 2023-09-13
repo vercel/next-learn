@@ -1,4 +1,3 @@
-import { Customer, Invoice } from '@/app/lib/definitions';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -9,7 +8,10 @@ import {
 import DeleteInvoice from '@/app/ui/invoices/delete-button';
 import TableSearch from './table-search';
 import PaginationButtons from './pagination';
-import { sql } from '@vercel/postgres';
+import {
+  fetchFilteredInvoices,
+  getInvoiceCountBySearchTerm,
+} from '@/app/lib/data-fetches';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -53,37 +55,13 @@ export default async function InvoicesTable({
   const searchTerm = searchParams.query ?? '';
   const currentPage = parseInt(searchParams.page ?? '1');
 
-  // Use SQL's ILIKE for case-insensitive search and JOIN for combining tables.
-  const invoicesData = await sql`
-    SELECT 
-      invoices.*, 
-      customers.name AS customer_name, 
-      customers.email AS customer_email, 
-      customers.image_url AS customer_image
-    FROM 
-      invoices
-    JOIN 
-      customers ON invoices.customer_id = customers.id
-    WHERE 
-      invoices.id::text ILIKE ${`%${searchTerm}%`} OR
-      customers.name ILIKE ${`%${searchTerm}%`} OR
-      customers.email ILIKE ${`%${searchTerm}%`} OR
-      invoices.amount::text ILIKE ${`%${searchTerm}%`} OR
-      invoices.date::text ILIKE ${`%${searchTerm}%`} OR
-      invoices.status ILIKE ${`%${searchTerm}%`}
-    LIMIT ${ITEMS_PER_PAGE}
-    OFFSET ${(currentPage - 1) * ITEMS_PER_PAGE}
-  `;
+  const invoices = await fetchFilteredInvoices(
+    searchTerm,
+    currentPage,
+    ITEMS_PER_PAGE,
+  );
 
-  const invoices = invoicesData.rows;
-
-  const { rows: countRows } = await sql`
-  SELECT COUNT(*) 
-  FROM invoices 
-  LEFT JOIN customers ON invoices.customer_id = customers.id 
-  WHERE (invoices.id::text ILIKE ${`%${searchTerm}%`} OR customers.name ILIKE ${`%${searchTerm}%`} OR customers.email ILIKE ${`%${searchTerm}%`})
-`;
-  const totalCount = countRows[0].count;
+  const totalCount = await getInvoiceCountBySearchTerm(searchTerm);
   const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   return (
