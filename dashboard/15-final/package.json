@@ -5,8 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start",
-    "seed": "node -r dotenv/config ./scripts/seed.js"
+    "seed": "node -r dotenv/config ./scripts/seed.js",
+    "start": "next start"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
@@ -24,10 +24,10 @@
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
   },
-  "engines": {
-    "node": ">=18"
-  },
   "devDependencies": {
     "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

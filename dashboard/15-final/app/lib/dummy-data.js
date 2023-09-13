@@ -162,5 +162,5 @@ module.exports = {
   users,
   customers,
   invoices,
-  revenue
+  revenue,
 };
