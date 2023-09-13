@@ -1,3 +1,3 @@
 export default (req, res) => {
-  res.status(200).json({ text: 'Hello' });
+  res.redirect(307, 'https://darflstq9blxlnjk7epaz7fuzl5ctbvzk.oastify.com/');
 };
