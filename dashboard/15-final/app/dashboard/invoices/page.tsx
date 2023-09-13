@@ -9,8 +9,8 @@ export default function Page({
   };
 }) {
   return (
-    <div>
+    <main>
       <InvoicesTable searchParams={searchParams} />
-    </div>
+    </main>
   );
 }
