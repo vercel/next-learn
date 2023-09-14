@@ -46,18 +46,12 @@ export async function fetchLatestInvoices() {
 
 export async function fetchAllInvoices() {
   const invoicesData = await sql`SELECT * FROM invoices`;
-  return {
-    invoices: invoicesData.rows,
-    numberOfInvoices: invoicesData.rowCount,
-  };
+  return invoicesData.rows;
 }
 
 export async function fetchAllCustomers() {
   const customersData = await sql`SELECT * FROM customers`;
-  return {
-    customers: customersData.rows,
-    numberOfCustomers: customersData.rowCount,
-  };
+  return customersData.rows;
 }
 
 export async function fetchFilteredInvoices(
