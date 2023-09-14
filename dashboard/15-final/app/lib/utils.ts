@@ -1,17 +1,10 @@
-import { Invoice, Revenue } from './definitions';
-import { fetchLatestInvoices } from './data-fetches';
+import { Invoice, Revenue, Customer, LatestInvoice } from './definitions';
 
-export const calculateAllInvoices = (
-  invoices: Invoice[],
-  status: 'pending' | 'paid',
-) => {
-  return invoices
-    .filter((invoice) => !status || invoice.status === status)
-    .reduce((total, invoice) => total + invoice.amount / 100, 0)
-    .toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
+export const formatCurrency = (amount: number) => {
+  return (amount / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 };
 
 export const calculateCustomerInvoices = (
@@ -29,22 +22,12 @@ export const calculateCustomerInvoices = (
     });
 };
 
-// Once a database is connected, we can use SQL to query the database directly
-// This will be more efficient than querying all invoices and then filtering them
-// E.g. "SELECT * FROM invoices
-// ORDER BY date DESC
-// LIMIT 5;"
-
 export const countCustomerInvoices = (
   invoices: Invoice[],
   customerId: number,
 ) => {
   return invoices.filter((invoice) => invoice.customer_id === customerId)
     .length;
-};
-
-export const findLatestInvoices = async () => {
-  return await fetchLatestInvoices();
 };
 
 export const generateYAxis = (revenue: Revenue[]) => {

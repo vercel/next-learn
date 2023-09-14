@@ -1,7 +1,7 @@
 import {
   countCustomerInvoices,
   calculateCustomerInvoices,
-} from '@/app/lib/calculations';
+} from '@/app/lib/utils';
 import { Customer, Invoice } from '@/app/lib/definitions';
 import { fetchAllCustomers, fetchAllInvoices } from '@/app/lib/data';
 import Image from 'next/image';
