@@ -11,7 +11,7 @@ import PaginationButtons from './pagination';
 import {
   fetchFilteredInvoices,
   fetchInvoiceCountBySearchTerm,
-} from '@/app/lib/data-fetches';
+} from '@/app/lib/data';
 
 const ITEMS_PER_PAGE = 10;
 
