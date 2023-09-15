@@ -1,9 +1,10 @@
 import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
+import { Revenue, LatestInvoice } from './definitions';
 
-export async function fetchAllRevenue() {
+export async function fetchRevenue() {
   const revenueData = await sql`SELECT * FROM revenue`;
-  return revenueData.rows;
+  return revenueData.rows as Revenue[];
 }
 
 export async function fetchNumberOfInvoices() {
@@ -41,7 +42,7 @@ export async function fetchLatestInvoices() {
     amount: formatCurrency(invoice.amount),
   }));
 
-  return latestInvoices;
+  return latestInvoices as LatestInvoice[];
 }
 
 export async function fetchAllInvoices() {

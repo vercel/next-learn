@@ -1,9 +1,8 @@
 import Card from '@/app/ui/dashboard/card';
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
-import { Revenue, LatestInvoice } from '@/app/lib/definitions';
 import {
-  fetchAllRevenue,
+  fetchRevenue,
   fetchLatestInvoices,
   fetchNumberOfInvoices,
   fetchNumberOfCustomers,
@@ -11,8 +10,8 @@ import {
 } from '@/app/lib/data';
 
 export default async function DashboardOverview() {
-  const revenue = (await fetchAllRevenue()) as Revenue[];
-  const latestInvoices = (await fetchLatestInvoices()) as LatestInvoice[];
+  const revenue = await fetchRevenue();
+  const latestInvoices = await fetchLatestInvoices();
   const numberOfInvoices = await fetchNumberOfInvoices();
   const numberOfCustomers = await fetchNumberOfCustomers();
   const { totalPaidInvoices, totalPendingInvoices } =
