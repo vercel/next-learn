@@ -4,18 +4,21 @@ import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import {
   fetchRevenue,
   fetchLatestInvoices,
-  fetchNumberOfInvoices,
-  fetchNumberOfCustomers,
+  fetchCounts,
   fetchTotalAmountByStatus,
 } from '@/app/lib/data';
 
 export default async function DashboardOverview() {
-  const revenue = await fetchRevenue();
-  const latestInvoices = await fetchLatestInvoices();
-  const numberOfInvoices = await fetchNumberOfInvoices();
-  const numberOfCustomers = await fetchNumberOfCustomers();
-  const { totalPaidInvoices, totalPendingInvoices } =
-    await fetchTotalAmountByStatus();
+  const [revenue, latestInvoices, counts, totalAmountByStatus] =
+    await Promise.all([
+      fetchRevenue(),
+      fetchLatestInvoices(),
+      fetchCounts(),
+      fetchTotalAmountByStatus(),
+    ]);
+
+  const { totalPaidInvoices, totalPendingInvoices } = totalAmountByStatus;
+  const { numberOfInvoices, numberOfCustomers } = counts;
 
   return (
     <>
