@@ -2,47 +2,64 @@ import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
 import { Revenue, LatestInvoice } from './definitions';
 
-export async function fetchRevenue() {
-  const revenueData = await sql`SELECT * FROM revenue`;
-  return revenueData.rows as Revenue[];
+export async function fetchRevenue(): Promise<Revenue[]> {
+  try {
+    const revenueData = await sql`SELECT * FROM revenue`;
+    return revenueData.rows as Revenue[];
+  } catch (error) {
+    console.error('Failed to fetch revenue data:', error);
+    throw new Error('Failed to fetch revenue data.');
+  }
 }
 
-export async function fetchNumberOfInvoices() {
-  const count = await sql`SELECT COUNT(*) FROM invoices`;
-  const numberOfInvoices = parseInt(count.rows[0].count, 10);
-  return numberOfInvoices;
-}
+export async function fetchCounts() {
+  try {
+    const invoiceCount = await sql`SELECT COUNT(*) FROM invoices`;
+    const numberOfInvoices = parseInt(invoiceCount.rows[0].count, 10);
 
-export async function fetchNumberOfCustomers() {
-  const count = await sql`SELECT COUNT(*) FROM customers`;
-  const numberOfCustomers = parseInt(count.rows[0].count, 10);
-  return numberOfCustomers;
+    const customerCount = await sql`SELECT COUNT(*) FROM customers`;
+    const numberOfCustomers = parseInt(customerCount.rows[0].count, 10);
+
+    return { numberOfCustomers, numberOfInvoices };
+  } catch (error) {
+    console.error('Failed to fetch counts:', error);
+    throw new Error('Failed to fetch counts.');
+  }
 }
 
 export async function fetchTotalAmountByStatus() {
-  const totalAmount = await sql`SELECT 
-    SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
-    SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
-    FROM invoices`;
-  const totalPaidInvoices = formatCurrency(totalAmount.rows[0].paid);
-  const totalPendingInvoices = formatCurrency(totalAmount.rows[0].pending);
-  return { totalPaidInvoices, totalPendingInvoices };
+  try {
+    const totalAmount = await sql`SELECT 
+      SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
+      SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
+      FROM invoices`;
+    const totalPaidInvoices = formatCurrency(totalAmount.rows[0].paid);
+    const totalPendingInvoices = formatCurrency(totalAmount.rows[0].pending);
+
+    return { totalPaidInvoices, totalPendingInvoices };
+  } catch (error) {
+    console.error('Failed to fetch total amounts by status:', error);
+    throw new Error('Failed to fetch total amounts by status.');
+  }
 }
 
 export async function fetchLatestInvoices() {
-  const data = await sql`
-    SELECT invoices.amount, customers.name, customers.image_url, customers.email 
-    FROM invoices 
-    JOIN customers ON invoices.customer_id = customers.id
-    ORDER BY invoices.date DESC
-    LIMIT 5`;
-
-  const latestInvoices = data.rows.map((invoice) => ({
-    ...invoice,
-    amount: formatCurrency(invoice.amount),
-  }));
-
-  return latestInvoices as LatestInvoice[];
+  try {
+    const data = await sql`
+      SELECT invoices.amount, customers.name, customers.image_url, customers.email 
+      FROM invoices 
+      JOIN customers ON invoices.customer_id = customers.id
+      ORDER BY invoices.date DESC
+      LIMIT 5`;
+    const latestInvoices = data.rows.map((invoice) => ({
+      ...invoice,
+      amount: formatCurrency(invoice.amount),
+    }));
+    return latestInvoices as LatestInvoice[];
+  } catch (error) {
+    console.error('Failed to fetch the latest invoices:', error);
+    throw new Error('Failed to fetch the latest invoices.');
+  }
 }
 
 export async function fetchAllInvoices() {
