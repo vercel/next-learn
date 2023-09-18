@@ -2,23 +2,51 @@ import Card from '@/app/ui/dashboard/card';
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import {
-  fetchRevenue,
+  fetchRevenueDelayed,
   fetchLatestInvoices,
   fetchCounts,
   fetchTotalAmountByStatus,
 } from '@/app/lib/data';
 
-export default async function DashboardOverview() {
-  const [revenue, latestInvoices, counts, totalAmountByStatus] =
-    await Promise.all([
-      fetchRevenue(),
-      fetchLatestInvoices(),
-      fetchCounts(),
-      fetchTotalAmountByStatus(),
-    ]);
+export const dynamic = 'force-dynamic';
 
-  const { totalPaidInvoices, totalPendingInvoices } = totalAmountByStatus;
-  const { numberOfInvoices, numberOfCustomers } = counts;
+export default async function DashboardOverview() {
+  const [
+    revenueResult,
+    latestInvoicesResult,
+    countsResult,
+    totalAmountByStatusResult,
+  ] = await Promise.allSettled([
+    fetchRevenueDelayed(),
+    fetchLatestInvoices(),
+    fetchCounts(),
+    fetchTotalAmountByStatus(),
+  ]);
+
+  let revenue;
+  let latestInvoices;
+  let numberOfInvoices;
+  let numberOfCustomers;
+  let totalPaidInvoices;
+  let totalPendingInvoices;
+
+  if (revenueResult.status === 'fulfilled') {
+    revenue = revenueResult.value;
+  }
+
+  if (latestInvoicesResult.status === 'fulfilled') {
+    latestInvoices = latestInvoicesResult.value;
+  }
+
+  if (countsResult.status === 'fulfilled') {
+    numberOfInvoices = countsResult.value.numberOfInvoices;
+    numberOfCustomers = countsResult.value.numberOfCustomers;
+  }
+
+  if (totalAmountByStatusResult.status === 'fulfilled') {
+    totalPaidInvoices = totalAmountByStatusResult.value.totalPaidInvoices;
+    totalPendingInvoices = totalAmountByStatusResult.value.totalPendingInvoices;
+  }
 
   return (
     <>
