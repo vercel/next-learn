@@ -5,10 +5,10 @@ import Image from 'next/image';
 export default async function LatestInvoices({
   latestInvoices,
 }: {
-  latestInvoices: LatestInvoice[];
+  latestInvoices: LatestInvoice[] | undefined;
 }) {
   return (
-    <div className="w-full rounded-xl border p-6 shadow-sm md:col-span-4 lg:col-span-3">
+    <div className="w-full rounded-xl border bg-white p-6 shadow-sm md:col-span-4 lg:col-span-3">
       <h2 className="font-semibold">Latest Invoices</h2>
 
       {latestInvoices.map((invoice) => {

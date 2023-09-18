@@ -3,10 +3,15 @@ import { generateYAxis } from '@/app/lib/utils';
 
 // This component is representational only.
 // For data visualization UI, check out:
+// https://www.tremor.so/
 // https://www.chartjs.org/
 // https://airbnb.io/visx/
-// https://www.tremor.so/
-export default function RevenueChart({ revenue }: { revenue: Revenue[] }) {
+
+export default function RevenueChart({
+  revenue,
+}: {
+  revenue: Revenue[] | undefined;
+}) {
   const chartHeight = 350;
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
 
@@ -15,7 +20,7 @@ export default function RevenueChart({ revenue }: { revenue: Revenue[] }) {
   }
 
   return (
-    <div className="rounded-xl border p-6 shadow-sm md:col-span-5">
+    <div className="rounded-xl border bg-white p-6 shadow-sm md:col-span-5">
       <h2 className="font-semibold">Revenue</h2>
       <div className="sm:grid-cols-13 mt-4 grid grid-cols-12 items-end gap-2 md:gap-4">
         {/* y-axis */}

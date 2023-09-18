@@ -18,7 +18,7 @@ export default function Card({
   type,
 }: {
   title: string;
-  value: number | string;
+  value: number | string | undefined;
   type: 'invoices' | 'customers' | 'pending' | 'collected';
 }) {
   const Icon = iconMap[type];
