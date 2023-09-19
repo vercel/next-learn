@@ -8,6 +8,7 @@ import {
 import DeleteInvoice from '@/app/ui/invoices/delete-button';
 import TableSearch from './table-search';
 import PaginationButtons from './pagination';
+import AddInvoice from '@/app/ui/invoices/add-button';
 import {
   fetchFilteredInvoices,
   fetchInvoiceCountBySearchTerm,
@@ -62,12 +63,7 @@ export default async function InvoicesTable({
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
         <h1 className="text-base font-semibold">Invoices</h1>
-        <Link
-          href="/dashboard/invoices/create"
-          className="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-        >
-          Add Invoice
-        </Link>
+        <AddInvoice />
       </div>
       <div className="mt-8 flex items-center justify-between gap-2">
         <TableSearch searchParams={searchParams} />
