@@ -17,24 +17,6 @@ import {
 
 const ITEMS_PER_PAGE = 10;
 
-function renderInvoiceStatus(status: string) {
-  if (status === 'pending') {
-    return (
-      <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
-        <ClockIcon className="mr-1 w-4 text-red-700" />
-        Pending
-      </span>
-    );
-  } else {
-    return (
-      <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-        <CheckCircleIcon className="mr-1 w-4 text-green-700" />
-        Paid
-      </span>
-    );
-  }
-}
-
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 
 export default async function InvoicesTable({
@@ -138,7 +120,7 @@ export default async function InvoicesTable({
                         {formatDateToLocal(invoice.date)}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
-                        {renderInvoiceStatus(invoice.status)}
+                        <InvoiceStatus status={invoice.status} />
                       </td>
                       <td className="flex justify-end gap-2 whitespace-nowrap py-4 pl-3 pr-6 text-sm">
                         <EditInvoice id={invoice.id} />
