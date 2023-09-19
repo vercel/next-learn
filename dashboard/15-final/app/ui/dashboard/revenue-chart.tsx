@@ -1,5 +1,5 @@
-import { Revenue } from '@/app/lib/definitions';
 import { generateYAxis } from '@/app/lib/utils';
+import { fetchRevenueDelayed } from '@/app/lib/data';
 
 // This component is representational only.
 // For data visualization UI, check out:
@@ -7,11 +7,9 @@ import { generateYAxis } from '@/app/lib/utils';
 // https://www.chartjs.org/
 // https://airbnb.io/visx/
 
-export default function RevenueChart({
-  revenue,
-}: {
-  revenue: Revenue[] | undefined;
-}) {
+export default async function RevenueChart() {
+  const revenue = await fetchRevenueDelayed();
+
   const chartHeight = 350;
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
 

@@ -1,4 +1,3 @@
-// InvoiceList.tsx
 import { LatestInvoice } from '@/app/lib/definitions';
 import Image from 'next/image';
 
