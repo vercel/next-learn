@@ -16,7 +16,6 @@ export default function PaginationButtons({
   currentPage: number;
   searchParams: { query: string; page: string };
 }) {
-  const router = useRouter();
   const pathname = usePathname();
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -25,11 +24,6 @@ export default function PaginationButtons({
     newSearchParams.set('page', pageNumber.toString());
     return `${pathname}?${newSearchParams.toString()}`;
   };
-
-  useEffect(() => {
-    const newUrl = createPageUrl(currentPage);
-    router.push(newUrl);
-  }, [currentPage]);
 
   const PreviousPageTag = currentPage === 1 ? 'p' : Link;
   const NextPageTag = currentPage === totalPages ? 'p' : Link;
