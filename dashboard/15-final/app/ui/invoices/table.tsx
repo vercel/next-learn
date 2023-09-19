@@ -79,8 +79,12 @@ export default async function InvoicesTable({
         </Link>
       </div>
       <div className="mt-8 flex items-center justify-between gap-2">
-        <TableSearch />
-        <PaginationButtons totalPages={totalPages} currentPage={currentPage} />
+        <TableSearch searchParams={searchParams} />
+        <PaginationButtons
+          searchParams={searchParams}
+          totalPages={totalPages}
+          currentPage={currentPage}
+        />
       </div>
       <div className="mt-4 flow-root">
         <div className="overflow-x-auto">
