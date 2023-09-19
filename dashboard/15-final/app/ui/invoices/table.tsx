@@ -111,10 +111,7 @@ export default async function InvoicesTable({
                         {invoice.customer_email}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
-                        {(invoice.amount / 100).toLocaleString('en-US', {
-                          style: 'currency',
-                          currency: 'USD',
-                        })}
+                        {formatCurrency(invoice.amount)}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
                         {formatDateToLocal(invoice.date)}
