@@ -1,22 +1,14 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import {
-  PencilSquareIcon,
-  ClockIcon,
-  CheckCircleIcon,
-} from '@heroicons/react/24/outline';
 import DeleteInvoice from '@/app/ui/invoices/delete-button';
-import TableSearch from './table-search';
-import PaginationButtons from './pagination';
 import EditInvoice from '@/app/ui/invoices/edit-button';
 import AddInvoice from '@/app/ui/invoices/add-button';
+import TableSearch from '@/app/ui/invoices/table-search';
+import PaginationButtons from '@/app/ui/invoices/pagination';
+import InvoiceStatus from '@/app/ui/invoices/status';
 import {
   fetchFilteredInvoices,
   fetchInvoiceCountBySearchTerm,
 } from '@/app/lib/data';
-
-const ITEMS_PER_PAGE = 10;
-
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 
 export default async function InvoicesTable({
@@ -27,6 +19,7 @@ export default async function InvoicesTable({
     page: string;
   };
 }) {
+  const ITEMS_PER_PAGE = 10;
   const searchTerm = searchParams.query ?? '';
   let currentPage = 1;
   if (!searchTerm) {
