@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default async function LatestInvoices({
   latestInvoices,
 }: {
-  latestInvoices: LatestInvoice[] | undefined;
+  latestInvoices: LatestInvoice[];
 }) {
   return (
     <div className="w-full rounded-xl border bg-white p-6 shadow-sm md:col-span-4 lg:col-span-3">
