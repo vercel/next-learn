@@ -8,6 +8,7 @@ import {
 import DeleteInvoice from '@/app/ui/invoices/delete-button';
 import TableSearch from './table-search';
 import PaginationButtons from './pagination';
+import EditInvoice from '@/app/ui/invoices/edit-button';
 import AddInvoice from '@/app/ui/invoices/add-button';
 import {
   fetchFilteredInvoices,
@@ -140,12 +141,7 @@ export default async function InvoicesTable({
                         {renderInvoiceStatus(invoice.status)}
                       </td>
                       <td className="flex justify-end gap-2 whitespace-nowrap py-4 pl-3 pr-6 text-sm">
-                        <Link
-                          href={`/dashboard/invoices/${invoice.id}/edit`}
-                          className="rounded-md border p-1"
-                        >
-                          <PencilSquareIcon className="w-4" />
-                        </Link>
+                        <EditInvoice id={invoice.id} />
                         <DeleteInvoice id={invoice.id} />
                       </td>
                     </tr>
