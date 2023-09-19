@@ -2,7 +2,7 @@ import Image from 'next/image';
 import DeleteInvoice from '@/app/ui/invoices/delete-button';
 import EditInvoice from '@/app/ui/invoices/edit-button';
 import AddInvoice from '@/app/ui/invoices/add-button';
-import TableSearch from '@/app/ui/invoices/table-search';
+import Search from '@/app/ui/invoices/search';
 import PaginationButtons from '@/app/ui/invoices/pagination';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import {
@@ -42,7 +42,7 @@ export default async function InvoicesTable({
         <AddInvoice />
       </div>
       <div className="mt-8 flex items-center justify-between gap-2">
-        <TableSearch searchParams={searchParams} />
+        <Search searchParams={searchParams} />
         <PaginationButtons
           searchParams={searchParams}
           totalPages={totalPages}
