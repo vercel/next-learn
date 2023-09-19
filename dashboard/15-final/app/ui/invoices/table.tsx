@@ -1,48 +1,15 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import {
-  PencilSquareIcon,
-  ClockIcon,
-  CheckCircleIcon,
-} from '@heroicons/react/24/outline';
 import DeleteInvoice from '@/app/ui/invoices/delete-button';
-import TableSearch from './table-search';
-import PaginationButtons from './pagination';
+import EditInvoice from '@/app/ui/invoices/edit-button';
+import AddInvoice from '@/app/ui/invoices/add-button';
+import Search from '@/app/ui/invoices/search';
+import PaginationButtons from '@/app/ui/invoices/pagination';
+import InvoiceStatus from '@/app/ui/invoices/status';
 import {
   fetchFilteredInvoices,
   fetchInvoiceCountBySearchTerm,
 } from '@/app/lib/data';
-
-const ITEMS_PER_PAGE = 10;
-
-function renderInvoiceStatus(status: string) {
-  if (status === 'pending') {
-    return (
-      <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
-        <ClockIcon className="mr-1 w-4 text-red-700" />
-        Pending
-      </span>
-    );
-  } else {
-    return (
-      <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-        <CheckCircleIcon className="mr-1 w-4 text-green-700" />
-        Paid
-      </span>
-    );
-  }
-}
-
-function formatDateToLocal(dateStr: string, locale: string = 'en-US') {
-  const date = new Date(dateStr);
-  const options: Intl.DateTimeFormatOptions = {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  };
-  const formatter = new Intl.DateTimeFormat(locale, options);
-  return formatter.format(date);
-}
+import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 
 export default async function InvoicesTable({
   searchParams,
@@ -52,6 +19,7 @@ export default async function InvoicesTable({
     page: string;
   };
 }) {
+  const ITEMS_PER_PAGE = 10;
   const searchTerm = searchParams.query ?? '';
   let currentPage = 1;
   if (!searchTerm) {
@@ -71,15 +39,10 @@ export default async function InvoicesTable({
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
         <h1 className="text-base font-semibold">Invoices</h1>
-        <Link
-          href="/dashboard/invoices/create"
-          className="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-        >
-          Add Invoice
-        </Link>
+        <AddInvoice />
       </div>
       <div className="mt-8 flex items-center justify-between gap-2">
-        <TableSearch searchParams={searchParams} />
+        <Search searchParams={searchParams} />
         <PaginationButtons
           searchParams={searchParams}
           totalPages={totalPages}
@@ -141,24 +104,16 @@ export default async function InvoicesTable({
                         {invoice.customer_email}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
-                        {(invoice.amount / 100).toLocaleString('en-US', {
-                          style: 'currency',
-                          currency: 'USD',
-                        })}
+                        {formatCurrency(invoice.amount)}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
                         {formatDateToLocal(invoice.date)}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
-                        {renderInvoiceStatus(invoice.status)}
+                        <InvoiceStatus status={invoice.status} />
                       </td>
                       <td className="flex justify-end gap-2 whitespace-nowrap py-4 pl-3 pr-6 text-sm">
-                        <Link
-                          href={`/dashboard/invoices/${invoice.id}/edit`}
-                          className="rounded-md border p-1"
-                        >
-                          <PencilSquareIcon className="w-4" />
-                        </Link>
+                        <EditInvoice id={invoice.id} />
                         <DeleteInvoice id={invoice.id} />
                       </td>
                     </tr>

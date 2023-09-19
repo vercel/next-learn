@@ -3,7 +3,7 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { usePathname, useRouter } from 'next/navigation';
 
-export default function TableSearch({
+export default function Search({
   searchParams,
 }: {
   searchParams: { query: string; page: string };
