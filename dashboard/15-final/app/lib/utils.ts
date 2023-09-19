@@ -1,7 +1,43 @@
-import { Invoice, Revenue } from './definitions';
-import { fetchLatestInvoices } from './data-fetches';
+import { Invoice, Revenue, Customer, LatestInvoice } from './definitions';
 
-export const calculateAllInvoices = (
+export const formatCurrency = (amount: number) => {
+  return (amount / 100).toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+};
+
+export function findLatestInvoices(invoices: Invoice[], customers: Customer[]) {
+  // Sort the invoices by date in descending order and take the top 5
+  const latestInvoices = [...invoices]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 5);
+
+  // Find corresponding customers for the latest 5 invoices
+  const latestInvoicesWithCustomerInfo = latestInvoices.map((invoice) => {
+    const customer = customers.find(
+      (customer) => customer.id === invoice.customer_id,
+    );
+
+    // Format the amount to USD
+    const formattedAmount = invoice.amount.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+
+    return {
+      id: invoice.id,
+      name: customer?.name,
+      image_url: customer?.image_url,
+      email: customer?.email,
+      amount: formattedAmount,
+    };
+  });
+
+  return latestInvoicesWithCustomerInfo;
+}
+
+export const calculateInvoicesByStatus = (
   invoices: Invoice[],
   status: 'pending' | 'paid',
 ) => {
@@ -29,22 +65,12 @@ export const calculateCustomerInvoices = (
     });
 };
 
-// Once a database is connected, we can use SQL to query the database directly
-// This will be more efficient than querying all invoices and then filtering them
-// E.g. "SELECT * FROM invoices
-// ORDER BY date DESC
-// LIMIT 5;"
-
 export const countCustomerInvoices = (
   invoices: Invoice[],
   customerId: number,
 ) => {
   return invoices.filter((invoice) => invoice.customer_id === customerId)
     .length;
-};
-
-export const findLatestInvoices = async () => {
-  return await fetchLatestInvoices();
 };
 
 export const generateYAxis = (revenue: Revenue[]) => {

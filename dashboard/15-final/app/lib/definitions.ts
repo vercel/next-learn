@@ -25,6 +25,14 @@ export type Invoice = {
   date: string;
 };
 
+export type LatestInvoice = {
+  id: number;
+  name: string;
+  image_url: string;
+  email: string;
+  amount: string;
+};
+
 export type Revenue = {
   month: string;
   revenue: number;
