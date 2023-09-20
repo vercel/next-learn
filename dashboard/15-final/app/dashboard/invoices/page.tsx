@@ -4,10 +4,17 @@ import AddInvoiceButton from '@/app/ui/invoices/add-button';
 import Table from '@/app/ui/invoices/table';
 import { fetchFilteredInvoices } from '@/app/lib/data';
 
-export default async function Page() {
-  const ITEMS_PER_PAGE = 10;
-  const searchTerm = '';
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: {
+    query: string;
+    page: string;
+  };
+}) {
+  let searchTerm = searchParams.query ?? '';
   let currentPage = 1;
+  const ITEMS_PER_PAGE = 10;
 
   const { invoices, count } = await fetchFilteredInvoices(
     searchTerm,
@@ -15,14 +22,7 @@ export default async function Page() {
     ITEMS_PER_PAGE,
   );
 
-  // const searchTerm = searchParams.query ?? '';
-  // let currentPage = 1;
-  // if (!searchTerm) {
-  //   currentPage = parseInt(searchParams.page ?? '1');
-  // }
-
-  // const totalCount = await fetchInvoiceCountBySearchTerm(searchTerm);
-  // const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
 
   return (
     <div className="w-full">
@@ -31,12 +31,8 @@ export default async function Page() {
         <AddInvoiceButton />
       </div>
       <div className="mt-8 flex items-center justify-between gap-2">
-        {/* <Search searchParams={searchParams} />
-        <Pagination
-          searchParams={searchParams}
-          totalPages={totalPages}
-          currentPage={currentPage}
-        /> */}
+        <Search />
+        {/* <Pagination /> */}
       </div>
       <Table invoices={invoices} />
     </div>
