@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
-import { Revenue, LatestInvoice } from './definitions';
+import { Revenue, LatestInvoice, Invoice } from './definitions';
 
 export async function fetchRevenue(): Promise<Revenue[]> {
   try {
@@ -94,38 +94,42 @@ export async function fetchFilteredInvoices(
   currentPage: number,
   ITEMS_PER_PAGE: number,
 ) {
-  const invoicesData = await sql`
-    SELECT 
-      invoices.*, 
-      customers.name AS customer_name, 
-      customers.email AS customer_email, 
-      customers.image_url AS customer_image
-    FROM 
-      invoices
-    JOIN 
-      customers ON invoices.customer_id = customers.id
-    WHERE 
-      invoices.id::text ILIKE ${`%${searchTerm}%`} OR
-      customers.name ILIKE ${`%${searchTerm}%`} OR
-      customers.email ILIKE ${`%${searchTerm}%`} OR
-      invoices.amount::text ILIKE ${`%${searchTerm}%`} OR
-      invoices.date::text ILIKE ${`%${searchTerm}%`} OR
-      invoices.status ILIKE ${`%${searchTerm}%`}
-    LIMIT ${ITEMS_PER_PAGE}
-    OFFSET ${(currentPage - 1) * ITEMS_PER_PAGE}
-  `;
-  return { invoices: invoicesData.rows, count: invoicesData.rowCount };
-}
+  console.log(`Searching... ${searchTerm}`);
 
-// export async function fetchInvoiceCountBySearchTerm(searchTerm: string) {
-//   const { rows: countRows } = await sql`
-//   SELECT COUNT(*)
-//   FROM invoices
-//   LEFT JOIN customers ON invoices.customer_id = customers.id
-//   WHERE (invoices.id::text ILIKE ${`%${searchTerm}%`} OR customers.name ILIKE ${`%${searchTerm}%`} OR customers.email ILIKE ${`%${searchTerm}%`})
-// `;
-//   return countRows[0].count;
-// }
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const data = await sql`
+  SELECT 
+    invoices.id,
+    invoices.amount,
+    invoices.date,
+    invoices.status,
+    customers.name AS customer_name,
+    customers.email AS customer_email,
+    customers.image_url AS customer_image
+  FROM 
+    invoices
+  JOIN 
+    customers ON invoices.customer_id = customers.id
+  WHERE 
+    invoices.id::text ILIKE ${`%${searchTerm}%`} OR
+    customers.name ILIKE ${`%${searchTerm}%`} OR
+    customers.email ILIKE ${`%${searchTerm}%`} OR
+    invoices.amount::text ILIKE ${`%${searchTerm}%`} OR
+    invoices.date::text ILIKE ${`%${searchTerm}%`} OR
+    invoices.status ILIKE ${`%${searchTerm}%`}
+  LIMIT ${ITEMS_PER_PAGE}
+  OFFSET ${offset}
+`;
+
+  const invoicesData = await data;
+
+  console.log(`Found ${invoicesData.rowCount} invoices.`);
+
+  return {
+    invoices: invoicesData.rows as Invoice[],
+    count: invoicesData.rowCount,
+  };
+}
 
 export async function fetchInvoiceById(id: number | null) {
   return await sql`SELECT * from INVOICES where id=${id}`;
