@@ -4,7 +4,9 @@ import { Revenue, LatestInvoice, User } from './definitions';
 
 export async function fetchUser(email: string) {
   try {
-    return await sql`SELECT * from USERS where email=${email}`;
+    const user = await sql`SELECT * from USERS where email=${email}`;
+
+    return user.rows[0] as User;
   } catch (error) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');

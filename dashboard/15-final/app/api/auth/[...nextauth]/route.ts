@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
-// import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import { fetchUser } from '../../../lib/data';
 
 export const authOptions = {
@@ -14,16 +14,17 @@ export const authOptions = {
 
         try {
           const user = await fetchUser(email);
-
+          console.log('user: ', user);
           if (!user) {
             return null;
           }
 
-          // const passwordsMatch = await bcrypt.compare(password, user.password);
+          const passwordsMatch = await bcrypt.compare(password, user.password);
 
-          // if (!passwordsMatch) {
-          //   return null;
-          // }
+          if (!passwordsMatch) {
+            console.log('Passwords do not match');
+            return null;
+          }
 
           return user;
         } catch (error) {
