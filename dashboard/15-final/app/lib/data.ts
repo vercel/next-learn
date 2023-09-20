@@ -114,18 +114,18 @@ export async function fetchFilteredInvoices(
     LIMIT ${ITEMS_PER_PAGE}
     OFFSET ${(currentPage - 1) * ITEMS_PER_PAGE}
   `;
-  return invoicesData.rows;
+  return { invoices: invoicesData.rows, count: invoicesData.rowCount };
 }
 
-export async function fetchInvoiceCountBySearchTerm(searchTerm: string) {
-  const { rows: countRows } = await sql`
-  SELECT COUNT(*) 
-  FROM invoices 
-  LEFT JOIN customers ON invoices.customer_id = customers.id 
-  WHERE (invoices.id::text ILIKE ${`%${searchTerm}%`} OR customers.name ILIKE ${`%${searchTerm}%`} OR customers.email ILIKE ${`%${searchTerm}%`})
-`;
-  return countRows[0].count;
-}
+// export async function fetchInvoiceCountBySearchTerm(searchTerm: string) {
+//   const { rows: countRows } = await sql`
+//   SELECT COUNT(*)
+//   FROM invoices
+//   LEFT JOIN customers ON invoices.customer_id = customers.id
+//   WHERE (invoices.id::text ILIKE ${`%${searchTerm}%`} OR customers.name ILIKE ${`%${searchTerm}%`} OR customers.email ILIKE ${`%${searchTerm}%`})
+// `;
+//   return countRows[0].count;
+// }
 
 export async function fetchInvoiceById(id: number | null) {
   return await sql`SELECT * from INVOICES where id=${id}`;
