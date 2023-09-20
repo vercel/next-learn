@@ -4,10 +4,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
-export default function PaginationButtons({
+export default function Pagination({
   totalPages,
   currentPage,
   searchParams,

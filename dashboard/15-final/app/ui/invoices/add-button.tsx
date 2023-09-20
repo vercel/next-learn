@@ -1,5 +1,5 @@
 import Link from 'next/link';
-export default function AddInvoice() {
+export default function AddInvoiceButton() {
   return (
     <Link
       href="/dashboard/invoices/create"
