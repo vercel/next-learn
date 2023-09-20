@@ -1,10 +1,10 @@
-import NextAuth from 'next-auth/next';
+import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import { fetchUser } from '../../../lib/data';
 import { User } from '@/app/lib/definitions';
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -18,7 +18,7 @@ export const authOptions = {
 
         try {
           const user = await fetchUser(email);
-          console.log('user: ', user);
+
           if (!user) {
             return null;
           }
@@ -48,4 +48,4 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST, authOptions };
