@@ -1,20 +1,19 @@
 'use client';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import Link from 'next/link';
 
 export default function Pagination({
   totalPages,
   currentPage,
-  searchParams,
 }: {
   totalPages: number;
   currentPage: number;
-  searchParams: { query: string; page: string };
 }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   const createPageUrl = (pageNumber: number) => {
