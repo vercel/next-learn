@@ -21,7 +21,7 @@ export default function Page() {
         </a>
       </div>
       <div className="w-full sm:w-1/2">
-        <Image src={HeroImage} alt="Dashboard Hero Image" placeholder="blur" />
+        <Image src={HeroImage} alt="Dashboard Hero Image" />
       </div>
     </main>
   );
