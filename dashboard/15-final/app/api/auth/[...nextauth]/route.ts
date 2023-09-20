@@ -2,6 +2,7 @@ import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import { fetchUser } from '../../../lib/data';
+import { User } from '@/app/lib/definitions';
 
 export const authOptions = {
   providers: [
@@ -9,7 +10,10 @@ export const authOptions = {
       name: 'credentials',
       credentials: {},
 
-      async authorize(credentials) {
+      async authorize(credentials: {
+        email: string;
+        password: string;
+      }): Promise<null | User | undefined> {
         const { email, password } = credentials;
 
         try {
