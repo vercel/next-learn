@@ -1,15 +1,14 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useTransition } from 'react';
 
-export default function Search({
-  searchParams,
-}: {
-  searchParams: { query: string; page: string };
-}) {
+export default function Search() {
+  const [isPending, startTransition] = useTransition();
   const { replace } = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
@@ -18,7 +17,9 @@ export default function Search({
     } else {
       params.delete('query');
     }
-    replace(`${pathname}?${params.toString()}`);
+    startTransition(() => {
+      replace(`${pathname}?${params.toString()}`);
+    });
   }
 
   return (
@@ -31,11 +32,11 @@ export default function Search({
         <input
           type="text"
           placeholder="Search..."
-          value={searchParams.query || ''}
+          className="absolute inset-0 w-full rounded-md border border-gray-300 bg-transparent p-2 pl-8 text-sm"
           onChange={(e) => {
             handleSearch(e.target.value);
           }}
-          className="absolute inset-0 w-full rounded-md border border-gray-300 bg-transparent p-2 pl-8 text-sm"
+          defaultValue={searchParams.query || ''}
         />
       </div>
     </div>
