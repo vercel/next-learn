@@ -10,10 +10,12 @@ const authOptions: NextAuthOptions = {
       name: 'credentials',
       credentials: {},
 
+      // TODO: Not sure how to type authorize function correctly
+      // @ts-ignore
       async authorize(credentials: {
         email: string;
         password: string;
-      }): Promise<null | User | undefined> {
+      }): Promise<User | null | undefined> {
         const { email, password } = credentials;
 
         try {
