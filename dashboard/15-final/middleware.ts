@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const session = request.cookies.has('next-auth.session-token');
+  console.log('session debugging', session);
   if (session && request.nextUrl.pathname.startsWith('/login')) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
