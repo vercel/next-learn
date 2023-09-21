@@ -90,44 +90,57 @@ export async function fetchAllCustomers() {
 }
 
 export async function fetchFilteredInvoices(
-  searchTerm: string,
+  query: string,
   currentPage: number,
-  ITEMS_PER_PAGE: number,
 ) {
-  console.log(`Searching... ${searchTerm}`);
+  // console.log(`Searching... ${searchTerm}`);
 
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  const data = await sql`
-  SELECT 
-    invoices.id,
-    invoices.amount,
-    invoices.date,
-    invoices.status,
-    customers.name AS customer_name,
-    customers.email AS customer_email,
-    customers.image_url AS customer_image
-  FROM 
-    invoices
-  JOIN 
-    customers ON invoices.customer_id = customers.id
-  WHERE 
-    invoices.id::text ILIKE ${`%${searchTerm}%`} OR
-    customers.name ILIKE ${`%${searchTerm}%`} OR
-    customers.email ILIKE ${`%${searchTerm}%`} OR
-    invoices.amount::text ILIKE ${`%${searchTerm}%`} OR
-    invoices.date::text ILIKE ${`%${searchTerm}%`} OR
-    invoices.status ILIKE ${`%${searchTerm}%`}
-  LIMIT ${ITEMS_PER_PAGE}
-  OFFSET ${offset}
-`;
+  const itemsPerPage = 10;
+  const offset = (currentPage - 1) * itemsPerPage;
 
-  const invoicesData = await data;
+  const paginatedData = await sql`
+    SELECT
+      invoices.id,
+      invoices.amount,
+      invoices.date,
+      invoices.status,
+      customers.name AS customer_name,
+      customers.email AS customer_email,
+      customers.image_url AS customer_image
+    FROM invoices
+    JOIN customers ON invoices.customer_id = customers.id
+    WHERE
+      invoices.id::text ILIKE ${`%${query}%`} OR
+      customers.name ILIKE ${`%${query}%`} OR
+      customers.email ILIKE ${`%${query}%`} OR
+      invoices.amount::text ILIKE ${`%${query}%`} OR
+      invoices.date::text ILIKE ${`%${query}%`} OR
+      invoices.status ILIKE ${`%${query}%`}
+    ORDER BY invoices.id ASC
+    LIMIT ${itemsPerPage} OFFSET ${offset}
+  `;
 
-  console.log(`Found ${invoicesData.rowCount} invoices.`);
+  const countRecords = await sql`
+    SELECT COUNT(*)
+    FROM invoices
+    JOIN customers ON invoices.customer_id = customers.id
+    WHERE
+      invoices.id::text ILIKE ${`%${query}%`} OR
+      customers.name ILIKE ${`%${query}%`} OR
+      customers.email ILIKE ${`%${query}%`} OR
+      invoices.amount::text ILIKE ${`%${query}%`} OR
+      invoices.date::text ILIKE ${`%${query}%`} OR
+      invoices.status ILIKE ${`%${query}%`}
+  `;
+
+  const totalRecords = Number(countRecords.rows[0].count);
+  const totalPages = Math.ceil(totalRecords / itemsPerPage);
+
+  // console.log(`Found ${paginatedData.rowCount} invoices.`);
 
   return {
-    invoices: invoicesData.rows as Invoice[],
-    count: invoicesData.rowCount,
+    invoices: paginatedData.rows as Invoice[],
+    totalPages,
   };
 }
 
