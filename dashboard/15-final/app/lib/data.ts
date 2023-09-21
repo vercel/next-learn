@@ -1,17 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
-import { Revenue, LatestInvoice, User } from './definitions';
-
-export async function fetchUser(email: string) {
-  try {
-    const user = await sql`SELECT * from USERS where email=${email}`;
-
-    return user.rows[0] as User;
-  } catch (error) {
-    console.error('Failed to fetch user:', error);
-    throw new Error('Failed to fetch user.');
-  }
-}
+import { Revenue, LatestInvoice } from './definitions';
 
 export async function fetchRevenue(): Promise<Revenue[]> {
   try {
