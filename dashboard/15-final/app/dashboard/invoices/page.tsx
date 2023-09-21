@@ -14,11 +14,8 @@ export default async function Page({
       }
     | undefined;
 }) {
-  let query = searchParams?.query || '';
-  let currentPage = 1;
-  if (!query) {
-    currentPage = Number(searchParams?.page || '1');
-  }
+  const query = searchParams?.query || '';
+  const currentPage = query ? 1 : Number(searchParams?.page || '1');
 
   const { invoices, totalPages } = await fetchFilteredInvoices(
     query,

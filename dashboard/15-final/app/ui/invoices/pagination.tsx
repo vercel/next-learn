@@ -15,9 +15,10 @@ export default function Pagination({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const allPages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   const PreviousPageTag = currentPage === 1 ? 'p' : Link;
   const NextPageTag = currentPage === totalPages ? 'p' : Link;
-  const allPages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   const createPageUrl = (pageNumber: number) => {
     const params = new URLSearchParams(searchParams);
