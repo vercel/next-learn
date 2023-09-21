@@ -16,15 +16,14 @@ export default async function Page({
 }) {
   let query = searchParams?.query || '';
   let currentPage = 1;
-  const ITEMS_PER_PAGE = 10;
+  if (!query) {
+    currentPage = Number(searchParams?.page || '1');
+  }
 
-  const { invoices, count } = await fetchFilteredInvoices(
+  const { invoices, totalPages } = await fetchFilteredInvoices(
     query,
     currentPage,
-    ITEMS_PER_PAGE,
   );
-
-  const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
 
   return (
     <div className="w-full">
@@ -34,7 +33,7 @@ export default async function Page({
       </div>
       <div className="mt-8 flex items-center justify-between gap-2">
         <Search />
-        {/* <Pagination /> */}
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
       </div>
       <Table invoices={invoices} />
     </div>
