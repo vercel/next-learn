@@ -6,24 +6,24 @@ import clsx from 'clsx';
 import Link from 'next/link';
 
 export default function Pagination({
-  totalPages,
   currentPage,
+  totalPages,
 }: {
-  totalPages: number;
   currentPage: number;
+  totalPages: number;
 }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
-
-  const createPageUrl = (pageNumber: number) => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    newSearchParams.set('page', pageNumber.toString());
-    return `${pathname}?${newSearchParams.toString()}`;
-  };
 
   const PreviousPageTag = currentPage === 1 ? 'p' : Link;
   const NextPageTag = currentPage === totalPages ? 'p' : Link;
+  const allPages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const createPageUrl = (pageNumber: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('page', pageNumber.toString());
+    return `${pathname}?${params.toString()}`;
+  };
 
   return (
     <div className="inline-flex -space-x-px">
@@ -38,7 +38,7 @@ export default function Pagination({
       >
         <ChevronLeftIcon className="w-4" />
       </PreviousPageTag>
-      {pageNumbers.map((page) => {
+      {allPages.map((page) => {
         const PageTag = page === currentPage ? 'p' : Link;
         return (
           <PageTag
