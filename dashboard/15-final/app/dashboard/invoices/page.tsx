@@ -7,17 +7,19 @@ import { fetchFilteredInvoices } from '@/app/lib/data';
 export default async function Page({
   searchParams,
 }: {
-  searchParams: {
-    query: string;
-    page: string;
-  };
+  searchParams:
+    | {
+        query: string | undefined;
+        page: string | undefined;
+      }
+    | undefined;
 }) {
-  let searchTerm = searchParams.query ?? '';
+  let query = searchParams?.query || '';
   let currentPage = 1;
   const ITEMS_PER_PAGE = 10;
 
   const { invoices, count } = await fetchFilteredInvoices(
-    searchTerm,
+    query,
     currentPage,
     ITEMS_PER_PAGE,
   );
