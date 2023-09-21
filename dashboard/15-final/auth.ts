@@ -7,7 +7,7 @@ import { sql } from '@vercel/postgres';
 async function getUser(email: string) {
   try {
     const user = await sql`SELECT * from USERS where email=${email}`;
-
+    console.log('USER', user);
     return user.rows[0] as User;
   } catch (error) {
     console.error('Failed to fetch user:', error);
@@ -25,10 +25,12 @@ export const authOptions: NextAuthOptions = {
       },
       // @ts-ignore
       async authorize(credentials) {
+        console.log('debugging credentials', credentials);
         const { email, password } = credentials ?? {};
         const user = await getUser(email as string);
 
         if (!user || !password) {
+          console.log('Missing credentials');
           return null;
         }
 
