@@ -1,6 +1,5 @@
 import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
-import { Revenue } from './definitions';
 
 export async function fetchRevenue() {
   try {
@@ -13,7 +12,10 @@ export async function fetchRevenue() {
 
     // console.log('Data fetch complete after 3 seconds.');
 
-    return data.rows as Revenue[];
+    return data.rows as {
+      month: string;
+      revenue: number;
+    }[];
   } catch (error) {
     console.error('Failed to fetch revenue data:', error);
     throw new Error('Failed to fetch revenue data.');
@@ -185,11 +187,11 @@ export async function fetchCustomersTable() {
       customers.email,
       customers.image_url,
       COUNT(invoices.id) AS total_invoices,
-      SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,  -- Added a comma here
-      SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid  -- Fixed by adding comma before this line
+      SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending, 
+      SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid 
     FROM customers 
-    LEFT JOIN invoices ON customers.id = invoices.customer_id  -- Changed to LEFT JOIN
-    GROUP BY customers.id, customers.name, customers.email, customers.image_url  -- Added GROUP BY
+    LEFT JOIN invoices ON customers.id = invoices.customer_id 
+    GROUP BY customers.id, customers.name, customers.email, customers.image_url  
     ORDER BY customers.name ASC
   `;
 
