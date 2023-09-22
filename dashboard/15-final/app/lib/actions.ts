@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
-export async function deleteInvoice(id: number) {
+export async function deleteInvoice(id: string) {
   await sql`DELETE FROM invoices WHERE id = ${id}`;
   revalidatePath('/dashboard/invoices');
 }
@@ -18,7 +18,6 @@ const NewInvoice = z.object({
 
 const UpdatedInvoice = NewInvoice.extend({
   id: z.string(),
-  date: z.string(),
 });
 
 export async function createInvoice(formData: FormData) {
@@ -37,14 +36,14 @@ export async function createInvoice(formData: FormData) {
 }
 
 export async function updateInvoice(formData: FormData) {
-  const { id, date, customerId, amount, status } = UpdatedInvoice.parse(
+  const { id, customerId, amount, status } = UpdatedInvoice.parse(
     Object.fromEntries(formData.entries()),
   );
   const ammountInCents = amount * 100;
 
   await sql`
     UPDATE invoices
-    SET customer_id = ${customerId}, amount = ${ammountInCents}, status = ${status}, date = ${date}
+    SET customer_id = ${customerId}, amount = ${ammountInCents}, status = ${status}
     WHERE id = ${id}
   `;
 

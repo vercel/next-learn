@@ -1,13 +1,8 @@
 import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
-import {
-  Revenue,
-  LatestInvoice,
-  InvoiceTable,
-  CustomerTable,
-} from './definitions';
+import { Revenue } from './definitions';
 
-export async function fetchRevenue(): Promise<Revenue[]> {
+export async function fetchRevenue() {
   try {
     // We artificially delay a reponse for demo purposes.
     // Don't do this in real life :)
@@ -69,7 +64,13 @@ export async function fetchLatestInvoices() {
       ...invoice,
       amount: formatCurrency(invoice.amount),
     }));
-    return latestInvoices as LatestInvoice[];
+    return latestInvoices as {
+      id: string;
+      name: string;
+      image_url: string;
+      email: string;
+      amount: string;
+    }[];
   } catch (error) {
     console.error('Failed to fetch the latest invoices:', error);
     throw new Error('Failed to fetch the latest invoices.');
@@ -97,7 +98,6 @@ export async function fetchFilteredInvoices(
     FROM invoices
     JOIN customers ON invoices.customer_id = customers.id
     WHERE
-      invoices.id::text ILIKE ${`%${query}%`} OR
       customers.name ILIKE ${`%${query}%`} OR
       customers.email ILIKE ${`%${query}%`} OR
       invoices.amount::text ILIKE ${`%${query}%`} OR
@@ -112,7 +112,6 @@ export async function fetchFilteredInvoices(
     FROM invoices
     JOIN customers ON invoices.customer_id = customers.id
     WHERE
-      invoices.id::text ILIKE ${`%${query}%`} OR
       customers.name ILIKE ${`%${query}%`} OR
       customers.email ILIKE ${`%${query}%`} OR
       invoices.amount::text ILIKE ${`%${query}%`} OR
@@ -126,53 +125,73 @@ export async function fetchFilteredInvoices(
   // console.log(`Found ${data.rowCount} invoices.`);
 
   return {
-    invoices: data.rows as InvoiceTable[],
+    invoices: data.rows as {
+      id: string;
+      customer_id: string;
+      customer_name: string;
+      customer_email: string;
+      customer_image: string;
+      date: string;
+      amount: number;
+      status: 'pending' | 'paid';
+    }[],
     totalPages,
   };
 }
 
-export async function fetchInvoiceById(id: number) {
+export async function fetchInvoiceById(id: string) {
   const data = await sql`
-  SELECT
-    invoices.id,
-    invoices.amount,
-    invoices.status,
-    customers.name
-  FROM invoices
-  JOIN customers ON invoices.customer_id = customers.id
-  WHERE invoices.id = ${id};
-`;
-  const invoice = data.rows[0];
-  return invoice;
+    SELECT
+      invoices.id,
+      invoices.amount,
+      invoices.status,
+      customers.name
+    FROM invoices
+    JOIN customers ON invoices.customer_id = customers.id
+    WHERE invoices.id = ${id};
+  `;
+
+  const invoice = data.rows.map((invoice) => ({
+    ...invoice,
+    amount: invoice.amount / 100,
+  }));
+
+  return invoice[0] as {
+    id: string;
+    amount: number;
+    status: string;
+    name: string;
+  };
 }
 
 export async function fetchAllCustomers() {
   const data = await sql`
-  SELECT 
-    id,
-    name
-  FROM customers
-  ORDER BY name ASC
-`;
+    SELECT 
+      id,
+      name
+    FROM customers
+    ORDER BY name ASC
+  `;
+
   const customers = data.rows;
-  return customers;
+  return customers as { id: string; name: string }[];
 }
 
 export async function fetchCustomersTable() {
   const data = await sql`
-  SELECT 
-    customers.id,
-    customers.name,
-    customers.email,
-    customers.image_url,
-    COUNT(invoices.id) AS total_invoices,
-    SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,  -- Added a comma here
-    SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid  -- Fixed by adding comma before this line
-  FROM customers 
-  LEFT JOIN invoices ON customers.id = invoices.customer_id  -- Changed to LEFT JOIN
-  GROUP BY customers.id, customers.name, customers.email, customers.image_url  -- Added GROUP BY
-  ORDER BY customers.name ASC
-`;
+    SELECT 
+      customers.id,
+      customers.name,
+      customers.email,
+      customers.image_url,
+      COUNT(invoices.id) AS total_invoices,
+      SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,  -- Added a comma here
+      SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid  -- Fixed by adding comma before this line
+    FROM customers 
+    LEFT JOIN invoices ON customers.id = invoices.customer_id  -- Changed to LEFT JOIN
+    GROUP BY customers.id, customers.name, customers.email, customers.image_url  -- Added GROUP BY
+    ORDER BY customers.name ASC
+  `;
 
   const customers = data.rows.map((customer) => ({
     ...customer,
@@ -180,7 +199,13 @@ export async function fetchCustomersTable() {
     total_paid: formatCurrency(customer.total_paid),
   }));
 
-  console.log('customers', customers);
-
-  return customers as CustomerTable[];
+  return customers as {
+    id: string;
+    name: string;
+    email: string;
+    image_url: string;
+    total_invoices: number;
+    total_pending: string;
+    total_paid: string;
+  }[];
 }

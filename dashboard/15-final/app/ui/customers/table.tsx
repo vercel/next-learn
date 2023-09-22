@@ -1,8 +1,8 @@
-import { fetchCustomers } from '@/app/lib/data';
+import { fetchCustomersTable } from '@/app/lib/data';
 import Image from 'next/image';
 
 export default async function CustomersTable() {
-  const customers = await fetchCustomers();
+  const customers = await fetchCustomersTable();
 
   return (
     <div className="w-full">
