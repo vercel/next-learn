@@ -1,4 +1,4 @@
-import { InvoiceTable, Revenue, Customer } from './definitions';
+import { Revenue } from './definitions';
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -20,39 +20,6 @@ export const formatDateToLocal = (
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);
 };
-
-export function findLatestInvoices(
-  invoices: InvoiceTable[],
-  customers: Customer[],
-) {
-  // Sort the invoices by date in descending order and take the top 5
-  const latestInvoices = [...invoices]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 5);
-
-  // Find corresponding customers for the latest 5 invoices
-  const latestInvoicesWithCustomerInfo = latestInvoices.map((invoice) => {
-    const customer = customers.find(
-      (customer) => customer.id === invoice.customer_id,
-    );
-
-    // Format the amount to USD
-    const formattedAmount = invoice.amount.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-
-    return {
-      id: invoice.id,
-      name: customer?.name,
-      image_url: customer?.image_url,
-      email: customer?.email,
-      amount: formattedAmount,
-    };
-  });
-
-  return latestInvoicesWithCustomerInfo;
-}
 
 export const generateYAxis = (revenue: Revenue[]) => {
   // Calculate what labels we need to display on the y-axis
