@@ -21,7 +21,7 @@ const UpdatedInvoice = NewInvoice.extend({
   date: z.string(),
 });
 
-export async function addInvoice(formData: FormData) {
+export async function createInvoice(formData: FormData) {
   const rawFormData = Object.fromEntries(formData.entries());
   const { customerId, amount, status } = NewInvoice.parse(rawFormData);
   const date = new Date().toISOString().split('T')[0];

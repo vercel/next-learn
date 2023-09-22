@@ -14,11 +14,11 @@ export async function fetchRevenue(): Promise<Revenue[]> {
     // console.log('Fetching revenue data...');
     // await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const revenueData = await sql`SELECT * FROM revenue`;
+    const data = await sql`SELECT * FROM revenue`;
 
     // console.log('Data fetch complete after 3 seconds.');
 
-    return revenueData.rows as Revenue[];
+    return data.rows as Revenue[];
   } catch (error) {
     console.error('Failed to fetch revenue data:', error);
     throw new Error('Failed to fetch revenue data.');
@@ -42,12 +42,12 @@ export async function fetchCounts() {
 
 export async function fetchTotalAmountByStatus() {
   try {
-    const totalAmount = await sql`SELECT 
+    const data = await sql`SELECT 
       SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
       SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
       FROM invoices`;
-    const totalPaidInvoices = formatCurrency(totalAmount.rows[0].paid);
-    const totalPendingInvoices = formatCurrency(totalAmount.rows[0].pending);
+    const totalPaidInvoices = formatCurrency(data.rows[0].paid);
+    const totalPendingInvoices = formatCurrency(data.rows[0].pending);
 
     return { totalPaidInvoices, totalPendingInvoices };
   } catch (error) {
@@ -85,7 +85,7 @@ export async function fetchFilteredInvoices(
   const itemsPerPage = 10;
   const offset = (currentPage - 1) * itemsPerPage;
 
-  const paginatedData = await sql`
+  const data = await sql`
     SELECT
       invoices.id,
       invoices.amount,
@@ -107,7 +107,7 @@ export async function fetchFilteredInvoices(
     LIMIT ${itemsPerPage} OFFSET ${offset}
   `;
 
-  const countRecords = await sql`
+  const count = await sql`
     SELECT COUNT(*)
     FROM invoices
     JOIN customers ON invoices.customer_id = customers.id
@@ -120,13 +120,13 @@ export async function fetchFilteredInvoices(
       invoices.status ILIKE ${`%${query}%`}
   `;
 
-  const totalRecords = Number(countRecords.rows[0].count);
+  const totalRecords = Number(count.rows[0].count);
   const totalPages = Math.ceil(totalRecords / itemsPerPage);
 
-  // console.log(`Found ${paginatedData.rowCount} invoices.`);
+  // console.log(`Found ${data.rowCount} invoices.`);
 
   return {
-    invoices: paginatedData.rows as InvoiceTable[],
+    invoices: data.rows as InvoiceTable[],
     totalPages,
   };
 }
@@ -146,7 +146,19 @@ export async function fetchInvoiceById(id: number) {
   return invoice;
 }
 
-export async function fetchCustomers() {
+export async function fetchAllCustomers() {
+  const data = await sql`
+  SELECT 
+    id,
+    name
+  FROM customers
+  ORDER BY name ASC
+`;
+  const customers = data.rows;
+  return customers;
+}
+
+export async function fetchCustomersTable() {
   const data = await sql`
   SELECT 
     customers.id,
