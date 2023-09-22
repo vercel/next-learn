@@ -1,4 +1,4 @@
-import { TableInvoice, Revenue, Customer } from './definitions';
+import { InvoiceTable, Revenue, Customer } from './definitions';
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -22,7 +22,7 @@ export const formatDateToLocal = (
 };
 
 export function findLatestInvoices(
-  invoices: TableInvoice[],
+  invoices: InvoiceTable[],
   customers: Customer[],
 ) {
   // Sort the invoices by date in descending order and take the top 5
@@ -53,42 +53,6 @@ export function findLatestInvoices(
 
   return latestInvoicesWithCustomerInfo;
 }
-
-export const calculateInvoicesByStatus = (
-  invoices: TableInvoice[],
-  status: 'pending' | 'paid',
-) => {
-  return invoices
-    .filter((invoice) => !status || invoice.status === status)
-    .reduce((total, invoice) => total + invoice.amount / 100, 0)
-    .toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-};
-
-export const calculateCustomerInvoices = (
-  invoices: TableInvoice[],
-  status: 'pending' | 'paid',
-  customerId: number,
-) => {
-  return invoices
-    .filter((invoice) => invoice.customer_id === customerId)
-    .filter((invoice) => !status || invoice.status === status)
-    .reduce((total, invoice) => total + invoice.amount / 100, 0)
-    .toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-};
-
-export const countCustomerInvoices = (
-  invoices: TableInvoice[],
-  customerId: number,
-) => {
-  return invoices.filter((invoice) => invoice.customer_id === customerId)
-    .length;
-};
 
 export const generateYAxis = (revenue: Revenue[]) => {
   // Calculate what labels we need to display on the y-axis

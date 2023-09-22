@@ -1,6 +1,11 @@
 import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
-import { Revenue, LatestInvoice, TableInvoice } from './definitions';
+import {
+  Revenue,
+  LatestInvoice,
+  InvoiceTable,
+  CustomerTable,
+} from './definitions';
 
 export async function fetchRevenue(): Promise<Revenue[]> {
   try {
@@ -64,7 +69,7 @@ export async function fetchLatestInvoices() {
       ...invoice,
       amount: formatCurrency(invoice.amount),
     }));
-    return latestInvoices;
+    return latestInvoices as LatestInvoice[];
   } catch (error) {
     console.error('Failed to fetch the latest invoices:', error);
     throw new Error('Failed to fetch the latest invoices.');
@@ -121,7 +126,7 @@ export async function fetchFilteredInvoices(
   // console.log(`Found ${paginatedData.rowCount} invoices.`);
 
   return {
-    invoices: paginatedData.rows as TableInvoice[],
+    invoices: paginatedData.rows as InvoiceTable[],
     totalPages,
   };
 }
@@ -141,12 +146,29 @@ export async function fetchInvoiceById(id: number) {
   return invoice;
 }
 
-export async function fetchAllInvoices() {
-  const invoicesData = await sql`SELECT * FROM invoices`;
-  return invoicesData.rows;
-}
+export async function fetchCustomers() {
+  const data = await sql`
+  SELECT 
+    customers.id,
+    customers.name,
+    customers.email,
+    customers.image_url,
+    COUNT(invoices.id) AS total_invoices,
+    SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,  -- Added a comma here
+    SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid  -- Fixed by adding comma before this line
+  FROM customers 
+  LEFT JOIN invoices ON customers.id = invoices.customer_id  -- Changed to LEFT JOIN
+  GROUP BY customers.id, customers.name, customers.email, customers.image_url  -- Added GROUP BY
+  ORDER BY customers.name ASC
+`;
 
-export async function fetchAllCustomers() {
-  const customersData = await sql`SELECT * FROM customers`;
-  return customersData.rows;
+  const customers = data.rows.map((customer) => ({
+    ...customer,
+    total_pending: formatCurrency(customer.total_pending),
+    total_paid: formatCurrency(customer.total_paid),
+  }));
+
+  console.log('customers', customers);
+
+  return customers as CustomerTable[];
 }

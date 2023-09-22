@@ -1,14 +1,8 @@
-import {
-  countCustomerInvoices,
-  calculateCustomerInvoices,
-} from '@/app/lib/utils';
-import { Customer, TableInvoice } from '@/app/lib/definitions';
-import { fetchAllCustomers, fetchAllInvoices } from '@/app/lib/data';
+import { fetchCustomers } from '@/app/lib/data';
 import Image from 'next/image';
 
 export default async function CustomersTable() {
-  const invoices = (await fetchAllInvoices()) as TableInvoice[];
-  const customers = (await fetchAllCustomers()) as Customer[];
+  const customers = await fetchCustomers();
 
   return (
     <div className="w-full">
@@ -59,21 +53,13 @@ export default async function CustomersTable() {
                         {customer.email}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
-                        {countCustomerInvoices(invoices, customer.id)}
+                        {customer.total_invoices}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
-                        {calculateCustomerInvoices(
-                          invoices,
-                          'pending',
-                          customer.id,
-                        )}
+                        {customer.total_pending}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm">
-                        {calculateCustomerInvoices(
-                          invoices,
-                          'paid',
-                          customer.id,
-                        )}
+                        {customer.total_paid}
                       </td>
                     </tr>
                   ))}
