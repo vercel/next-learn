@@ -55,7 +55,7 @@ async function seedCustomers() {
       );
     `;
 
-    console.log(`Created "customers" table`, createTable);
+    console.log(`Created "customers" table`);
 
     // Insert data into the "customers" table
     const insertedCustomers = await Promise.all(
