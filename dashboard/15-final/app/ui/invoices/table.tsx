@@ -3,12 +3,12 @@ import DeleteInvoice from '@/app/ui/invoices/delete-button';
 import UpdateInvoice from '@/app/ui/invoices/update-button';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { TableInvoice } from '@/app/lib/definitions';
+import { InvoiceTable } from '@/app/lib/definitions';
 
 export default async function InvoicesTable({
   invoices,
 }: {
-  invoices: TableInvoice[];
+  invoices: InvoiceTable[];
 }) {
   return (
     <div className="mt-4 flow-root">

@@ -1,4 +1,4 @@
-import { FormInvoice } from '@/app/lib/definitions';
+import { InvoiceForm } from '@/app/lib/definitions';
 import { addOrUpdateInvoice } from '@/app/lib/actions';
 import { fetchAllCustomers } from '@/app/lib/data';
 
@@ -7,7 +7,7 @@ export default async function InvoiceForm({
   invoice,
 }: {
   type: 'new' | 'edit';
-  invoice?: FormInvoice;
+  invoice?: InvoiceForm;
 }) {
   const customers = await fetchAllCustomers();
   const amount = invoice?.amount ? (invoice?.amount / 100).toFixed(2) : '';
