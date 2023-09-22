@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  // const session = request.cookies.has('next-auth.session-token');
-  const session = true;
+  const session = request.cookies.has('next-auth.session-token');
+  console.log('session', session);
   if (
     session &&
     (request.nextUrl.pathname.startsWith('/login') ||
