@@ -4,23 +4,14 @@ import { Revenue, LatestInvoice, TableInvoice } from './definitions';
 
 export async function fetchRevenue(): Promise<Revenue[]> {
   try {
-    const revenueData = await sql`SELECT * FROM revenue`;
-    return revenueData.rows as Revenue[];
-  } catch (error) {
-    console.error('Failed to fetch revenue data:', error);
-    throw new Error('Failed to fetch revenue data.');
-  }
-}
-
-export async function fetchRevenueDelayed(): Promise<Revenue[]> {
-  try {
     // We artificially delay a reponse for demo purposes.
     // Don't do this in real life :)
-    console.log('Fetching revenue data...');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // console.log('Fetching revenue data...');
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const revenueData = await sql`SELECT * FROM revenue`;
-    console.log('Data fetch complete after 3 seconds.');
+
+    // console.log('Data fetch complete after 3 seconds.');
 
     return revenueData.rows as Revenue[];
   } catch (error) {
@@ -68,11 +59,12 @@ export async function fetchLatestInvoices() {
       JOIN customers ON invoices.customer_id = customers.id
       ORDER BY invoices.date DESC
       LIMIT 5`;
+
     const latestInvoices = data.rows.map((invoice) => ({
       ...invoice,
       amount: formatCurrency(invoice.amount),
     }));
-    return latestInvoices as LatestInvoice[];
+    return latestInvoices;
   } catch (error) {
     console.error('Failed to fetch the latest invoices:', error);
     throw new Error('Failed to fetch the latest invoices.');
