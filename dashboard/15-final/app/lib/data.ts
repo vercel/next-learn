@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
-import { Revenue, LatestInvoice, Invoice } from './definitions';
+import { Revenue, LatestInvoice, TableInvoice } from './definitions';
 
 export async function fetchRevenue(): Promise<Revenue[]> {
   try {
@@ -79,16 +79,6 @@ export async function fetchLatestInvoices() {
   }
 }
 
-export async function fetchAllInvoices() {
-  const invoicesData = await sql`SELECT * FROM invoices`;
-  return invoicesData.rows;
-}
-
-export async function fetchAllCustomers() {
-  const customersData = await sql`SELECT * FROM customers`;
-  return customersData.rows;
-}
-
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
@@ -139,11 +129,32 @@ export async function fetchFilteredInvoices(
   // console.log(`Found ${paginatedData.rowCount} invoices.`);
 
   return {
-    invoices: paginatedData.rows as Invoice[],
+    invoices: paginatedData.rows as TableInvoice[],
     totalPages,
   };
 }
 
-export async function fetchInvoiceById(id: number | null) {
-  return await sql`SELECT * from INVOICES where id=${id}`;
+export async function fetchInvoiceById(id: number) {
+  const data = await sql`
+  SELECT
+    invoices.id,
+    invoices.amount,
+    invoices.status,
+    customers.name
+  FROM invoices
+  JOIN customers ON invoices.customer_id = customers.id
+  WHERE invoices.id = ${id};
+`;
+  const invoice = data.rows[0];
+  return invoice;
+}
+
+export async function fetchAllInvoices() {
+  const invoicesData = await sql`SELECT * FROM invoices`;
+  return invoicesData.rows;
+}
+
+export async function fetchAllCustomers() {
+  const customersData = await sql`SELECT * FROM customers`;
+  return customersData.rows;
 }

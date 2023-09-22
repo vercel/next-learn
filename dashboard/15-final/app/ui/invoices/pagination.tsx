@@ -16,7 +16,6 @@ export default function Pagination({
   const searchParams = useSearchParams();
 
   const allPages = Array.from({ length: totalPages }, (_, i) => i + 1);
-
   const PreviousPageTag = currentPage === 1 ? 'p' : Link;
   const NextPageTag = currentPage === totalPages ? 'p' : Link;
 

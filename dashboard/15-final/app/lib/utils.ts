@@ -1,4 +1,4 @@
-import { Invoice, Revenue, Customer } from './definitions';
+import { TableInvoice, Revenue, Customer } from './definitions';
 
 export const formatCurrency = (amount: number) => {
   return (amount / 100).toLocaleString('en-US', {
@@ -21,7 +21,10 @@ export const formatDateToLocal = (
   return formatter.format(date);
 };
 
-export function findLatestInvoices(invoices: Invoice[], customers: Customer[]) {
+export function findLatestInvoices(
+  invoices: TableInvoice[],
+  customers: Customer[],
+) {
   // Sort the invoices by date in descending order and take the top 5
   const latestInvoices = [...invoices]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -52,7 +55,7 @@ export function findLatestInvoices(invoices: Invoice[], customers: Customer[]) {
 }
 
 export const calculateInvoicesByStatus = (
-  invoices: Invoice[],
+  invoices: TableInvoice[],
   status: 'pending' | 'paid',
 ) => {
   return invoices
@@ -65,7 +68,7 @@ export const calculateInvoicesByStatus = (
 };
 
 export const calculateCustomerInvoices = (
-  invoices: Invoice[],
+  invoices: TableInvoice[],
   status: 'pending' | 'paid',
   customerId: number,
 ) => {
@@ -80,7 +83,7 @@ export const calculateCustomerInvoices = (
 };
 
 export const countCustomerInvoices = (
-  invoices: Invoice[],
+  invoices: TableInvoice[],
   customerId: number,
 ) => {
   return invoices.filter((invoice) => invoice.customer_id === customerId)

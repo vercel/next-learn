@@ -2,12 +2,12 @@ import {
   countCustomerInvoices,
   calculateCustomerInvoices,
 } from '@/app/lib/utils';
-import { Customer, Invoice } from '@/app/lib/definitions';
+import { Customer, TableInvoice } from '@/app/lib/definitions';
 import { fetchAllCustomers, fetchAllInvoices } from '@/app/lib/data';
 import Image from 'next/image';
 
 export default async function CustomersTable() {
-  const invoices = (await fetchAllInvoices()) as Invoice[];
+  const invoices = (await fetchAllInvoices()) as TableInvoice[];
   const customers = (await fetchAllCustomers()) as Customer[];
 
   return (
