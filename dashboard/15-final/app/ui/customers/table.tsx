@@ -16,19 +16,19 @@ export default async function CustomersTable() {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-50 text-left text-sm">
                   <tr>
-                    <th scope="col" className="px-3.5 py-3.5  sm:pl-6">
+                    <th scope="col" className="px-4 py-4 sm:pl-6">
                       Name
                     </th>
-                    <th scope="col" className="px-3 py-3.5 font-semibold">
+                    <th scope="col" className="px-4 py-4 font-semibold">
                       Email
                     </th>
-                    <th scope="col" className="px-3 py-3.5 font-semibold">
+                    <th scope="col" className="px-4 py-4 font-semibold">
                       Total Invoices
                     </th>
-                    <th scope="col" className="px-3 py-3.5 font-semibold">
+                    <th scope="col" className="px-4 py-4 font-semibold">
                       Total Pending
                     </th>
-                    <th scope="col" className="px-3 py-3.5 font-semibold">
+                    <th scope="col" className="px-4 py-4 font-semibold">
                       Total Paid
                     </th>
                   </tr>
@@ -49,16 +49,16 @@ export default async function CustomersTable() {
                           <p>{customer.name}</p>
                         </div>
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm">
+                      <td className="whitespace-nowrap px-4 py-4 text-sm">
                         {customer.email}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm">
+                      <td className="whitespace-nowrap px-4 py-4 text-sm">
                         {customer.total_invoices}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm">
+                      <td className="whitespace-nowrap px-4 py-4 text-sm">
                         {customer.total_pending}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm">
+                      <td className="whitespace-nowrap px-4 py-4 text-sm">
                         {customer.total_paid}
                       </td>
                     </tr>
