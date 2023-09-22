@@ -4,7 +4,7 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 import { useTransition } from 'react';
 import { deleteInvoice } from '@/app/lib/actions';
 
-export default function DeleteInvoice({ id }: { id: number }) {
+export default function DeleteInvoice({ id }: { id: string }) {
   const [isPending, startTransition] = useTransition();
 
   return (
