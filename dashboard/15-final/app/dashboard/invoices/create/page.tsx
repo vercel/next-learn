@@ -9,6 +9,7 @@ export default async function Page() {
       <h2 className="mb-6 text-xl font-semibold text-gray-900">
         Create Invoice
       </h2>
+
       <form action={createInvoice}>
         {/* Customer */}
         <div className="mb-4">

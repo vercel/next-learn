@@ -22,9 +22,6 @@ export default async function Page({
     currentPage,
   );
 
-  // delay to simulate slow network
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
