@@ -10,6 +10,7 @@ export default async function Page() {
         Create Invoice
       </h2>
       <form action={createInvoice}>
+        {/* Customer */}
         <div className="mb-4">
           <label
             htmlFor="customer"
@@ -24,6 +25,7 @@ export default async function Page() {
             className="block w-full rounded-md border-0 py-1.5 pl-3 text-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-200"
             defaultValue=""
             aria-label="Select Customer"
+            aria-required="true"
             required
           >
             <option value="" disabled>
@@ -37,24 +39,40 @@ export default async function Page() {
           </select>
         </div>
 
+        {/* Amount */}
         <div className="mb-4">
-          <label className="mb-2 block text-sm font-semibold">Amount</label>
+          <label
+            className="mb-2 block text-sm font-semibold"
+            htmlFor="amount"
+            id="amount-label"
+          >
+            Amount
+          </label>
           <div className="relative mt-2 rounded-md shadow-sm">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              <span className="text-gray-600 sm:text-sm">$</span>
+              <span className="text-gray-600 sm:text-sm" aria-hidden="true">
+                $
+              </span>
             </div>
             <input
+              id="amount"
               name="amount"
               type="number"
               step="0.01"
               placeholder="00.00"
               className="block w-full rounded-md border-0 py-1.5 pl-7 text-sm leading-6 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400"
+              aria-describedby="amount-label"
             />
           </div>
         </div>
 
+        {/* Invoice Status */}
         <div className="mb-4">
-          <label className="mb-2 block text-sm font-semibold" htmlFor="status">
+          <label
+            className="mb-2 block text-sm font-semibold"
+            htmlFor="status"
+            id="status-label"
+          >
             Status
           </label>
           <select
@@ -62,15 +80,17 @@ export default async function Page() {
             name="status"
             className="block w-full rounded-md border-0 py-1.5 pl-3 text-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-200"
             defaultValue="pending"
+            aria-describedby="status-label"
           >
             <option value="pending">Pending</option>
             <option value="paid">Paid</option>
           </select>
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className="rounded-md bg-blue-500 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-blue-600"
+          className="rounded-md bg-blue-500 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-blue-600 focus:border-blue-700 focus:outline-none focus:ring focus:ring-blue-200"
         >
           Create
         </button>
