@@ -37,3 +37,14 @@ export type LatestInvoice = {
   email: string;
   amount: string;
 };
+
+export type InvoiceTable = {
+  id: string;
+  customer_id: string;
+  customer_name: string;
+  customer_email: string;
+  customer_image: string;
+  date: string;
+  amount: number;
+  status: 'pending' | 'paid';
+};
