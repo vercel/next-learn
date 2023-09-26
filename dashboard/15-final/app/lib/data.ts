@@ -149,12 +149,14 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
-    return invoice[0] as {
-      id: string;
-      amount: number;
-      status: string;
-      name: string;
-    };
+    return invoice[0] as
+      | {
+          id: string;
+          amount: number;
+          status: string;
+          name: string;
+        }
+      | undefined;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
