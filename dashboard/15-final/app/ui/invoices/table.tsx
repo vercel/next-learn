@@ -2,12 +2,12 @@ import Image from 'next/image';
 import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { InvoiceTable } from '@/app/lib/definitions';
+import { InvoicesTable } from '@/app/lib/definitions';
 
 export default async function InvoicesTable({
   invoices,
 }: {
-  invoices: InvoiceTable[];
+  invoices: InvoicesTable[];
 }) {
   return (
     <div className="mt-4 flow-root">
@@ -43,17 +43,17 @@ export default async function InvoicesTable({
                     <td className="whitespace-nowrap px-6 py-4 text-sm">
                       <div className="flex items-center gap-3">
                         <Image
-                          src={`${invoice.customer_image}`}
+                          src={invoice.image_url}
                           className="rounded-full"
                           alt="Customer Image"
                           width={28}
                           height={28}
                         />
-                        <p>{invoice.customer_name}</p>
+                        <p>{invoice.name}</p>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
-                      {invoice.customer_email}
+                      {invoice.email}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm">
                       {formatCurrency(invoice.amount)}
