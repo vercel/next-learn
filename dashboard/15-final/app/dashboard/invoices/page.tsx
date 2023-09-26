@@ -1,6 +1,6 @@
 import Pagination from '@/app/ui/invoices/pagination';
 import Search from '@/app/ui/invoices/search';
-import CreateInvoice from '@/app/ui/invoices/create-button';
+import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import Table from '@/app/ui/invoices/table';
 import { fetchFilteredInvoices } from '@/app/lib/data';
 
