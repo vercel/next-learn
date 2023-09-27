@@ -39,7 +39,7 @@ export default async function Page() {
 
         {/* Amount */}
         <div className="mb-4">
-          <label className="mb-2 block text-sm font-semibold" htmlFor="amount">
+          <label htmlFor="amount" className="mb-2 block text-sm font-semibold">
             Amount
           </label>
           <div className="relative mt-2 rounded-md shadow-sm">
@@ -59,7 +59,7 @@ export default async function Page() {
 
         {/* Invoice Status */}
         <div className="mb-4">
-          <label className="mb-2 block text-sm font-semibold" htmlFor="status">
+          <label htmlFor="status" className="mb-2 block text-sm font-semibold">
             Status
           </label>
           <select
@@ -78,7 +78,7 @@ export default async function Page() {
           type="submit"
           className="rounded-md bg-blue-500 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-blue-600 focus:border-blue-700 focus:outline-none focus:ring focus:ring-blue-200"
         >
-          Create
+          Create Invoice
         </button>
       </form>
     </main>
