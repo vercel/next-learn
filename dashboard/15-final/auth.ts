@@ -17,7 +17,7 @@ async function getUser(email: string) {
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: 'credentials',
+      name: 'Sign-In with Credentials',
       credentials: {
         password: { label: 'Password', type: 'password' },
         email: { label: 'Email', type: 'email' },
