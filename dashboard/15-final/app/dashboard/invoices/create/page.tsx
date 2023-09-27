@@ -52,6 +52,7 @@ export default async function Page() {
               placeholder="00.00"
               className="block w-full rounded-md border border-gray-200 py-2 pl-6 text-sm outline-2  placeholder:text-gray-200"
               required
+              min="0"
             />
           </div>
         </div>
