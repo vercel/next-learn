@@ -1,15 +1,15 @@
 'use client';
 
 import { createInvoice } from '@/app/lib/actions';
-import { CustomerForm } from '@/app/lib/definitions';
+import { CustomerName } from '@/app/lib/definitions';
 import { experimental_useFormState as useFormState } from 'react-dom';
 
-export default function Form({ customers }: { customers: CustomerForm[] }) {
+export default function Form({ customers }: { customers: CustomerName[] }) {
   const initialState = { message: null, errors: [] };
-  const [state, formAction] = useFormState(createInvoice, initialState);
+  const [state, dispatch] = useFormState(createInvoice, initialState);
 
   return (
-    <form action={formAction}>
+    <form action={dispatch}>
       {/* Customer Name */}
       <div className="mb-4">
         <label htmlFor="customer" className="mb-2 block text-sm font-semibold">

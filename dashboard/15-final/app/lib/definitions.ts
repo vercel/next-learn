@@ -58,7 +58,7 @@ export type CustomersTable = {
   total_paid: string;
 };
 
-export type CustomerForm = {
+export type CustomerName = {
   id: string;
   name: string;
 };
