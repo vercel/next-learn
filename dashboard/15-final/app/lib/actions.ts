@@ -21,7 +21,7 @@ const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ date: true });
 const DeleteInvoice = FormSchema.pick({ id: true });
 
-export async function createInvoice2(prevState: any, formData: FormData) {
+export async function createInvoice(prevState: any, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateInvoice.safeParse({
     customerId: formData.get('customerId'),

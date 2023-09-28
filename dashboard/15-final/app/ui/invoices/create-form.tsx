@@ -1,12 +1,12 @@
 'use client';
 
-import { createInvoice2 } from '@/app/lib/actions';
-import { Customer } from '@/app/lib/definitions';
+import { createInvoice } from '@/app/lib/actions';
+import { CustomerForm } from '@/app/lib/definitions';
 import { experimental_useFormState as useFormState } from 'react-dom';
 
-export default function Form({ customers }: { customers: Customer[] }) {
+export default function Form({ customers }: { customers: CustomerForm[] }) {
   const initialState = { message: null, errors: [] };
-  const [state, formAction] = useFormState(createInvoice2, initialState);
+  const [state, formAction] = useFormState(createInvoice, initialState);
 
   return (
     <form action={formAction}>

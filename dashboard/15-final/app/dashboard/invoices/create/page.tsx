@@ -1,5 +1,5 @@
 import { fetchAllCustomers } from '@/app/lib/data';
-import Form from './form';
+import Form from '@/app/ui/invoices/create-form';
 
 export default async function Page() {
   const customers = await fetchAllCustomers();

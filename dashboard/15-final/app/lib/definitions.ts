@@ -57,3 +57,8 @@ export type CustomersTable = {
   total_pending: string;
   total_paid: string;
 };
+
+export type CustomerForm = {
+  id: string;
+  name: string;
+};
