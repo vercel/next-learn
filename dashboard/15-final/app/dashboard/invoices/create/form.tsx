@@ -36,7 +36,7 @@ export default function Form({ customers }: { customers: Customer[] }) {
           <div
             id="customer-error"
             aria-live="polite"
-            className="mt-2 pl-2 text-sm text-red-500"
+            className="mt-2 text-sm text-red-500"
           >
             {state.errors.customerId.map((error: string) => (
               <p key={error}>{error}</p>
@@ -68,7 +68,7 @@ export default function Form({ customers }: { customers: Customer[] }) {
           <div
             id="amount-error"
             aria-live="polite"
-            className="mt-2 pl-1 text-sm text-red-500"
+            className="mt-2 text-sm text-red-500"
           >
             {state.errors.amount.map((error: string) => (
               <p key={error}>{error}</p>
@@ -97,7 +97,7 @@ export default function Form({ customers }: { customers: Customer[] }) {
           <div
             aria-describedby="status-error"
             aria-live="polite"
-            className="mt-2 pl-1 text-sm text-red-500"
+            className="mt-2 text-sm text-red-500"
           >
             {state.errors.status.map((error: string) => (
               <p key={error}>{error}</p>
@@ -107,15 +107,15 @@ export default function Form({ customers }: { customers: Customer[] }) {
       </div>
 
       {state.message ? (
-        <div aria-live="polite" className="mt-2 pl-1 text-sm text-red-500">
-          {state.message}
+        <div aria-live="polite" className="my-2 text-sm text-red-500">
+          <p>{state.message}</p>
         </div>
       ) : null}
 
       {/* Submit Button */}
       <button
         type="submit"
-        className="rounded-md bg-black px-4 py-2 text-center text-sm text-white outline-2 outline-offset-4 hover:bg-gray-800"
+        className="mt-2 rounded-md bg-black px-4 py-2 text-center text-sm text-white outline-2 outline-offset-4 hover:bg-gray-800"
       >
         Create Invoice
       </button>
