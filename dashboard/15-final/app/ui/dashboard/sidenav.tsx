@@ -1,7 +1,7 @@
-import { PowerIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import Link from 'next/link';
 import NavLinks from '@/app/ui/dashboard/nav-links';
+import LogOutButton from './log-out-button';
 
 export default function SideNav() {
   return (
@@ -18,13 +18,7 @@ export default function SideNav() {
         </Link>
         <NavLinks />
       </div>
-      <Link
-        href="/login"
-        className="flex gap-2 rounded p-2 font-semibold hover:text-blue-600"
-      >
-        <PowerIcon className="w-6" />
-        <div className="hidden md:block">Sign Out</div>
-      </Link>
+      <LogOutButton />
     </div>
   );
 }
