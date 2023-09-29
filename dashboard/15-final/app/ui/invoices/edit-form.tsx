@@ -32,7 +32,7 @@ export default function EditInvoiceForm({
           <select
             id="customer"
             name="customerId"
-            className="block w-full rounded-md border-0 py-1.5 pl-3 text-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-200 focus:ring-blue-200"
+            className="block w-full rounded-md border border-gray-200 py-2 pl-3 text-sm outline-2 placeholder:text-gray-200"
             defaultValue={invoice.name}
             aria-describedby="customer-error"
           >
@@ -71,7 +71,7 @@ export default function EditInvoiceForm({
               step="0.01"
               defaultValue={invoice.amount}
               placeholder="00.00"
-              className="block w-full rounded-md border-0 py-1.5 pl-7 text-sm leading-6 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-blue-200"
+              className="block w-full rounded-md border border-gray-200 py-2 pl-3 text-sm outline-2 placeholder:text-gray-200"
               aria-describedby="amount-error"
             />
           </div>
@@ -97,7 +97,7 @@ export default function EditInvoiceForm({
           <select
             id="status"
             name="status"
-            className="block w-full rounded-md border-0 py-1.5 pl-3 text-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-200 focus:ring-blue-200"
+            className="block w-full rounded-md border border-gray-200 py-2 pl-3 text-sm outline-2 placeholder:text-gray-200"
             defaultValue={invoice.status}
             aria-describedby="status-error"
           >
