@@ -21,6 +21,7 @@ const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ date: true });
 const DeleteInvoice = FormSchema.pick({ id: true });
 
+// This is temporary
 export type State = {
   errors?: {
     customerId?: string[];
@@ -38,7 +39,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
     status: formData.get('status'),
   });
 
-  // If form validation fails, return early. Otherwise, continue.
+  // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -61,21 +62,29 @@ export async function createInvoice(prevState: State, formData: FormData) {
     revalidatePath('/dashboard/invoices');
     redirect('/dashboard/invoices');
   } catch (error) {
-    // If a database error occurs, return a specific error.
+    // If a database error occurs, return a more specific error.
     return {
       message: 'Database error: Failed to create invoice.',
     };
   }
 }
 
-export async function updateInvoice(formData: FormData) {
-  const { id, customerId, amount, status } = UpdateInvoice.parse({
+export async function updateInvoice(prevState: State, formData: FormData) {
+  const validatedFields = UpdateInvoice.safeParse({
     id: formData.get('id'),
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
   });
 
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Invoice.',
+    };
+  }
+
+  const { id, customerId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
 
   try {
@@ -88,7 +97,7 @@ export async function updateInvoice(formData: FormData) {
     revalidatePath('/dashboard/invoices');
     redirect('/dashboard/invoices');
   } catch (error) {
-    throw new Error('Failed to Update Invoice');
+    return { message: 'Database error: Failed to update invoice.' };
   }
 }
 

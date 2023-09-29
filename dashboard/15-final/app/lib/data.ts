@@ -5,6 +5,7 @@ import {
   LatestInvoice,
   InvoicesTable,
   CustomersTable,
+  InvoiceForm,
 } from './definitions';
 
 export async function fetchRevenue() {
@@ -149,21 +150,14 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
-    return invoice[0] as
-      | {
-          id: string;
-          amount: number;
-          status: string;
-          name: string;
-        }
-      | undefined;
+    return invoice[0] as InvoiceForm[];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
   }
 }
 
-export async function fetchAllCustomers() {
+export async function fetchCustomerNames() {
   try {
     const data = await sql`
       SELECT 
