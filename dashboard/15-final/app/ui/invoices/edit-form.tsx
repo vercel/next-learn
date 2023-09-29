@@ -2,6 +2,7 @@
 
 import { CustomerName, InvoiceForm } from '@/app/lib/definitions';
 import { updateInvoice } from '@/app/lib/actions';
+// @ts-ignore React types do not yet include useFormState
 import { experimental_useFormState as useFormState } from 'react-dom';
 
 export default function EditInvoiceForm({

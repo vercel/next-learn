@@ -11,7 +11,6 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
   const { replace } = useRouter();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
