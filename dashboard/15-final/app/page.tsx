@@ -14,10 +14,11 @@ export default function Page() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vulputate
           dapibus consectetur. Duis quis eros euismod.
         </p>
-        <a href="/login">
-          <button className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800">
-            Log in
-          </button>
+        <a
+          href="/login"
+          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800"
+        >
+          Log in
         </a>
       </div>
       <div className="w-full sm:w-1/2">
