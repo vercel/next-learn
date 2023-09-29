@@ -34,7 +34,7 @@ export default function EditInvoiceForm({
             name="customerId"
             className="block w-full rounded-md border-0 py-1.5 pl-3 text-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-200 focus:ring-blue-200"
             defaultValue={invoice.name}
-            aria-label="Select Customer"
+            aria-describedby="customer-error"
           >
             {customerNames.map((name) => (
               <option key={name.id} value={name.id}>
@@ -42,6 +42,18 @@ export default function EditInvoiceForm({
               </option>
             ))}
           </select>
+
+          {state.errors?.customerId ? (
+            <div
+              id="customer-error"
+              aria-live="polite"
+              className="mt-2 text-sm text-red-500"
+            >
+              {state.errors.customerId.map((error: string) => (
+                <p key={error}>{error}</p>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         {/* Invoice amount */}
@@ -60,9 +72,21 @@ export default function EditInvoiceForm({
               defaultValue={invoice.amount}
               placeholder="00.00"
               className="block w-full rounded-md border-0 py-1.5 pl-7 text-sm leading-6 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-blue-200"
-              aria-label="Enter Amount"
+              aria-describedby="amount-error"
             />
           </div>
+
+          {state.errors?.amount ? (
+            <div
+              id="amount-error"
+              aria-live="polite"
+              className="mt-2 text-sm text-red-500"
+            >
+              {state.errors.amount.map((error: string) => (
+                <p key={error}>{error}</p>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         {/* Invoice status */}
@@ -75,18 +99,35 @@ export default function EditInvoiceForm({
             name="status"
             className="block w-full rounded-md border-0 py-1.5 pl-3 text-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-200 focus:ring-blue-200"
             defaultValue={invoice.status}
-            aria-label="Select Status"
+            aria-describedby="status-error"
           >
             <option value="pending">Pending</option>
             <option value="paid">Paid</option>
           </select>
+
+          {state.errors?.status ? (
+            <div
+              aria-describedby="status-error"
+              aria-live="polite"
+              className="mt-2 text-sm text-red-500"
+            >
+              {state.errors.status.map((error: string) => (
+                <p key={error}>{error}</p>
+              ))}
+            </div>
+          ) : null}
         </div>
+
+        {state.message ? (
+          <div aria-live="polite" className="my-2 text-sm text-red-500">
+            <p>{state.message}</p>
+          </div>
+        ) : null}
 
         {/* Submit button */}
         <button
           type="submit"
-          className="rounded-md bg-blue-500 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          aria-label="Update Invoice"
+          className="mt-2 rounded-md bg-black px-4 py-2 text-center text-sm text-white outline-2 outline-offset-4 hover:bg-gray-800"
         >
           Update Invoice
         </button>

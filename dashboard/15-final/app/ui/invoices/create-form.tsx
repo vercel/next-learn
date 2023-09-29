@@ -73,6 +73,7 @@ export default function Form({
               aria-describedby="amount-error"
             />
           </div>
+
           {state.errors?.amount ? (
             <div
               id="amount-error"
