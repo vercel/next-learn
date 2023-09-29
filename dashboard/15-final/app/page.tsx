@@ -16,7 +16,7 @@ export default function Page() {
         </p>
         <a
           href="/login"
-          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800"
+          className="rounded-md bg-black px-4 py-2 text-center text-sm text-white outline-2 outline-offset-4 hover:bg-gray-800"
         >
           Log in
         </a>

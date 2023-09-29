@@ -12,7 +12,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const router = useRouter();
+  const { replace } = useRouter();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ export default function LoginForm() {
         return;
       }
 
-      router.replace('dashboard');
+      replace('/dashboard');
     } catch (error) {
       console.log(error);
     }
