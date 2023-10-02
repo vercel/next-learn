@@ -27,9 +27,7 @@ export default function Card({
     <div className="rounded-xl border bg-white p-6 shadow-sm">
       <div className="flex justify-between ">
         <h3 className="text-sm font-medium">{title}</h3>
-        {Icon ? (
-          <Icon className="h-5 w-5 text-gray-700" aria-label={type} />
-        ) : null}
+        {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
       </div>
       <p className="mt-2 truncate text-2xl font-semibold tracking-wide md:text-3xl">
         {value}

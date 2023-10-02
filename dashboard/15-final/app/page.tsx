@@ -14,14 +14,18 @@ export default function Page() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vulputate
           dapibus consectetur. Duis quis eros euismod.
         </p>
-        <a href="/login">
-          <button className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800">
-            Log in
-          </button>
+        <a
+          href="/login"
+          className="rounded-md bg-black px-4 py-2 text-center text-sm text-white outline-2 outline-offset-4 hover:bg-gray-800"
+        >
+          Log in
         </a>
       </div>
       <div className="w-full sm:w-1/2">
-        <Image src={HeroImage} alt="Dashboard Hero Image" />
+        <Image
+          src={HeroImage}
+          alt="A collection of UI elements from the dashboard application."
+        />
       </div>
     </main>
   );

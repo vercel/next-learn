@@ -2,9 +2,11 @@ import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
 import {
   Revenue,
-  LatestInvoice,
   InvoicesTable,
   CustomersTable,
+  InvoiceForm,
+  CustomerName,
+  LatestInvoiceRaw,
 } from './definitions';
 
 export async function fetchRevenue() {
@@ -14,11 +16,11 @@ export async function fetchRevenue() {
     // console.log('Fetching revenue data...');
     // await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const data = await sql`SELECT * FROM revenue`;
+    const data = await sql<Revenue>`SELECT * FROM revenue`;
 
     // console.log('Data fetch complete after 3 seconds.');
 
-    return data.rows as Revenue[];
+    return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch revenue data.');
@@ -58,7 +60,7 @@ export async function fetchTotalAmountByStatus() {
 
 export async function fetchLatestInvoices() {
   try {
-    const data = await sql`
+    const data = await sql<LatestInvoiceRaw>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email 
       FROM invoices 
       JOIN customers ON invoices.customer_id = customers.id
@@ -69,7 +71,7 @@ export async function fetchLatestInvoices() {
       ...invoice,
       amount: formatCurrency(invoice.amount),
     }));
-    return latestInvoices as LatestInvoice[];
+    return latestInvoices;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
@@ -84,7 +86,7 @@ export async function fetchFilteredInvoices(
   const offset = (currentPage - 1) * itemsPerPage;
 
   try {
-    const data = await sql`
+    const data = await sql<InvoicesTable>`
       SELECT
         invoices.id,
         invoices.amount,
@@ -121,7 +123,7 @@ export async function fetchFilteredInvoices(
     const totalPages = Math.ceil(totalRecords / itemsPerPage);
 
     return {
-      invoices: data.rows as InvoicesTable[],
+      invoices: data.rows,
       totalPages,
     };
   } catch (error) {
@@ -132,7 +134,7 @@ export async function fetchFilteredInvoices(
 
 export async function fetchInvoiceById(id: string) {
   try {
-    const data = await sql`
+    const data = await sql<InvoiceForm>`
       SELECT
         invoices.id,
         invoices.amount,
@@ -149,23 +151,16 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
-    return invoice[0] as
-      | {
-          id: string;
-          amount: number;
-          status: string;
-          name: string;
-        }
-      | undefined;
+    return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
   }
 }
 
-export async function fetchAllCustomers() {
+export async function fetchCustomerNames() {
   try {
-    const data = await sql`
+    const data = await sql<CustomerName>`
       SELECT 
         id,
         name
@@ -174,7 +169,7 @@ export async function fetchAllCustomers() {
     `;
 
     const customers = data.rows;
-    return customers as { id: string; name: string }[];
+    return customers;
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch all customers.');
@@ -183,7 +178,7 @@ export async function fetchAllCustomers() {
 
 export async function fetchCustomersTable() {
   try {
-    const data = await sql`
+    const data = await sql<CustomersTable>`
       SELECT 
         customers.id,
         customers.name,
@@ -204,7 +199,7 @@ export async function fetchCustomersTable() {
       total_paid: formatCurrency(customer.total_paid),
     }));
 
-    return customers as CustomersTable[];
+    return customers;
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch customer table.');
