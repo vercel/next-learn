@@ -1,6 +1,8 @@
 import { generateYAxis } from '@/app/lib/utils';
 import { fetchRevenue } from '@/app/lib/data';
 import { CalendarIcon } from '@heroicons/react/24/outline';
+import { lusitana } from '@/app/lib/fonts.js';
+import clsx from 'clsx';
 // This component is representational only.
 // For data visualization UI, check out:
 // https://www.tremor.so/
@@ -19,7 +21,9 @@ export default async function RevenueChart() {
 
   return (
     <div className="w-full md:col-span-4">
-      <h2 className="mb-4 text-xl md:text-2xl">Recent Revenue</h2>
+      <h2 className={clsx(lusitana.className, 'mb-4 text-xl md:text-2xl')}>
+        Recent Revenue
+      </h2>
       <div className="rounded-xl bg-gray-50 p-4">
         <div className="sm:grid-cols-13 mt-0 grid grid-cols-12 items-end gap-2 rounded-md bg-white p-4 md:gap-4">
           {/* y-axis */}
