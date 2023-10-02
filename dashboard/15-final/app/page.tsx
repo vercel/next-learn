@@ -1,6 +1,7 @@
 import BackgroundBlur from '@/app/ui/background-blur';
 import Image from 'next/image';
 import HeroImage from '@/public/hero.png';
+import Link from 'next/link';
 
 export default function Page() {
   return (
@@ -8,24 +9,22 @@ export default function Page() {
       <div className="min-w-xl my-8 flex flex-col items-start gap-4 px-4 lg:max-w-xl lg:gap-6">
         <BackgroundBlur />
         <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Next.js Dashboard
+          Acme
         </h1>
         <p className="leading-6 text-gray-900">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vulputate
-          dapibus consectetur. Duis quis eros euismod.
+          Welcome to Acme. This demo is part of the{' '}
+          <a href="https://nextjs.org/learn/">Next.js Learn</a> guide, brought
+          to you by Vercel.
         </p>
-        <a
+        <Link
           href="/login"
-          className="rounded-md bg-black px-4 py-2 text-center text-sm text-white outline-2 outline-offset-4 hover:bg-gray-800"
+          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800"
         >
           Log in
-        </a>
+        </Link>
       </div>
       <div className="w-full sm:w-1/2">
-        <Image
-          src={HeroImage}
-          alt="A collection of UI elements from the dashboard application."
-        />
+        <Image src={HeroImage} alt="Dashboard Hero" />
       </div>
     </main>
   );
