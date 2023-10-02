@@ -13,8 +13,8 @@ export default function Page() {
         </h1>
         <p className="leading-6 text-gray-900">
           Welcome to Acme. This demo is part of the{' '}
-          <Link href="https://nextjs.org/learn/">Next.js Learn</Link> guide,
-          brought to you by Vercel.
+          <a href="https://nextjs.org/learn/">Next.js Learn</a> guide, brought
+          to you by Vercel.
         </p>
         <Link
           href="/login"
