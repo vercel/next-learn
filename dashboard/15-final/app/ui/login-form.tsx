@@ -1,8 +1,10 @@
 'use client';
 
+import Link from 'next/link';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import BackgroundBlur from '@/app/ui/background-blur';
 import React, { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 
 // This component contains basic logic for a React Form.
@@ -12,11 +14,30 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(`Email: ${email}, Password: ${password}`);
-  };
+  const [error, setError] = useState('');
 
+  const router = useRouter();
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    try {
+      const res = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res?.error) {
+        setError('Invalid Credentials');
+        return;
+      }
+
+      router.replace('dashboard');
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="relative mx-auto mt-40 p-4">
       <BackgroundBlur />
@@ -64,6 +85,11 @@ export default function LoginForm() {
               >
                 Log in
               </button>
+              {error && (
+                <div className="mt-2 w-fit rounded-md bg-red-500 px-3 py-1 text-sm text-white">
+                  {error}
+                </div>
+              )}
             </div>
           </form>
         </div>
