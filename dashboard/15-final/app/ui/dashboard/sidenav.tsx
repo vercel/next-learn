@@ -7,7 +7,7 @@ export default function SideNav() {
   return (
     <div className="flex h-full flex-col border-r px-2 py-4">
       <Link
-        className="flex h-20 items-end rounded-md bg-blue-600 p-4 md:h-40"
+        className="mb-2 flex h-20 items-end rounded-md bg-blue-600 p-4 md:h-40"
         href="/"
       >
         <Image
@@ -17,7 +17,7 @@ export default function SideNav() {
           height={100}
         />
       </Link>
-      <div className="flex grow flex-row justify-between space-x-2 md:flex-col">
+      <div className="flex grow flex-row justify-between space-x-2 space-y-2 md:flex-col md:space-x-0">
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
         <LogOutButton />
