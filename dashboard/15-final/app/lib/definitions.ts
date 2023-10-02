@@ -1,5 +1,5 @@
 // This file contains type definitions for you data.
-// These describe the shape of the data, and what data type each property should accept.
+// It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.
 // However, you're using an ORM such as Prisma, these types are generated automatically.
 export type User = {
@@ -39,7 +39,7 @@ export type LatestInvoice = {
   amount: string;
 };
 
-// the database returns a number for amount, but we later format it to a string with the formatCurrency function
+// The database returns a number for amount, but we later format it to a string with the formatCurrency function
 export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
   amount: number;
 };

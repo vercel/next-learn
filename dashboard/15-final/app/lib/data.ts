@@ -2,7 +2,6 @@ import { sql } from '@vercel/postgres';
 import { formatCurrency } from './utils';
 import {
   Revenue,
-  LatestInvoice,
   InvoicesTable,
   CustomersTable,
   InvoiceForm,
