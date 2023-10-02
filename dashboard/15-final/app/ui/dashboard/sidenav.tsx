@@ -10,7 +10,7 @@ export default function SideNav() {
         <Link href="/">
           <Image
             src="/logo.png"
-            alt="Logo"
+            alt="The Next.js Symbol, a white N inside a black circle"
             className="mb-4 ml-1"
             width={32}
             height={32}
