@@ -47,16 +47,18 @@ async function seedUsers() {
 
 async function seedInvoices() {
   try {
+    await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
     // Create the "invoices" table if it doesn't exist
     const createTable = await sql`
-      CREATE TABLE IF NOT EXISTS invoices (
-        id SERIAL PRIMARY KEY,
-        customer_id INT NOT NULL,
-        amount INT NOT NULL,
-        status VARCHAR(255) NOT NULL,
-        date DATE NOT NULL
-      );
-    `;
+    CREATE TABLE IF NOT EXISTS invoices (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    customer_id UUID NOT NULL,
+    amount INT NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    date DATE NOT NULL
+  );
+`;
 
     console.log(`Created "invoices" table`);
 
@@ -64,8 +66,8 @@ async function seedInvoices() {
     const insertedInvoices = await Promise.all(
       invoices.map(
         (invoice) => sql`
-        INSERT INTO invoices (id, customer_id, amount, status, date)
-        VALUES (${invoice.id}, ${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
+        INSERT INTO invoices (customer_id, amount, status, date)
+        VALUES (${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
         ON CONFLICT (id) DO NOTHING;
       `,
       ),
@@ -85,10 +87,12 @@ async function seedInvoices() {
 
 async function seedCustomers() {
   try {
-    // Create the "invoices" table if it doesn't exist
+    await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    // Create the "customers" table if it doesn't exist
     const createTable = await sql`
       CREATE TABLE IF NOT EXISTS customers (
-        id SERIAL PRIMARY KEY,
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
         image_url VARCHAR(255) NOT NULL

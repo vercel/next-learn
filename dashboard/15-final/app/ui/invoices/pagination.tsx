@@ -1,32 +1,29 @@
 'use client';
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
-export default function PaginationButtons({
-  totalPages,
+export default function Pagination({
   currentPage,
-  searchParams,
+  totalPages,
 }: {
-  totalPages: number;
   currentPage: number;
-  searchParams: { query: string; page: string };
+  totalPages: number;
 }) {
   const pathname = usePathname();
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const searchParams = useSearchParams();
 
-  const createPageUrl = (pageNumber: number) => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    newSearchParams.set('page', pageNumber.toString());
-    return `${pathname}?${newSearchParams.toString()}`;
-  };
-
+  const allPages = Array.from({ length: totalPages }, (_, i) => i + 1);
   const PreviousPageTag = currentPage === 1 ? 'p' : Link;
   const NextPageTag = currentPage === totalPages ? 'p' : Link;
+
+  const createPageUrl = (pageNumber: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('page', pageNumber.toString());
+    return `${pathname}?${params.toString()}`;
+  };
 
   return (
     <div className="inline-flex -space-x-px">
@@ -41,7 +38,7 @@ export default function PaginationButtons({
       >
         <ChevronLeftIcon className="w-4" />
       </PreviousPageTag>
-      {pageNumbers.map((page) => {
+      {allPages.map((page) => {
         const PageTag = page === currentPage ? 'p' : Link;
         return (
           <PageTag
