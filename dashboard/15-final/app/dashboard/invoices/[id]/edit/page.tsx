@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
 import { fetchInvoiceById, fetchAllCustomers } from '@/app/lib/data';
 import { updateInvoice } from '@/app/lib/actions';
+import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
