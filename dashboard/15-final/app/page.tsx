@@ -31,7 +31,7 @@ export default function Page() {
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:p-24">
           <Image
-            src="/hero-1.png"
+            src="/hero.png"
             width={1000}
             height={760}
             alt="Dashboard Hero"
