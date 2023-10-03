@@ -7,7 +7,7 @@ import {
   fetchTotalAmountByStatus,
 } from '@/app/lib/data';
 import { Suspense } from 'react';
-import { RevenueChartSkeleton } from '@/app/ui/skeletons';
+import { RevenueChartSkeleton } from '@/app/ui/dashboard/skeletons';
 
 export const dynamic = 'force-dynamic';
 
