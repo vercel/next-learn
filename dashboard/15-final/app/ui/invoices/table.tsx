@@ -51,37 +51,22 @@ export default async function InvoicesTable({
                 </div>
               ))}
             </div>
-            <table className="hidden min-w-full rounded-md bg-white md:table">
-              <thead className="rounded-md bg-gray-50 text-left text-sm">
+            <table className="hidden min-w-full rounded-md bg-white text-gray-900 md:table">
+              <thead className="rounded-md bg-gray-50 text-left text-sm font-normal">
                 <tr>
-                  <th
-                    scope="col"
-                    className="px-6 pb-4 font-normal text-gray-900"
-                  >
+                  <th scope="col" className="px-6 pb-4">
                     Customer
                   </th>
-                  <th
-                    scope="col"
-                    className="px-3 pb-4 font-normal text-gray-900"
-                  >
+                  <th scope="col" className="px-3 pb-4">
                     Email
                   </th>
-                  <th
-                    scope="col"
-                    className="px-3 pb-4 font-normal text-gray-900"
-                  >
+                  <th scope="col" className="px-3 pb-4">
                     Amount
                   </th>
-                  <th
-                    scope="col"
-                    className="px-3 pb-4 font-normal text-gray-900"
-                  >
+                  <th scope="col" className="px-3 pb-4">
                     Date
                   </th>
-                  <th
-                    scope="col"
-                    className="px-3 pb-4 font-normal text-gray-900"
-                  >
+                  <th scope="col" className="px-3 pb-4">
                     Status
                   </th>
                   <th scope="col" className="relative pb-4 pl-3 pr-6 sm:pr-6">
@@ -89,7 +74,7 @@ export default async function InvoicesTable({
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 text-gray-900">
+              <tbody className="divide-y divide-gray-200">
                 {invoices?.map((invoice) => (
                   <tr key={invoice.id} className="w-full">
                     <td className="whitespace-nowrap px-6 py-5">
