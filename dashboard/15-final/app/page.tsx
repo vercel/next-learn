@@ -31,11 +31,10 @@ export default function Page() {
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:p-24">
           <Image
-            src="/hero.png"
+            src="/hero-1.png"
             width={1000}
             height={760}
             alt="Dashboard Hero"
-            quality={100}
             className="hidden md:block"
           />
           <Image
@@ -43,7 +42,6 @@ export default function Page() {
             width={436}
             height={604}
             alt="Dashboard Hero"
-            quality={100}
             className="block md:hidden"
           />
         </div>
