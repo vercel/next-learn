@@ -2,7 +2,7 @@ import { LatestInvoice } from '@/app/lib/definitions';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { lusitana } from '@/app/ui/fonts.js';
+import { lusitana } from '@/app/ui/fonts';
 
 export default async function LatestInvoices({
   latestInvoices,
@@ -20,9 +20,12 @@ export default async function LatestInvoices({
             return (
               <div
                 key={invoice.id}
-            className={clsx('flex flex-row items-center justify-between py-4', {
-               'border-t': i !== 0,
-            })}
+                className={clsx(
+                  'flex flex-row items-center justify-between py-4',
+                  {
+                    'border-t': i !== 0,
+                  },
+                )}
               >
                 <div className="flex items-center">
                   <Image
