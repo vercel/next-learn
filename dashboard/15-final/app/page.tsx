@@ -29,21 +29,21 @@ export default function Page() {
             <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
         </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:p-12">
+        <div className="flex items-center justify-center p-6 md:w-3/5 md:p-24">
           <Image
             src="/hero.png"
-            height={1000}
-            width={760}
+            width={1000}
+            height={760}
             alt="Dashboard Hero"
-            quality={95}
+            quality={100}
             className="hidden md:block"
           />
           <Image
             src="/hero-mobile.png"
+            width={436}
             height={604}
-            width={440}
             alt="Dashboard Hero"
-            quality={95}
+            quality={100}
             className="block md:hidden"
           />
         </div>
