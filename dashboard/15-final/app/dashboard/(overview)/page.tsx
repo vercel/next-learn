@@ -7,6 +7,7 @@ import {
   fetchTotalAmountByStatus,
 } from '@/app/lib/data';
 import { Suspense } from 'react';
+import { lusitana } from '@/app/ui/fonts';
 import { RevenueChartSkeleton } from '@/app/ui/dashboard/skeletons';
 
 export const dynamic = 'force-dynamic';
@@ -19,6 +20,9 @@ export default async function Page() {
 
   return (
     <main>
+      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+        Dashboard
+      </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <Card title="Collected" value={totalPaidInvoices} type="collected" />
         <Card title="Pending" value={totalPendingInvoices} type="pending" />
