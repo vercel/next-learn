@@ -7,9 +7,9 @@ import {
   fetchTotalAmountByStatus,
 } from '@/app/lib/data';
 import { Suspense } from 'react';
-import { RevenueChartSkeleton } from '@/app/ui/skeletons';
 import { lusitana } from '@/app/ui/fonts.js';
-import clsx from 'clsx';
+import { RevenueChartSkeleton } from '@/app/ui/dashboard/skeletons';
+
 export const dynamic = 'force-dynamic';
 
 export default async function Page() {

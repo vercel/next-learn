@@ -1,30 +1,50 @@
-import BackgroundBlur from '@/app/ui/background-blur';
+import AcmeLogo from '@/app/ui/acme-logo';
+import { lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
-import HeroImage from '@/public/hero.png';
 import Link from 'next/link';
-
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
 export default function Page() {
   return (
-    <main className="flex flex-col gap-4 lg:h-screen lg:flex-row lg:items-center lg:justify-end">
-      <div className="min-w-xl my-8 flex flex-col items-start gap-4 px-4 lg:max-w-xl lg:gap-6">
-        <BackgroundBlur />
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Acme
-        </h1>
-        <p className="leading-6 text-gray-900">
-          Welcome to Acme. This demo is part of the{' '}
-          <a href="https://nextjs.org/learn/">Next.js Learn</a> guide, brought
-          to you by Vercel.
-        </p>
-        <Link
-          href="/login"
-          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-gray-800"
-        >
-          Log in
-        </Link>
+    <main className="flex min-h-screen flex-col p-6">
+      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-600 p-4 md:h-52">
+        <div className="w-32 text-white md:w-48">
+          <AcmeLogo />
+        </div>
       </div>
-      <div className="w-full sm:w-1/2">
-        <Image src={HeroImage} alt="Dashboard Hero" />
+      <div className="mt-4 flex h-full min-h-[500px] grow flex-col gap-4 md:flex-row">
+        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
+          <p
+            className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
+          >
+            <strong>Welcome to Acme.</strong> This is the example for the{' '}
+            <a href="https://nextjs.org/learn/" className="text-blue-500">
+              Next.js Learn Course
+            </a>
+            , brought to you by Vercel.
+          </p>
+          <Link
+            href="/login"
+            className="flex items-center gap-5 self-start rounded-lg bg-blue-600 px-6 py-3 text-sm text-white md:text-base"
+          >
+            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
+          </Link>
+        </div>
+        <div className="flex items-center justify-center p-6 md:w-3/5 md:p-24">
+          <Image
+            src="/hero.png"
+            width={1000}
+            height={760}
+            alt="Dashboard Hero"
+            className="hidden md:block"
+          />
+          <Image
+            src="/hero-mobile.png"
+            width={436}
+            height={604}
+            alt="Dashboard Hero"
+            className="block md:hidden"
+          />
+        </div>
       </div>
     </main>
   );
