@@ -5,7 +5,7 @@ import AcmeLogo from '../acme-logo';
 
 export default function SideNav() {
   return (
-    <div className="flex h-full flex-col border-r px-2 py-4">
+    <div className="flex h-full flex-col px-2 py-4">
       <Link
         className="mb-2 flex h-20 items-end justify-center rounded-md bg-blue-600 p-4 md:h-40 md:justify-start"
         href="/"
