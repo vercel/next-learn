@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import BackgroundBlur from '@/app/ui/background-blur';
 import React, { useState } from 'react';
 import Image from 'next/image';
 
@@ -35,8 +34,6 @@ export default function LoginForm() {
   };
   return (
     <div className="relative mx-auto mt-40 p-4">
-      <BackgroundBlur />
-
       <div className="mx-auto flex w-full flex-col items-center space-y-2 rounded-xl border bg-white px-4 py-6 shadow-sm sm:max-w-sm sm:space-y-4 sm:px-8 sm:py-12">
         <Link href="/">
           <Image
