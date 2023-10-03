@@ -28,7 +28,7 @@ export default function Form({
       <nav aria-label="Breadcrumb" className="mb-6 block">
         <ol className={clsx(lusitana.className, 'flex text-2xl')}>
           <li aria-current="false" className="text-gray-500">
-            <Link href="/invoices">Invoices</Link>
+            <Link href="/dashboard/invoices">Invoices</Link>
             <span className="mx-3 inline-block">/</span>
           </li>
           <li aria-current="true">
@@ -174,7 +174,7 @@ export default function Form({
         </div>
         <div className="mt-6 flex justify-end gap-4">
           <Link
-            href="/invoices"
+            href="/dashboard/invoices"
             className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
           >
             Cancel
