@@ -43,14 +43,14 @@ export default function LoginForm() {
           <Logo />
         </div>
         <form onSubmit={handleSubmit} className="space-y-3">
-          <div className="flex-1 rounded-lg bg-gray-50 px-3 pb-6 pt-4">
-            <h1 className={clsx(lusitana.className, 'mb-3 ml-3 text-2xl')}>
+          <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-6 pt-5">
+            <h1 className={clsx(lusitana.className, 'mb-3 text-2xl')}>
               Please log in to continue.
             </h1>
             <div className="w-full">
               <div>
                 <label
-                  className="ml-3 block text-xs font-medium leading-8 text-gray-900"
+                  className="mb-3 mt-5 block text-xs font-medium text-gray-900"
                   htmlFor="email"
                 >
                   Email
@@ -69,7 +69,7 @@ export default function LoginForm() {
               </div>
               <div className="mt-4">
                 <label
-                  className="ml-3 block text-xs font-medium leading-8 text-gray-900"
+                  className="mb-3 mt-5 block text-xs font-medium text-gray-900"
                   htmlFor="password"
                 >
                   Password
