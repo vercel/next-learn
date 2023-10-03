@@ -1,10 +1,14 @@
 'use client';
 
-import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import Image from 'next/image';
+import { lusitana } from '@/app/ui/fonts';
+import clsx from 'clsx';
+import { AtSymbolIcon, KeyIcon } from '@heroicons/react/24/outline';
+import { Button } from './button';
+import { ArrowRightIcon } from '@heroicons/react/20/solid';
+import { Logo } from './logo';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -33,65 +37,69 @@ export default function LoginForm() {
     }
   };
   return (
-    <div className="relative mx-auto mt-40 p-4">
-      <div className="mx-auto flex w-full flex-col items-center space-y-2 rounded-xl border bg-white px-4 py-6 shadow-sm sm:max-w-sm sm:space-y-4 sm:px-8 sm:py-12">
-        <Link href="/">
-          <Image
-            width={40}
-            height={40}
-            src="/logo.png"
-            alt="The Next.js Symbol, a white N inside a black circle"
-          />
-        </Link>
-        <div className="w-full">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label
-                className="block text-sm font-medium leading-8 text-gray-900"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                className="block w-full rounded-md border border-gray-200 py-2 pl-3 text-sm outline-2 placeholder:text-gray-200"
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="mt-4">
-              <label
-                className="block text-sm font-medium leading-8 text-gray-900"
-                htmlFor="password"
-              >
-                Password
-              </label>
-              <input
-                className="block w-full rounded-md border border-gray-200 py-2 pl-3 text-sm outline-2 placeholder:text-gray-200"
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            {error && (
-              <p
-                aria-live="polite"
-                className="mt-4 w-fit rounded-md py-1 text-sm text-red-500"
-              >
-                {error}
-              </p>
-            )}
-
-            <button
-              className="mt-7 w-full rounded-md bg-black px-4 py-2 text-center text-sm text-white outline-2 outline-offset-4 hover:bg-gray-800"
-              type="submit"
-            >
-              Log in
-            </button>
-          </form>
+    <div className="flex items-center justify-center md:h-screen">
+      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
+        <div className="flex h-36 w-full items-end rounded-lg bg-blue-600 p-3">
+          <Logo />
         </div>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-6 pt-5">
+            <h1 className={clsx(lusitana.className, 'mb-3 text-2xl')}>
+              Please log in to continue.
+            </h1>
+            <div className="w-full">
+              <div>
+                <label
+                  className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <div className="relative">
+                  <input
+                    className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <AtSymbolIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                </div>
+              </div>
+              <div className="mt-4">
+                <label
+                  className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                    id="password"
+                    type="password"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <KeyIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                </div>
+              </div>
+              {error && (
+                <p
+                  aria-live="polite"
+                  className="mt-4 w-fit rounded-md py-1 text-sm text-red-500"
+                >
+                  {error}
+                </p>
+              )}
+            </div>
+          </div>
+          <Button className="w-full" type="submit">
+            Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+          </Button>
+        </form>
       </div>
     </div>
   );
