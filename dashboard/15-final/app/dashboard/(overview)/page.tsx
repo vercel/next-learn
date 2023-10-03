@@ -8,7 +8,7 @@ import {
 } from '@/app/lib/data';
 import { Suspense } from 'react';
 import { RevenueChartSkeleton } from '@/app/ui/skeletons';
-import { lusitana } from '@/app/lib/fonts.js';
+import { lusitana } from '@/app/ui/fonts.js';
 import clsx from 'clsx';
 export const dynamic = 'force-dynamic';
 
