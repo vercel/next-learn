@@ -124,7 +124,7 @@ export default function Form({
                 <div className="flex items-center">
                   <input
                     id="pending"
-                    name="pending"
+                    name="status"
                     type="radio"
                     value="pending"
                     className="h-4 w-4 border-gray-300 bg-gray-100 text-gray-600 focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-gray-600"
@@ -139,7 +139,7 @@ export default function Form({
                 <div className="flex items-center">
                   <input
                     id="paid"
-                    name="paid"
+                    name="status"
                     type="radio"
                     value="paid"
                     className="h-4 w-4 border-gray-300 bg-gray-100 text-gray-600 focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-gray-600"

@@ -129,7 +129,7 @@ export default function EditInvoiceForm({
                 <div className="flex items-center">
                   <input
                     id="pending"
-                    name="pending"
+                    name="status"
                     type="radio"
                     value="pending"
                     defaultChecked={invoice.status === 'pending'}
@@ -145,7 +145,7 @@ export default function EditInvoiceForm({
                 <div className="flex items-center">
                   <input
                     id="paid"
-                    name="paid"
+                    name="status"
                     type="radio"
                     value="paid"
                     defaultChecked={invoice.status === 'paid'}
