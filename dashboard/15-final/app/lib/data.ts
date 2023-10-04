@@ -82,7 +82,7 @@ export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
 ) {
-  const itemsPerPage = 10;
+  const itemsPerPage = 6;
   const offset = (currentPage - 1) * itemsPerPage;
 
   try {
