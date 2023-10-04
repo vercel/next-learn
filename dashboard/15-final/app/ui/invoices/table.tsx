@@ -27,11 +27,11 @@ export default async function InvoicesTable({
     }
   `;
   return (
-    <div className="mt-4 flow-root">
+    <div className="mt-6 flow-root">
       <style>{styles}</style>
       <div>
         <div className="inline-block min-w-full align-middle">
-          <div className="rounded-lg bg-gray-50 p-2">
+          <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
             <div className="md:hidden">
               {invoices?.map((invoice) => (
                 <div
@@ -70,21 +70,21 @@ export default async function InvoicesTable({
               ))}
             </div>
             <table className="hidden min-w-full text-gray-900 md:table">
-              <thead className="rounded-lg  text-left text-sm font-normal">
+              <thead className="rounded-lg text-left text-sm font-normal">
                 <tr>
-                  <th scope="col" className="px-6 pb-4 pt-2">
+                  <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                     Customer
                   </th>
-                  <th scope="col" className="px-3 pb-4 pt-2">
+                  <th scope="col" className="px-3 py-5 font-medium">
                     Email
                   </th>
-                  <th scope="col" className="px-3 pb-4 pt-2">
+                  <th scope="col" className="px-3 py-5 font-medium">
                     Amount
                   </th>
-                  <th scope="col" className="px-3 pb-4 pt-2">
+                  <th scope="col" className="px-3 py-5 font-medium">
                     Date
                   </th>
-                  <th scope="col" className="px-3 pb-4 pt-2">
+                  <th scope="col" className="px-3 py-5 font-medium">
                     Status
                   </th>
                   <th
@@ -97,7 +97,10 @@ export default async function InvoicesTable({
               </thead>
               <tbody className="bg-white">
                 {invoices?.map((invoice) => (
-                  <tr key={invoice.id} className="w-full">
+                  <tr
+                    key={invoice.id}
+                    className="w-full border-b text-sm last-of-type:border-none"
+                  >
                     <td className="whitespace-nowrap px-6 py-5">
                       <div className="flex items-center gap-3">
                         <Image
@@ -110,19 +113,19 @@ export default async function InvoicesTable({
                         <p>{invoice.name}</p>
                       </div>
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4">
+                    <td className="whitespace-nowrap px-3 py-3">
                       {invoice.email}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4">
+                    <td className="whitespace-nowrap px-3 py-3">
                       {formatCurrency(invoice.amount)}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4">
+                    <td className="whitespace-nowrap px-3 py-3">
                       {formatDateToLocal(invoice.date)}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4">
+                    <td className="whitespace-nowrap px-3 py-3">
                       <InvoiceStatus status={invoice.status} />
                     </td>
-                    <td className="flex justify-end gap-2 whitespace-nowrap px-6 py-4">
+                    <td className="flex justify-end gap-2 whitespace-nowrap px-6 py-3">
                       <UpdateInvoice id={invoice.id} />
                       <DeleteInvoice id={invoice.id} />
                     </td>
