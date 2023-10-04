@@ -3,10 +3,8 @@
 import { createInvoice } from '@/app/lib/actions';
 import { CustomerName } from '@/app/lib/definitions';
 import Link from 'next/link';
-import { lusitana } from '@/app/ui/fonts';
 // @ts-ignore React types do not yet include useFormState
 import { experimental_useFormState as useFormState } from 'react-dom';
-import { clsx } from 'clsx';
 import {
   CheckIcon,
   ClockIcon,
@@ -14,6 +12,7 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '../button';
+import { Breadcrumbs } from './breadcrumbs';
 
 export default function Form({
   customerNames,
@@ -25,17 +24,16 @@ export default function Form({
 
   return (
     <div>
-      <nav aria-label="Breadcrumb" className="mb-6 block">
-        <ol className={clsx(lusitana.className, 'flex text-2xl')}>
-          <li aria-current="false" className="text-gray-500">
-            <Link href="/dashboard/invoices">Invoices</Link>
-            <span className="mx-3 inline-block">/</span>
-          </li>
-          <li aria-current="true">
-            <Link href="/invoices/create">Create</Link>
-          </li>
-        </ol>
-      </nav>
+      <Breadcrumbs
+        breadcrumbs={[
+          { label: 'Invoices', href: '/dashboard/invoices' },
+          {
+            label: 'Create Invoice',
+            href: '/dashboard/invoices/create',
+            active: true,
+          },
+        ]}
+      />
       <form action={dispatch}>
         <div className="rounded-md bg-gray-50 p-6">
           {/* Customer Name */}
