@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import NavLinks from '@/app/ui/dashboard/nav-links';
 import LogOutButton from './log-out-button';
-import LogoIcon from './logo-icon';
+import AcmeLogo from '../acme-logo';
 
 export default function SideNav() {
   return (
@@ -11,9 +10,9 @@ export default function SideNav() {
         className="mb-2 flex h-20 items-end justify-center rounded-md bg-blue-600 p-4 md:h-40 md:justify-start"
         href="/"
       >
-        <span className="h-8">
-          <LogoIcon />
-        </span>
+        <div className="w-32 text-white md:w-40">
+          <AcmeLogo />
+        </div>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />

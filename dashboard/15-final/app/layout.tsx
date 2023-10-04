@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import '@/app/ui/global.css';
 import type { Metadata } from 'next';
 import { inter } from '@/app/ui/fonts';
@@ -14,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={clsx(inter.className, 'antialiased')}>{children}</body>
     </html>
   );
 }
