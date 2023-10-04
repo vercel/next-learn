@@ -22,7 +22,7 @@ export default function Search() {
   }, 300);
 
   return (
-    <div className="relative w-full max-w-2xl">
+    <div className="min-w-md relative grow md:mr-4">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
