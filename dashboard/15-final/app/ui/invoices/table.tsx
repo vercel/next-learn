@@ -29,9 +29,9 @@ export default async function InvoicesTable({
   return (
     <div className="mt-4 flow-root">
       <style>{styles}</style>
-      <div className="overflow-x-auto">
+      <div>
         <div className="inline-block min-w-full align-middle">
-          <div className="overflow-hidden rounded-lg bg-gray-50 p-2">
+          <div className="rounded-lg bg-gray-50 p-2">
             <div className="md:hidden">
               {invoices?.map((invoice) => (
                 <div
