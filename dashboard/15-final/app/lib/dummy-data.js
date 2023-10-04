@@ -10,30 +10,6 @@ const users = [
 
 const customers = [
   {
-    id: '93980f8c-a5e4-484c-a469-2d12ca8fdde3',
-    name: 'Ada Lovelace',
-    email: 'ada@lovelace.com',
-    image_url: '/customers/ada-lovelace.png',
-  },
-  {
-    id: 'e53120f8-0301-437b-924a-0288f4ec6040',
-    name: 'Grace Hopper',
-    email: 'grace@hopper.com',
-    image_url: '/customers/grace-hopper.png',
-  },
-  {
-    id: '030fab4c-18d7-4ed2-814c-4171cc67bca8',
-    name: 'Hedy Lammar',
-    email: 'hedy@lammar.com',
-    image_url: '/customers/hedy-lammar.png',
-  },
-  {
-    id: '3958dc9e-718f-4377-85e9-fec4b6a6442a',
-    name: 'Margaret Hamilton',
-    email: 'margaret@hamilton.com',
-    image_url: '/customers/margaret-hamilton.png',
-  },
-  {
     id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
     name: 'Delba de Oliveira',
     email: 'delba@oliveira.com',
@@ -64,10 +40,22 @@ const customers = [
     image_url: '/customers/steph-dietz.png',
   },
   {
-    id: '3958dc9e-787f-4377-85e9-fec4b6a6442a',
+    id: '76d65c26-f784-44a2-ac19-586678f7c2f2',
     name: 'Tom Occhino',
     email: 'tom@occhino.com',
     image_url: '/customers/tom-occhino.png',
+  },
+  {
+    id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
+    name: 'Evil Rabbit',
+    email: 'evil@rabbit.com',
+    image_url: '/customers/evil-rabbit.png',
+  },
+  {
+    id: '126eed9c-c90c-4ef6-a4a8-fcf7408d3c66',
+    name: 'Emil Kowalski',
+    email: 'emil@kowalski.com',
+    image_url: '/customers/emil-kowalski.png',
   },
 ];
 
@@ -85,7 +73,7 @@ const invoices = [
     date: '2022-11-14',
   },
   {
-    customer_id: customers[2].id,
+    customer_id: customers[4].id,
     amount: 3040,
     status: 'paid',
     date: '2022-10-29',
@@ -97,19 +85,19 @@ const invoices = [
     date: '2023-09-10',
   },
   {
-    customer_id: customers[0].id,
+    customer_id: customers[5].id,
     amount: 34577,
     status: 'pending',
     date: '2023-08-05',
   },
   {
-    customer_id: customers[1].id,
+    customer_id: customers[7].id,
     amount: 54246,
     status: 'pending',
     date: '2023-07-16',
   },
   {
-    customer_id: customers[2].id,
+    customer_id: customers[6].id,
     amount: 8945,
     status: 'pending',
     date: '2023-06-27',
@@ -121,13 +109,13 @@ const invoices = [
     date: '2023-06-09',
   },
   {
-    customer_id: customers[2].id,
+    customer_id: customers[4].id,
     amount: 1250,
     status: 'paid',
     date: '2023-06-17',
   },
   {
-    customer_id: customers[0].id,
+    customer_id: customers[5].id,
     amount: 8945,
     status: 'paid',
     date: '2023-06-07',
@@ -139,7 +127,7 @@ const invoices = [
     date: '2023-08-19',
   },
   {
-    customer_id: customers[2].id,
+    customer_id: customers[5].id,
     amount: 8945,
     status: 'paid',
     date: '2023-06-03',
@@ -151,7 +139,7 @@ const invoices = [
     date: '2023-06-18',
   },
   {
-    customer_id: customers[3].id,
+    customer_id: customers[0].id,
     amount: 8945,
     status: 'paid',
     date: '2023-10-04',

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
-import Search from './search';
+import Search from '../search';
 import { CustomersTable, FormattedCustomersTable } from '@/app/lib/definitions';
 
 export default async function CustomersTable({
@@ -83,7 +83,7 @@ export default async function CustomersTable({
                 <tbody className="divide-y divide-gray-200 text-gray-900">
                   {customers.map((customer) => (
                     <tr key={customer.id} className="group">
-                      <td className="whitespace-nowrap bg-white py-4 pl-4 pr-3 text-sm font-medium text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
+                      <td className="whitespace-nowrap bg-white py-4 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
                         <div className="flex items-center gap-3">
                           <Image
                             src={customer.image_url}
