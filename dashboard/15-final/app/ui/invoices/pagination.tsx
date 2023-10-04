@@ -47,7 +47,7 @@ export default function Pagination({
             className={clsx(
               'flex h-9 w-9 items-center justify-center text-sm ring-1 ring-inset ring-gray-300',
               {
-                'z-10 bg-blue-600 text-white ring-blue-600':
+                'z-10 bg-blue-500 text-white ring-blue-500':
                   currentPage === page,
               },
             )}
