@@ -22,16 +22,16 @@ export default function Search() {
   }, 300);
 
   return (
-    <div className="relative max-w-md flex-grow">
+    <div className="min-w-md relative grow md:mr-4">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
-      <div className="relative flex items-center px-2 py-2">
+      <div className="relative flex h-10 items-center px-2 py-2">
         <MagnifyingGlassIcon className="h-5 text-gray-400" />
         <input
           type="text"
           placeholder="Search..."
-          className="absolute inset-0 w-full rounded-md border border-gray-300 bg-transparent p-2 pl-8 text-sm"
+          className="absolute inset-0 h-full w-full rounded-md border border-gray-300 bg-transparent pl-8 text-sm"
           onChange={(e) => {
             handleSearch(e.target.value);
           }}

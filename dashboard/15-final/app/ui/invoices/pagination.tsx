@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { usePathname, useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -26,46 +26,50 @@ export default function Pagination({
   };
 
   return (
-    <div className="inline-flex -space-x-px">
+    <div className="inline-flex">
       <PreviousPageTag
         href={createPageUrl(currentPage - 1)}
         className={clsx(
-          'flex h-9 w-9 items-center justify-center rounded-l-md ring-1 ring-inset ring-gray-300',
+          'mr-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:opacity-60',
           {
             'text-gray-300': currentPage === 1,
           },
         )}
       >
-        <ChevronLeftIcon className="w-4" />
+        <ArrowLeftIcon className="w-4" />
       </PreviousPageTag>
-      {allPages.map((page) => {
-        const PageTag = page === currentPage ? 'p' : Link;
-        return (
-          <PageTag
-            key={page}
-            href={createPageUrl(page)}
-            className={clsx(
-              'flex h-9 w-9 items-center justify-center text-sm ring-1 ring-inset ring-gray-300',
-              {
-                'z-10 bg-blue-500 text-white ring-blue-500':
-                  currentPage === page,
-              },
-            )}
-          >
-            {page}
-          </PageTag>
-        );
-      })}
+      <div className="flex -space-x-px ">
+        {allPages.map((page, i) => {
+          const PageTag = page === currentPage ? 'p' : Link;
+          return (
+            <PageTag
+              key={page}
+              href={createPageUrl(page)}
+              className={clsx(
+                i === 0 && 'rounded-l-md',
+                i === allPages.length - 1 && 'rounded-r-md',
+                'flex h-10 w-10 items-center justify-center text-sm ring-1 ring-inset ring-gray-300',
+                {
+                  'z-10 bg-blue-600 text-white ring-blue-600':
+                    currentPage === page,
+                },
+              )}
+            >
+              {page}
+            </PageTag>
+          );
+        })}
+      </div>
       <NextPageTag
         href={createPageUrl(currentPage + 1)}
         className={clsx(
-          'flex h-9 w-9 items-center justify-center rounded-r-md ring-1 ring-inset ring-gray-300',
+          'ml-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:opacity-60',
           {
             'text-gray-300': currentPage === totalPages,
           },
         )}
       >
-        <ChevronRightIcon className="w-4" />
+        <ArrowRightIcon className="w-4" />
       </NextPageTag>
     </div>
   );
