@@ -30,7 +30,7 @@ export default function Pagination({
       <PreviousPageTag
         href={createPageUrl(currentPage - 1)}
         className={clsx(
-          'mr-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300',
+          'mr-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:opacity-60',
           {
             'text-gray-300': currentPage === 1,
           },
@@ -63,7 +63,7 @@ export default function Pagination({
       <NextPageTag
         href={createPageUrl(currentPage + 1)}
         className={clsx(
-          'ml-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300',
+          'ml-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:opacity-60',
           {
             'text-gray-300': currentPage === totalPages,
           },

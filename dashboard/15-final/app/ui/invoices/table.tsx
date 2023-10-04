@@ -9,11 +9,29 @@ export default async function InvoicesTable({
 }: {
   invoices: InvoicesTable[];
 }) {
+  const styles = `
+    /* Round top-left and top-right corners of the first row in tbody */
+    tbody tr:first-child td:first-child {
+        border-top-left-radius: 8px;
+    }
+    tbody tr:first-child td:last-child {
+        border-top-right-radius: 8px;
+    }
+
+    /* Round bottom-left and bottom-right corners of the last row in tbody */
+    tbody tr:last-child td:first-child {
+        border-bottom-left-radius: 8px;
+    }
+    tbody tr:last-child td:last-child {
+        border-bottom-right-radius: 8px;
+    }
+  `;
   return (
     <div className="mt-4 flow-root">
+      <style>{styles}</style>
       <div className="overflow-x-auto">
         <div className="inline-block min-w-full align-middle">
-          <div className="overflow-hidden rounded-md bg-gray-50 p-2">
+          <div className="overflow-hidden rounded-lg bg-gray-50 p-2">
             <div className="md:hidden">
               {invoices?.map((invoice) => (
                 <div
@@ -51,30 +69,33 @@ export default async function InvoicesTable({
                 </div>
               ))}
             </div>
-            <table className="hidden min-w-full rounded-md bg-white text-gray-900 md:table">
-              <thead className="rounded-md bg-gray-50 text-left text-sm font-normal">
+            <table className="hidden min-w-full text-gray-900 md:table">
+              <thead className="rounded-lg  text-left text-sm font-normal">
                 <tr>
-                  <th scope="col" className="px-6 pb-4">
+                  <th scope="col" className="px-6 pb-4 pt-2">
                     Customer
                   </th>
-                  <th scope="col" className="px-3 pb-4">
+                  <th scope="col" className="px-3 pb-4 pt-2">
                     Email
                   </th>
-                  <th scope="col" className="px-3 pb-4">
+                  <th scope="col" className="px-3 pb-4 pt-2">
                     Amount
                   </th>
-                  <th scope="col" className="px-3 pb-4">
+                  <th scope="col" className="px-3 pb-4 pt-2">
                     Date
                   </th>
-                  <th scope="col" className="px-3 pb-4">
+                  <th scope="col" className="px-3 pb-4 pt-2">
                     Status
                   </th>
-                  <th scope="col" className="relative pb-4 pl-3 pr-6 sm:pr-6">
+                  <th
+                    scope="col"
+                    className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
+                  >
                     <span className="sr-only">Edit</span>
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="bg-white">
                 {invoices?.map((invoice) => (
                   <tr key={invoice.id} className="w-full">
                     <td className="whitespace-nowrap px-6 py-5">

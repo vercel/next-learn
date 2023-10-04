@@ -33,9 +33,6 @@ export default async function Page({
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search />
-        <span className="hidden md:block">
-          <Pagination totalPages={totalPages} currentPage={currentPage} />
-        </span>
         <span className="md:hidden">
           <CreateInvoice />
         </span>
