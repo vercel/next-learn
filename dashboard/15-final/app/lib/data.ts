@@ -27,37 +27,6 @@ export async function fetchRevenue() {
   }
 }
 
-export async function fetchCounts() {
-  try {
-    const invoiceCount = await sql`SELECT COUNT(*) FROM invoices`;
-    const numberOfInvoices = parseInt(invoiceCount.rows[0].count, 10);
-
-    const customerCount = await sql`SELECT COUNT(*) FROM customers`;
-    const numberOfCustomers = parseInt(customerCount.rows[0].count, 10);
-
-    return { numberOfCustomers, numberOfInvoices };
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch counts.');
-  }
-}
-
-export async function fetchTotalAmountByStatus() {
-  try {
-    const data = await sql`SELECT
-      SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
-      SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
-      FROM invoices`;
-    const totalPaidInvoices = formatCurrency(data.rows[0].paid);
-    const totalPendingInvoices = formatCurrency(data.rows[0].pending);
-
-    return { totalPaidInvoices, totalPendingInvoices };
-  } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch total amounts by status.');
-  }
-}
-
 export async function fetchLatestInvoices() {
   try {
     const data = await sql<LatestInvoiceRaw>`
@@ -75,6 +44,38 @@ export async function fetchLatestInvoices() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
+  }
+}
+
+export async function fetchCardData() {
+  try {
+    const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
+    const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
+    const invoiceStatusPromise = sql`SELECT
+         SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
+         SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
+         FROM invoices`;
+
+    const data = await Promise.all([
+      invoiceCountPromise,
+      customerCountPromise,
+      invoiceStatusPromise,
+    ]);
+
+    const numberOfInvoices = Number(data[0].rows[0].count ?? '0');
+    const numberOfCustomers = Number(data[1].rows[0].count ?? '0');
+    const totalPaidInvoices = formatCurrency(data[2].rows[0].paid ?? '0');
+    const totalPendingInvoices = formatCurrency(data[2].rows[0].pending ?? '0');
+
+    return {
+      numberOfCustomers,
+      numberOfInvoices,
+      totalPaidInvoices,
+      totalPendingInvoices,
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to card data.');
   }
 }
 

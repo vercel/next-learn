@@ -4,25 +4,29 @@ const shimmer =
 
 export function CardSkeleton() {
   return (
-    <div
-      className={`${shimmer} relative h-[114px] overflow-hidden rounded-xl border bg-white p-6 shadow-sm`}
-    >
-      <div className="flex justify-between">
-        <div className="h-6 w-20 rounded-lg bg-gray-100"></div>
-        <div className="h-6 w-6 rounded-lg bg-gray-100"></div>
+    <div className={`${shimmer} relative rounded-xl bg-gray-50 p-2 shadow-sm`}>
+      <div className="flex p-4">
+        <div className="h-5 w-5 rounded-md bg-gray-100"></div>
+        <h3 className="ml-2 h-6 w-16 rounded-md bg-gray-100 text-sm font-medium"></h3>
       </div>
-      <div className="mt-4 h-8 w-1/2 rounded-lg bg-gray-100"></div>
+      <div className="flex items-center justify-center truncate rounded-xl bg-white px-4 py-8">
+        <div className="h-7 w-20 rounded-md bg-gray-100"></div>
+      </div>
     </div>
   );
 }
 
 export function RevenueChartSkeleton() {
   return (
-    <div
-      className={`${shimmer} relative h-[464px] overflow-hidden rounded-xl border bg-white p-6 shadow-sm md:col-span-5`}
-    >
-      <div className="h-8 w-32 rounded-lg bg-gray-100"></div>
-      <div className="my-4 h-[370px] w-full rounded-lg bg-gray-100"></div>
+    <div className={`${shimmer} relative w-full md:col-span-4`}>
+      <h2 className="mb-4 h-8 w-36 rounded-md bg-gray-100"></h2>
+      <div className="rounded-xl bg-gray-50 p-4">
+        <div className="sm:grid-cols-13 mt-0 grid h-[410px] grid-cols-12 items-end gap-2 rounded-md  bg-white p-4 md:gap-4"></div>
+        <div className="flex items-center pb-2 pt-6">
+          <div className="h-5 w-5 rounded-full bg-gray-100"></div>
+          <div className="ml-2 h-4 w-20 rounded-md bg-gray-100"></div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -30,43 +34,66 @@ export function RevenueChartSkeleton() {
 export function LatestInvoicesSkeleton() {
   return (
     <div
-      className={`${shimmer} relative w-full  overflow-hidden rounded-xl border bg-white p-6 shadow-sm md:col-span-4 lg:col-span-3`}
+      className={`${shimmer} relative flex w-full flex-col md:col-span-4 lg:col-span-4`}
     >
-      <div className="h-8 w-40 rounded-lg bg-gray-100"></div>
-      <div className="mt-8 flex flex-row items-center justify-between">
-        <div className="flex items-center">
-          <div className="h-10 w-10 rounded-lg bg-gray-100"></div>
-          <div className="ml-4 h-10 w-44 rounded-lg bg-gray-100"></div>
+      <h2 className="mb-4 h-8 w-36 rounded-md bg-gray-100"></h2>
+      <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
+        <div className="bg-white px-6">
+          <div className="flex flex-row items-center justify-between border-b py-4">
+            <div className="flex items-center">
+              <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
+              <div className="min-w-0">
+                <div className="h-5 w-40 rounded-md bg-gray-100"></div>
+                <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+              </div>
+            </div>
+            <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+          </div>
+          <div className="flex flex-row items-center justify-between border-b py-4">
+            <div className="flex items-center">
+              <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
+              <div className="min-w-0">
+                <div className="h-5 w-40 rounded-md bg-gray-100"></div>
+                <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+              </div>
+            </div>
+            <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+          </div>
+          <div className="flex flex-row items-center justify-between border-b py-4">
+            <div className="flex items-center">
+              <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
+              <div className="min-w-0">
+                <div className="h-5 w-40 rounded-md bg-gray-100"></div>
+                <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+              </div>
+            </div>
+            <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+          </div>
+          <div className="flex flex-row items-center justify-between border-b py-4">
+            <div className="flex items-center">
+              <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
+              <div className="min-w-0">
+                <div className="h-5 w-40 rounded-md bg-gray-100"></div>
+                <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+              </div>
+            </div>
+            <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+          </div>
+          <div className="flex flex-row items-center justify-between py-4">
+            <div className="flex items-center">
+              <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
+              <div className="min-w-0">
+                <div className="h-5 w-40 rounded-md bg-gray-100"></div>
+                <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+              </div>
+            </div>
+            <div className="mt-2 h-4 w-12 rounded-md bg-gray-100"></div>
+          </div>
         </div>
-        <div className="h-10 w-16 rounded-lg bg-gray-100"></div>
-      </div>
-      <div className="mt-8 flex flex-row items-center justify-between">
-        <div className="flex items-center">
-          <div className="h-10 w-10 rounded-lg bg-gray-100"></div>
-          <div className="ml-4 h-10 w-44 rounded-lg bg-gray-100"></div>
+        <div className="flex items-center pb-2 pt-6">
+          <div className="h-5 w-5 rounded-full bg-gray-100"></div>
+          <div className="ml-2 h-4 w-20 rounded-md bg-gray-100"></div>
         </div>
-        <div className="h-10 w-16 rounded-lg bg-gray-100"></div>
-      </div>
-      <div className="mt-8 flex flex-row items-center justify-between">
-        <div className="flex items-center">
-          <div className="h-10 w-10 rounded-lg bg-gray-100"></div>
-          <div className="ml-4 h-10 w-44 rounded-lg bg-gray-100"></div>
-        </div>
-        <div className="h-10 w-16 rounded-lg bg-gray-100"></div>
-      </div>
-      <div className="mt-8 flex flex-row items-center justify-between">
-        <div className="flex items-center">
-          <div className="h-10 w-10 rounded-lg bg-gray-100"></div>
-          <div className="ml-4 h-10 w-44 rounded-lg bg-gray-100"></div>
-        </div>
-        <div className="h-10 w-16 rounded-lg bg-gray-100"></div>
-      </div>
-      <div className="mt-8 flex flex-row items-center justify-between">
-        <div className="flex items-center">
-          <div className="h-10 w-10 rounded-lg bg-gray-100"></div>
-          <div className="ml-4 h-10 w-44 rounded-lg bg-gray-100"></div>
-        </div>
-        <div className="h-10 w-16 rounded-lg bg-gray-100"></div>
       </div>
     </div>
   );
@@ -75,6 +102,9 @@ export function LatestInvoicesSkeleton() {
 export default function DashboardSkeleton() {
   return (
     <>
+      <h2
+        className={`${shimmer} relative mb-4 h-8 w-36 rounded-md bg-gray-100`}
+      ></h2>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <CardSkeleton />
         <CardSkeleton />
