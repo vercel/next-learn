@@ -7,10 +7,10 @@ export function CardSkeleton() {
     <div className={`${shimmer} relative rounded-xl bg-gray-50 p-2 shadow-sm`}>
       <div className="flex p-4">
         <div className="h-5 w-5 rounded-md bg-gray-100"></div>
-        <h3 className="ml-2 h-5 w-16 rounded-md bg-gray-100 text-sm font-medium"></h3>
+        <h3 className="ml-2 h-6 w-16 rounded-md bg-gray-100 text-sm font-medium"></h3>
       </div>
       <div className="flex items-center justify-center truncate rounded-xl bg-white px-4 py-8">
-        <div className="h-6 w-20 rounded-md bg-gray-100"></div>
+        <div className="h-7 w-20 rounded-md bg-gray-100"></div>
       </div>
     </div>
   );
@@ -21,7 +21,7 @@ export function RevenueChartSkeleton() {
     <div className={`${shimmer} relative w-full md:col-span-4`}>
       <h2 className="mb-4 h-8 w-36 rounded-md bg-gray-100"></h2>
       <div className="rounded-xl bg-gray-50 p-4">
-        <div className="sm:grid-cols-13 mt-0 grid h-[385px] grid-cols-12 items-end gap-2 rounded-md  bg-white p-4 md:gap-4"></div>
+        <div className="sm:grid-cols-13 mt-0 grid h-[410px] grid-cols-12 items-end gap-2 rounded-md  bg-white p-4 md:gap-4"></div>
         <div className="flex items-center pb-2 pt-6">
           <div className="h-5 w-5 rounded-full bg-gray-100"></div>
           <div className="ml-2 h-4 w-20 rounded-md bg-gray-100"></div>
