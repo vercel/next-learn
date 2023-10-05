@@ -1,5 +1,5 @@
 import Pagination from '@/app/ui/invoices/pagination';
-import Search from '@/app/ui/invoices/search';
+import Search from '@/app/ui/search';
 import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import Table from '@/app/ui/invoices/table';
 import { fetchFilteredInvoices } from '@/app/lib/data';
@@ -29,7 +29,7 @@ export default async function Page({
         <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <Search />
+        <Search placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
       <Table invoices={invoices} />

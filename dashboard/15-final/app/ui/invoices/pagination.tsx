@@ -16,8 +16,8 @@ export default function Pagination({
   const searchParams = useSearchParams();
 
   const allPages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  const PreviousPageTag = currentPage === 1 ? 'p' : Link;
-  const NextPageTag = currentPage === totalPages ? 'p' : Link;
+  const PreviousPageTag = Link;
+  const NextPageTag = Link;
 
   const createPageUrl = (pageNumber: number) => {
     const params = new URLSearchParams(searchParams);
@@ -30,9 +30,10 @@ export default function Pagination({
       <PreviousPageTag
         href={createPageUrl(currentPage - 1)}
         className={clsx(
-          'mr-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:opacity-60',
+          'mr-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:bg-gray-100',
           {
-            'text-gray-300': currentPage === 1,
+            'pointer-events-none text-gray-300 hover:bg-transparent':
+              currentPage === 1,
           },
         )}
       >
@@ -48,7 +49,7 @@ export default function Pagination({
               className={clsx(
                 i === 0 && 'rounded-l-md',
                 i === allPages.length - 1 && 'rounded-r-md',
-                'flex h-10 w-10 items-center justify-center text-sm ring-1 ring-inset ring-gray-300',
+                'flex h-10 w-10 items-center justify-center text-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100',
                 {
                   'z-10 bg-blue-600 text-white ring-blue-600':
                     currentPage === page,
@@ -63,7 +64,7 @@ export default function Pagination({
       <NextPageTag
         href={createPageUrl(currentPage + 1)}
         className={clsx(
-          'ml-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:opacity-60',
+          'ml-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:bg-gray-100',
           {
             'text-gray-300': currentPage === totalPages,
           },
