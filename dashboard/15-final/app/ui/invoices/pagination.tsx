@@ -82,7 +82,7 @@ export default function Pagination({
                 i === pagesToShow.length - 1 && 'rounded-r-md',
                 'flex h-10 w-10 items-center justify-center text-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100',
                 {
-                  'z-10 bg-blue-600 text-white ring-blue-600':
+                  'z-10 bg-blue-600 text-white ring-blue-600 hover:bg-blue-600':
                     currentPage === page,
                 },
               )}
