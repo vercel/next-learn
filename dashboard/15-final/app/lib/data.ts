@@ -14,7 +14,7 @@ export async function fetchRevenue() {
     // We artificially delay a reponse for demo purposes.
     // Don't do this in real life :)
     console.log('Fetching revenue data...');
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
