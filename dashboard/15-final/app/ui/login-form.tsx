@@ -4,11 +4,10 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { lusitana } from '@/app/ui/fonts';
-import clsx from 'clsx';
 import { AtSymbolIcon, KeyIcon } from '@heroicons/react/24/outline';
 import { Button } from './button';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { Logo } from './logo';
+import AcmeLogo from './acme-logo';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -39,12 +38,14 @@ export default function LoginForm() {
   return (
     <div className="flex items-center justify-center md:h-screen">
       <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
-        <div className="flex h-36 w-full items-end rounded-lg bg-blue-500 p-3">
-          <Logo />
+        <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
+          <div className="w-32 text-white md:w-36">
+            <AcmeLogo />
+          </div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-6 pt-5">
-            <h1 className={clsx(lusitana.className, 'mb-3 text-2xl')}>
+            <h1 className={`${lusitana.className} mb-3 text-2xl`}>
               Please log in to continue.
             </h1>
             <div className="w-full">
