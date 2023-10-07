@@ -4,10 +4,10 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { lusitana } from '@/app/ui/fonts';
+import AcmeLogo from '@/app/ui/acme-logo';
 import { AtSymbolIcon, KeyIcon } from '@heroicons/react/24/outline';
 import { Button } from './button';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import AcmeLogo from './acme-logo';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');

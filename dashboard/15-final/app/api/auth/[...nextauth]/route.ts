@@ -1,4 +1,2 @@
-import { handlers } from '@/auth';
-
-const { GET, POST } = handlers;
-export { GET, POST };
+export { GET, POST } from '@/auth';
+export const runtime = 'edge';
