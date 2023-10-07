@@ -79,6 +79,54 @@ export async function fetchCardData() {
   }
 }
 
+export async function fetchInvoices() {
+  try {
+    const data = await sql`SELECT COUNT(*) FROM invoices`;
+    const numberOfInvoices = Number(data.rows[0].count ?? '0');
+
+    return {
+      numberOfInvoices,
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to card data.');
+  }
+}
+
+export async function fetchCustomers() {
+  try {
+    const data = await sql`SELECT COUNT(*) FROM customers`;
+    const numberOfCustomers = Number(data.rows[0].count ?? '0');
+
+    return {
+      numberOfCustomers,
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to card data.');
+  }
+}
+
+export async function fetchInvoiceStatus() {
+  try {
+    const data = await sql`SELECT
+      SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
+      SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
+      FROM invoices`;
+
+    const totalPaidInvoices = formatCurrency(data.rows[0].paid ?? '0');
+    const totalPendingInvoices = formatCurrency(data.rows[0].pending ?? '0');
+
+    return {
+      totalPaidInvoices,
+      totalPendingInvoices,
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to card data.');
+  }
+}
+
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
@@ -210,21 +258,21 @@ export async function fetchCustomersTable() {
 export async function fetchFilteredCustomers(query: string) {
   try {
     const data = await sql<CustomersTable>`
-		SELECT
-		  customers.id,
-		  customers.name,
-		  customers.email,
-		  customers.image_url,
-		  COUNT(invoices.id) AS total_invoices,
-		  SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,
-		  SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid
-		FROM customers
-		LEFT JOIN invoices ON customers.id = invoices.customer_id
-		WHERE
-		  customers.name ILIKE ${`%${query}%`} OR
-        customers.email ILIKE ${`%${query}%`}
-		GROUP BY customers.id, customers.name, customers.email, customers.image_url
-		ORDER BY customers.name ASC
+      SELECT
+        customers.id,
+        customers.name,
+        customers.email,
+        customers.image_url,
+        COUNT(invoices.id) AS total_invoices,
+        SUM(CASE WHEN invoices.status = 'pending' THEN invoices.amount ELSE 0 END) AS total_pending,
+        SUM(CASE WHEN invoices.status = 'paid' THEN invoices.amount ELSE 0 END) AS total_paid
+      FROM customers
+      LEFT JOIN invoices ON customers.id = invoices.customer_id
+      WHERE
+        customers.name ILIKE ${`%${query}%`} OR
+          customers.email ILIKE ${`%${query}%`}
+      GROUP BY customers.id, customers.name, customers.email, customers.image_url
+      ORDER BY customers.name ASC
 	  `;
 
     const customers = data.rows.map((customer) => ({

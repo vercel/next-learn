@@ -5,36 +5,63 @@ import {
   InboxIcon,
 } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
+import {
+  fetchCustomers,
+  fetchInvoices,
+  fetchInvoiceStatus,
+} from '@/app/lib/data';
 
-const iconMap = {
-  collected: BanknotesIcon,
-  customers: UserGroupIcon,
-  pending: ClockIcon,
-  invoices: InboxIcon,
-};
+export async function CardCollected() {
+  const { numberOfInvoices } = await fetchInvoices();
 
-export default function Card({
+  return <Card title="Collected">{numberOfInvoices}</Card>;
+}
+
+export async function CardPending() {
+  const { totalPendingInvoices } = await fetchInvoiceStatus();
+
+  return <Card title="Pending">{totalPendingInvoices}</Card>;
+}
+
+export async function CardTotalInvoices() {
+  const { totalPaidInvoices } = await fetchInvoiceStatus();
+
+  return <Card title="Invoices">{totalPaidInvoices}</Card>;
+}
+
+export async function CardCustomers() {
+  const { numberOfCustomers } = await fetchCustomers();
+
+  return <Card title="Customers">{numberOfCustomers}</Card>;
+}
+
+function Card({
   title,
-  value,
-  type,
+  children,
 }: {
   title: string;
-  value: number | string;
-  type: 'invoices' | 'customers' | 'pending' | 'collected';
+  children: React.ReactNode;
 }) {
-  const Icon = iconMap[type];
+  const icons = {
+    collected: BanknotesIcon,
+    customers: UserGroupIcon,
+    pending: ClockIcon,
+    invoices: InboxIcon,
+  };
+
+  const Icon = icons[title.toLowerCase()];
 
   return (
     <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
       <div className="flex p-4">
-        {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
+        <Icon className="h-5 w-5 text-gray-700" />
         <h3 className="ml-2 text-sm font-medium">{title}</h3>
       </div>
       <p
         className={`${lusitana.className}
           truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
       >
-        {value}
+        {children}
       </p>
     </div>
   );

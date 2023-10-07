@@ -1,5 +1,7 @@
-import { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import NextAuth from 'next-auth';
+import type { NextAuthConfig } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import GitHub from 'next-auth/providers/github';
 import bcrypt from 'bcrypt';
 import { User } from '@/app/lib/definitions';
 import { sql } from '@vercel/postgres';
@@ -14,9 +16,10 @@ async function getUser(email: string) {
   }
 }
 
-export const authOptions: NextAuthOptions = {
+export const authConfig = {
   providers: [
-    CredentialsProvider({
+    GitHub,
+    Credentials({
       name: 'Sign-In with Credentials',
       credentials: {
         password: { label: 'Password', type: 'password' },
@@ -46,4 +49,6 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/login',
   },
-};
+} satisfies NextAuthConfig;
+
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
