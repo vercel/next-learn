@@ -19,18 +19,38 @@ export default function Pagination({
   const PreviousPageTag = Link;
   const NextPageTag = Link;
 
-  const createPageUrl = (pageNumber: number) => {
+  const createPageUrl = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
     params.set('page', pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
+
+  let pagesToShow = [];
+
+  if (totalPages <= 7) {
+    pagesToShow = allPages;
+  } else if (currentPage <= 3) {
+    pagesToShow = [1, 2, 3, '...', totalPages - 1, totalPages];
+  } else if (currentPage >= totalPages - 2) {
+    pagesToShow = [1, 2, '...', totalPages - 2, totalPages - 1, totalPages];
+  } else {
+    pagesToShow = [
+      1,
+      '...',
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      '...',
+      totalPages,
+    ];
+  }
 
   return (
     <div className="inline-flex">
       <PreviousPageTag
         href={createPageUrl(currentPage - 1)}
         className={clsx(
-          'mr-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:bg-gray-100',
+          'mr-2 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:bg-gray-100 md:mr-4',
           {
             'pointer-events-none text-gray-300 hover:bg-transparent':
               currentPage === 1,
@@ -40,18 +60,29 @@ export default function Pagination({
         <ArrowLeftIcon className="w-4" />
       </PreviousPageTag>
       <div className="flex -space-x-px ">
-        {allPages.map((page, i) => {
-          const PageTag = page === currentPage ? 'p' : Link;
+        {pagesToShow.map((page, i) => {
+          if (page === '...') {
+            return (
+              <span
+                key={`ellipsis-${i}`}
+                className="flex h-10 w-10 items-center justify-center text-sm ring-1 ring-inset ring-gray-300"
+              >
+                ...
+              </span>
+            );
+          }
+
+          const PageTag = page === currentPage || page === '...' ? 'p' : Link;
           return (
             <PageTag
               key={page}
               href={createPageUrl(page)}
               className={clsx(
                 i === 0 && 'rounded-l-md',
-                i === allPages.length - 1 && 'rounded-r-md',
+                i === pagesToShow.length - 1 && 'rounded-r-md',
                 'flex h-10 w-10 items-center justify-center text-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100',
                 {
-                  'z-10 bg-blue-600 text-white ring-blue-600':
+                  'z-10 bg-blue-600 text-white ring-blue-600 hover:bg-blue-600':
                     currentPage === page,
                 },
               )}
@@ -64,7 +95,7 @@ export default function Pagination({
       <NextPageTag
         href={createPageUrl(currentPage + 1)}
         className={clsx(
-          'ml-4 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:bg-gray-100',
+          'ml-2 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:bg-gray-100 md:ml-4',
           {
             'text-gray-300': currentPage === totalPages,
           },
