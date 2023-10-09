@@ -18,11 +18,6 @@ export default async function Page({
   const query = searchParams?.query || '';
   const currentPage = query ? 1 : Number(searchParams?.page || '1');
 
-  const { invoices, totalPages } = await fetchFilteredInvoices(
-    query,
-    currentPage,
-  );
-
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -32,9 +27,9 @@ export default async function Page({
         <Search placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
-      <Table invoices={invoices} />
+      <Table query={query} currentPage={currentPage} />
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPages} currentPage={currentPage} />
+        {/* <Pagination totalPages={totalPages} currentPage={currentPage} /> */}
       </div>
     </div>
   );
