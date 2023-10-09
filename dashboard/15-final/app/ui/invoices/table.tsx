@@ -9,26 +9,9 @@ export default async function InvoicesTable({
 }: {
   invoices: InvoicesTable[];
 }) {
-  const styles = `
-    /* Round top-left and top-right corners of the first row in tbody */
-    tbody tr:first-child td:first-child {
-        border-top-left-radius: 8px;
-    }
-    tbody tr:first-child td:last-child {
-        border-top-right-radius: 8px;
-    }
 
-    /* Round bottom-left and bottom-right corners of the last row in tbody */
-    tbody tr:last-child td:first-child {
-        border-bottom-left-radius: 8px;
-    }
-    tbody tr:last-child td:last-child {
-        border-bottom-right-radius: 8px;
-    }
-  `;
   return (
     <div className="mt-6 flow-root">
-      <style>{styles}</style>
       <div>
         <div className="inline-block min-w-full align-middle">
           <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
@@ -99,7 +82,7 @@ export default async function InvoicesTable({
                 {invoices?.map((invoice) => (
                   <tr
                     key={invoice.id}
-                    className="w-full border-b text-sm last-of-type:border-none"
+                    className="w-full border-b text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                   >
                     <td className="whitespace-nowrap px-6 py-5">
                       <div className="flex items-center gap-3">
@@ -125,9 +108,11 @@ export default async function InvoicesTable({
                     <td className="whitespace-nowrap px-3 py-3">
                       <InvoiceStatus status={invoice.status} />
                     </td>
-                    <td className="flex justify-end gap-2 whitespace-nowrap px-6 py-3">
-                      <UpdateInvoice id={invoice.id} />
-                      <DeleteInvoice id={invoice.id} />
+                    <td className="whitespace-nowrap px-6 py-4">
+                      <div className="flex justify-end gap-3">
+                        <UpdateInvoice id={invoice.id} />
+                        <DeleteInvoice id={invoice.id} />
+                      </div>
                     </td>
                   </tr>
                 ))}
