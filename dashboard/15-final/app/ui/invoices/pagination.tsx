@@ -26,64 +26,103 @@ export default function Pagination({
 
   return (
     <div className="inline-flex">
-      {/* Previous Page Arrow */}
-      <Link
+      <PaginationArrow
+        direction="left"
         href={createPageURL(currentPage - 1)}
-        className={clsx(
-          'mr-2 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:bg-gray-100 md:mr-4',
-          {
-            'pointer-events-none text-gray-300 hover:bg-transparent':
-              currentPage === 1,
-          },
-        )}
-      >
-        <ArrowLeftIcon className="w-4" />
-      </Link>
-      <div className="flex -space-x-px ">
-        {allPages.map((page, i) => {
-          if (page === '...') {
-            return (
-              <span
-                key={`ellipsis-${i}`}
-                className="flex h-10 w-10 items-center justify-center text-sm ring-1 ring-inset ring-gray-300"
-              >
-                ...
-              </span>
-            );
-          }
+        isDisabled={currentPage <= 1}
+      />
 
-          const PageTag = page === currentPage || page === '...' ? 'p' : Link;
+      <div className="flex -space-x-px">
+        {allPages.map((page, index) => {
+          let position: 'first' | 'last' | 'middle' | undefined;
+
+          if (index === 0) position = 'first';
+          if (index === allPages.length - 1) position = 'last';
+          if (page === '...') position = 'middle';
+
           return (
-            <PageTag
+            <PaginationNumber
               key={page}
               href={createPageURL(page)}
-              className={clsx(
-                i === 0 && 'rounded-l-md',
-                i === allPages.length - 1 && 'rounded-r-md',
-                'flex h-10 w-10 items-center justify-center text-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100',
-                {
-                  'z-10 bg-blue-600 text-white ring-blue-600 hover:bg-blue-600':
-                    currentPage === page,
-                },
-              )}
-            >
-              {page}
-            </PageTag>
+              page={page}
+              position={position}
+              isActive={currentPage === page}
+            />
           );
         })}
       </div>
-      {/* Next Page Arrow */}
-      <Link
+
+      <PaginationArrow
+        direction="right"
         href={createPageURL(currentPage + 1)}
-        className={clsx(
-          'ml-2 flex h-10 w-10 items-center justify-center rounded-md ring-1 ring-inset ring-gray-300 hover:bg-gray-100 md:ml-4',
-          {
-            'text-gray-300': currentPage === totalPages,
-          },
-        )}
-      >
-        <ArrowRightIcon className="w-4" />
-      </Link>
+        isDisabled={currentPage >= totalPages}
+      />
     </div>
+  );
+}
+
+function PaginationNumber({
+  page,
+  href,
+  isActive,
+  position,
+}: {
+  page: number | string;
+  href: string;
+  position?: 'first' | 'last' | 'middle';
+  isActive: boolean;
+}) {
+  const className = clsx(
+    'flex h-10 w-10 items-center justify-center text-sm border',
+    {
+      'rounded-l-md': position === 'first',
+      'rounded-r-md': position === 'last',
+      'z-10 bg-blue-600 border-blue-600 text-white': isActive,
+      'hover:bg-gray-100': !isActive && position !== 'middle',
+      'text-gray-300': position === 'middle',
+    },
+  );
+
+  return isActive || position === 'middle' ? (
+    <div className={className}>{page}</div>
+  ) : (
+    <Link href={href} className={className}>
+      {page}
+    </Link>
+  );
+}
+
+function PaginationArrow({
+  href,
+  direction,
+  isDisabled,
+}: {
+  href: string;
+  direction: 'left' | 'right';
+  isDisabled?: boolean;
+}) {
+  const className = clsx(
+    'flex h-10 w-10 items-center justify-center rounded-md border',
+    {
+      'pointer-events-none text-gray-300': isDisabled,
+      'hover:bg-gray-100': !isDisabled,
+      'mr-2 md:mr-4': direction === 'left',
+      'ml-2 md:ml-4': direction === 'right',
+    },
+  );
+
+  const icon =
+    direction === 'left' ? (
+      <ArrowLeftIcon className="w-4" />
+    ) : (
+      <ArrowRightIcon className="w-4" />
+    );
+
+  return isDisabled ? (
+    <div className={className}>{icon}</div>
+  ) : (
+    <Link className={className} href={href}>
+      {icon}
+    </Link>
   );
 }
