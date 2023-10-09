@@ -4,6 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { usePathname, useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { generatePagination } from '@/app/lib/utils';
 
 export default function Pagination({
   currentPage,
@@ -25,25 +26,7 @@ export default function Pagination({
     return `${pathname}?${params.toString()}`;
   };
 
-  let pagesToShow = [];
-
-  if (totalPages <= 7) {
-    pagesToShow = allPages;
-  } else if (currentPage <= 3) {
-    pagesToShow = [1, 2, 3, '...', totalPages - 1, totalPages];
-  } else if (currentPage >= totalPages - 2) {
-    pagesToShow = [1, 2, '...', totalPages - 2, totalPages - 1, totalPages];
-  } else {
-    pagesToShow = [
-      1,
-      '...',
-      currentPage - 1,
-      currentPage,
-      currentPage + 1,
-      '...',
-      totalPages,
-    ];
-  }
+  const allPages = generatePagination(currentPage, totalPages);
 
   return (
     <div className="inline-flex">
