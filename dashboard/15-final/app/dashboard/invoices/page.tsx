@@ -8,12 +8,10 @@ import { lusitana } from '@/app/ui/fonts';
 export default async function Page({
   searchParams,
 }: {
-  searchParams:
-    | {
-        query: string | undefined;
-        page: string | undefined;
-      }
-    | undefined;
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
 }) {
   const query = searchParams?.query || '';
   const currentPage = query ? 1 : Number(searchParams?.page || '1');
