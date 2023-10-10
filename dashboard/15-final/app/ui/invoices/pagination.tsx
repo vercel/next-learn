@@ -1,72 +1,123 @@
 'use client';
 
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { generatePagination } from '@/app/lib/utils';
+import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function Pagination({
-  currentPage,
-  totalPages,
-}: {
-  currentPage: number;
-  totalPages: number;
-}) {
+export default function Pagination({ totalPages }: { totalPages: number }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get('page')) || 1;
+  const allPages = generatePagination(currentPage, totalPages);
 
-  const allPages = Array.from({ length: totalPages }, (_, i) => i + 1);
-  const PreviousPageTag = currentPage === 1 ? 'p' : Link;
-  const NextPageTag = currentPage === totalPages ? 'p' : Link;
-
-  const createPageUrl = (pageNumber: number) => {
+  const createPageURL = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
     params.set('page', pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
 
   return (
-    <div className="inline-flex -space-x-px">
-      <PreviousPageTag
-        href={createPageUrl(currentPage - 1)}
-        className={clsx(
-          'flex h-9 w-9 items-center justify-center rounded-l-md ring-1 ring-inset ring-gray-300',
-          {
-            'text-gray-300': currentPage === 1,
-          },
-        )}
-      >
-        <ChevronLeftIcon className="w-4" />
-      </PreviousPageTag>
-      {allPages.map((page) => {
-        const PageTag = page === currentPage ? 'p' : Link;
-        return (
-          <PageTag
-            key={page}
-            href={createPageUrl(page)}
-            className={clsx(
-              'flex h-9 w-9 items-center justify-center text-sm ring-1 ring-inset ring-gray-300',
-              {
-                'z-10 bg-blue-600 text-white ring-blue-600':
-                  currentPage === page,
-              },
-            )}
-          >
-            {page}
-          </PageTag>
-        );
-      })}
-      <NextPageTag
-        href={createPageUrl(currentPage + 1)}
-        className={clsx(
-          'flex h-9 w-9 items-center justify-center rounded-r-md ring-1 ring-inset ring-gray-300',
-          {
-            'text-gray-300': currentPage === totalPages,
-          },
-        )}
-      >
-        <ChevronRightIcon className="w-4" />
-      </NextPageTag>
+    <div className="inline-flex">
+      <PaginationArrow
+        direction="left"
+        href={createPageURL(currentPage - 1)}
+        isDisabled={currentPage <= 1}
+      />
+
+      <div className="flex -space-x-px">
+        {allPages.map((page, index) => {
+          let position: 'first' | 'last' | 'single' | 'middle' | undefined;
+
+          if (index === 0) position = 'first';
+          if (index === allPages.length - 1) position = 'last';
+          if (allPages.length === 1) position = 'single';
+          if (page === '...') position = 'middle';
+
+          return (
+            <PaginationNumber
+              key={page}
+              href={createPageURL(page)}
+              page={page}
+              position={position}
+              isActive={currentPage === page}
+            />
+          );
+        })}
+      </div>
+
+      <PaginationArrow
+        direction="right"
+        href={createPageURL(currentPage + 1)}
+        isDisabled={currentPage >= totalPages}
+      />
     </div>
+  );
+}
+
+function PaginationNumber({
+  page,
+  href,
+  isActive,
+  position,
+}: {
+  page: number | string;
+  href: string;
+  position?: 'first' | 'last' | 'middle' | 'single';
+  isActive: boolean;
+}) {
+  const className = clsx(
+    'flex h-10 w-10 items-center justify-center text-sm border',
+    {
+      'rounded-l-md': position === 'first' || position === 'single',
+      'rounded-r-md': position === 'last' || position === 'single',
+      'z-10 bg-blue-600 border-blue-600 text-white': isActive,
+      'hover:bg-gray-100': !isActive && position !== 'middle',
+      'text-gray-300': position === 'middle',
+    },
+  );
+
+  return isActive || position === 'middle' ? (
+    <div className={className}>{page}</div>
+  ) : (
+    <Link href={href} className={className}>
+      {page}
+    </Link>
+  );
+}
+
+function PaginationArrow({
+  href,
+  direction,
+  isDisabled,
+}: {
+  href: string;
+  direction: 'left' | 'right';
+  isDisabled?: boolean;
+}) {
+  const className = clsx(
+    'flex h-10 w-10 items-center justify-center rounded-md border',
+    {
+      'pointer-events-none text-gray-300': isDisabled,
+      'hover:bg-gray-100': !isDisabled,
+      'mr-2 md:mr-4': direction === 'left',
+      'ml-2 md:ml-4': direction === 'right',
+    },
+  );
+
+  const icon =
+    direction === 'left' ? (
+      <ArrowLeftIcon className="w-4" />
+    ) : (
+      <ArrowRightIcon className="w-4" />
+    );
+
+  return isDisabled ? (
+    <div className={className}>{icon}</div>
+  ) : (
+    <Link className={className} href={href}>
+      {icon}
+    </Link>
   );
 }
