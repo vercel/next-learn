@@ -4,12 +4,10 @@ import CustomersTable from '@/app/ui/customers/table';
 export default async function Page({
   searchParams,
 }: {
-  searchParams:
-    | {
-        query: string | undefined;
-        page: string | undefined;
-      }
-    | undefined;
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
 }) {
   const query = searchParams?.query || '';
 
