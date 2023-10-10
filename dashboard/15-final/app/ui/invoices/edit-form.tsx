@@ -1,12 +1,7 @@
 'use client';
 
 import { CustomerName, InvoiceForm } from '@/app/lib/definitions';
-import { updateInvoice } from '@/app/lib/actions';
-// @ts-ignore React types do not yet include useFormState
-import { experimental_useFormState as useFormState } from 'react-dom';
 import Link from 'next/link';
-import { lusitana } from '@/app/ui/fonts';
-import { clsx } from 'clsx';
 import {
   CheckIcon,
   ClockIcon,
@@ -14,7 +9,9 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '../button';
-import { Breadcrumbs } from './breadcrumbs';
+import { updateInvoice } from '@/app/lib/actions';
+// @ts-ignore React types do not yet include useFormState
+import { experimental_useFormState as useFormState } from 'react-dom';
 
 export default function EditInvoiceForm({
   id,
@@ -30,16 +27,6 @@ export default function EditInvoiceForm({
 
   return (
     <div>
-      <Breadcrumbs
-        breadcrumbs={[
-          { label: 'Invoices', href: '/dashboard/invoices' },
-          {
-            label: 'Edit Invoice',
-            href: `/dashboard/invoices/${id}/edit`,
-            active: true,
-          },
-        ]}
-      />
       <form action={dispatch}>
         <div className="rounded-md bg-gray-50 p-4 md:p-6">
           {/* Customer Name */}

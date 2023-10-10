@@ -1,10 +1,7 @@
 'use client';
 
-import { createInvoice } from '@/app/lib/actions';
 import { CustomerName } from '@/app/lib/definitions';
 import Link from 'next/link';
-// @ts-ignore React types do not yet include useFormState
-import { experimental_useFormState as useFormState } from 'react-dom';
 import {
   CheckIcon,
   ClockIcon,
@@ -12,7 +9,9 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '../button';
-import { Breadcrumbs } from './breadcrumbs';
+import { createInvoice } from '@/app/lib/actions';
+// @ts-ignore React types do not yet include useFormState
+import { experimental_useFormState as useFormState } from 'react-dom';
 
 export default function Form({
   customerNames,
@@ -24,16 +23,6 @@ export default function Form({
 
   return (
     <div>
-      <Breadcrumbs
-        breadcrumbs={[
-          { label: 'Invoices', href: '/dashboard/invoices' },
-          {
-            label: 'Create Invoice',
-            href: '/dashboard/invoices/create',
-            active: true,
-          },
-        ]}
-      />
       <form action={dispatch}>
         <div className="rounded-md bg-gray-50 p-4 md:p-6">
           {/* Customer Name */}
