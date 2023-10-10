@@ -79,12 +79,12 @@ export async function fetchCardData() {
   }
 }
 
-const itemsPerPage = 6;
+const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
 ) {
-  const offset = (currentPage - 1) * itemsPerPage;
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
     const invoices = await sql<InvoicesTable>`
@@ -105,7 +105,7 @@ export async function fetchFilteredInvoices(
         invoices.date::text ILIKE ${`%${query}%`} OR
         invoices.status ILIKE ${`%${query}%`}
       ORDER BY invoices.date DESC
-      LIMIT ${itemsPerPage} OFFSET ${offset}
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
 
     return invoices.rows;
@@ -115,9 +115,9 @@ export async function fetchFilteredInvoices(
   }
 }
 
-export async function fetchTotalInvoices(query: string) {
+export async function fetchInvoicesPages(query: string) {
   try {
-    const total = sql`SELECT COUNT(*)
+    const count = await sql`SELECT COUNT(*)
     FROM invoices
     JOIN customers ON invoices.customer_id = customers.id
     WHERE
@@ -128,13 +128,11 @@ export async function fetchTotalInvoices(query: string) {
       invoices.status ILIKE ${`%${query}%`}
   `;
 
-    console.log(total);
-    const totalPages = Math.ceil(Number(total.rows[0].count) / itemsPerPage);
-
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to total number of invoices.');
+    throw new Error('Failed to fetch total number of invoices.');
   }
 }
 
