@@ -17,7 +17,8 @@ async function getUser(email: string) {
 export const {
   handlers: { GET, POST },
   auth,
-  CSRF_experimental,
+  signIn,
+  signOut,
 } = NextAuth({
   providers: [
     Credentials({
