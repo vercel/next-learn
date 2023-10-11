@@ -12,7 +12,6 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '../button';
-import { Breadcrumbs } from './breadcrumbs';
 
 export default function Form({
   customerNames,
@@ -23,17 +22,6 @@ export default function Form({
   const [state, dispatch] = useFormState(createInvoice, initialState);
 
   return (
-    <div>
-      <Breadcrumbs
-        breadcrumbs={[
-          { label: 'Invoices', href: '/dashboard/invoices' },
-          {
-            label: 'Create Invoice',
-            href: '/dashboard/invoices/create',
-            active: true,
-          },
-        ]}
-      />
       <form action={dispatch}>
         <div className="rounded-md bg-gray-50 p-4 md:p-6">
           {/* Customer Name */}
@@ -180,6 +168,5 @@ export default function Form({
           <Button type="submit">Create Invoice</Button>
         </div>
       </form>
-    </div>
   );
 }
