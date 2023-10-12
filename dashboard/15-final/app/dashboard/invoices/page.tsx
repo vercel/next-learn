@@ -1,27 +1,24 @@
 import Pagination from '@/app/ui/invoices/pagination';
 import Search from '@/app/ui/search';
-import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import Table from '@/app/ui/invoices/table';
-import { fetchFilteredInvoices } from '@/app/lib/data';
+import { CreateInvoice } from '@/app/ui/invoices/buttons';
 import { lusitana } from '@/app/ui/fonts';
+import { InvoicesTableSkeleton } from '@/app/ui/dashboard/skeletons';
+import { Suspense } from 'react';
+import { fetchInvoicesPages } from '@/app/lib/data';
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams:
-    | {
-        query: string | undefined;
-        page: string | undefined;
-      }
-    | undefined;
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
 }) {
   const query = searchParams?.query || '';
-  const currentPage = query ? 1 : Number(searchParams?.page || '1');
+  const currentPage = Number(searchParams?.page) || 1;
 
-  const { invoices, totalPages } = await fetchFilteredInvoices(
-    query,
-    currentPage,
-  );
+  const totalPages = await fetchInvoicesPages(query);
 
   return (
     <div className="w-full">
@@ -32,9 +29,11 @@ export default async function Page({
         <Search placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
-      <Table invoices={invoices} />
+      <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+        <Table query={query} currentPage={currentPage} />
+      </Suspense>
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPages} currentPage={currentPage} />
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   );
