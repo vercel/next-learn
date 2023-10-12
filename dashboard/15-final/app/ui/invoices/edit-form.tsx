@@ -1,6 +1,5 @@
 'use client';
 
-import { updateInvoice } from '@/app/lib/actions';
 import { CustomerField, InvoiceForm } from '@/app/lib/definitions';
 import {
   CheckIcon,
@@ -10,6 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Button } from '../button';
+import { updateInvoice } from '@/app/lib/actions';
 // @ts-ignore React types do not yet include useFormState
 import { experimental_useFormState as useFormState } from 'react-dom';
 
