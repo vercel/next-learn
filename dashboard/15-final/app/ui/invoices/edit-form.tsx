@@ -1,26 +1,24 @@
 'use client';
 
-import { CustomerName, InvoiceForm } from '@/app/lib/definitions';
-import Link from 'next/link';
+import { CustomerField, InvoiceForm } from '@/app/lib/definitions';
 import {
   CheckIcon,
   ClockIcon,
   CurrencyDollarIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import { Button } from '../button';
 import { updateInvoice } from '@/app/lib/actions';
 // @ts-ignore React types do not yet include useFormState
 import { experimental_useFormState as useFormState } from 'react-dom';
 
 export default function EditInvoiceForm({
-  id,
   invoice,
-  customerNames,
+  customers,
 }: {
-  id: string;
   invoice: InvoiceForm;
-  customerNames: CustomerName[];
+  customers: CustomerField[];
 }) {
   const initialState = { message: null, errors: [] };
   const [state, dispatch] = useFormState(updateInvoice, initialState);
@@ -28,6 +26,8 @@ export default function EditInvoiceForm({
   return (
     <form action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
+        {/* Invoice ID */}
+        <input type="hidden" name="id" value={invoice.id} />
         {/* Customer Name */}
         <div className="mb-4">
           <label htmlFor="customer" className="mb-2 block text-sm font-medium">
@@ -38,15 +38,15 @@ export default function EditInvoiceForm({
               id="customer"
               name="customerId"
               className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={invoice.name}
+              defaultValue={invoice.customer_id}
               aria-describedby="customer-error"
             >
               <option value="" disabled>
                 Select a customer
               </option>
-              {customerNames.map((name) => (
-                <option key={name.id} value={name.id}>
-                  {name.name}
+              {customers.map((customer) => (
+                <option key={customer.id} value={customer.id}>
+                  {customer.name}
                 </option>
               ))}
             </select>
@@ -81,9 +81,7 @@ export default function EditInvoiceForm({
                 placeholder="Enter USD amount"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="amount-error"
-                style={
-                  { '-moz-appearance': 'textfield' } as React.CSSProperties
-                }
+                style={{ MozAppearance: 'textfield' } as React.CSSProperties}
               />
               <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
