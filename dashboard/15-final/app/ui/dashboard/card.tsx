@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
 import {
-  fetchCustomers,
+  fetchCustomersCount,
   fetchInvoices,
   fetchInvoiceStatus,
 } from '@/app/lib/data';
@@ -30,7 +30,7 @@ export async function CardTotalInvoices() {
 }
 
 export async function CardCustomers() {
-  const { numberOfCustomers } = await fetchCustomers();
+  const { numberOfCustomers } = await fetchCustomersCount();
 
   return <Card title="Customers">{numberOfCustomers}</Card>;
 }
