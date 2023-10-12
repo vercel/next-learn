@@ -1,13 +1,16 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { lusitana } from '@/app/ui/fonts';
-import { AtSymbolIcon, KeyIcon } from '@heroicons/react/24/outline';
+import {
+  AtSymbolIcon,
+  KeyIcon,
+  ArrowRightIcon,
+} from '@heroicons/react/24/outline';
 import { Button } from './button';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import AcmeLogo from './acme-logo';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
