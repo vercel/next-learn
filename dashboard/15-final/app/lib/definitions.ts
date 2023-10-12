@@ -75,14 +75,14 @@ export type FormattedCustomersTable = {
   total_paid: string;
 };
 
-export type CustomerName = {
+export type CustomerField = {
   id: string;
   name: string;
 };
 
 export type InvoiceForm = {
   id: string;
-  name: string;
+  customer_id: string;
   amount: number;
   status: 'pending' | 'paid';
 };
