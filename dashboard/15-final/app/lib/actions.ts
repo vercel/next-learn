@@ -13,7 +13,9 @@ const FormSchema = z.object({
   amount: z.coerce
     .number()
     .gt(0, { message: 'Please enter an amount greater than $0.' }),
-  status: z.enum(['pending', 'paid']),
+  status: z.enum(['pending', 'paid'], {
+    invalid_type_error: 'Please select an invoice status.',
+  }),
   date: z.string(),
 });
 
@@ -61,7 +63,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
-      message: 'Database error: Failed to create invoice.',
+      message: 'Database Error: Failed to Create Invoice.',
     };
   }
 
@@ -95,7 +97,7 @@ export async function updateInvoice(prevState: State, formData: FormData) {
       WHERE id = ${id}
     `;
   } catch (error) {
-    return { message: 'Database error: Failed to update invoice.' };
+    return { message: 'Database Error: Failed to Update Invoice.' };
   }
 
   revalidatePath('/dashboard/invoices');
@@ -103,6 +105,8 @@ export async function updateInvoice(prevState: State, formData: FormData) {
 }
 
 export async function deleteInvoice(formData: FormData) {
+  throw new Error('Failed to Delete Invoice');
+
   const { id } = DeleteInvoice.parse({
     id: formData.get('id'),
   });
@@ -112,6 +116,6 @@ export async function deleteInvoice(formData: FormData) {
     revalidatePath('/dashboard/invoices');
     return { message: 'Deleted Invoice' };
   } catch (error) {
-    return { message: 'Database error: Failed to delete invoice.' };
+    return { message: 'Database Error: Failed to Delete Invoice.' };
   }
 }
