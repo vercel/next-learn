@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 import { sql } from '@vercel/postgres';
 import type { User } from '@/app/lib/definitions';
+import authConfig from './auth.config';
 
 async function getUser(email: string) {
   try {
@@ -20,7 +21,9 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  ...authConfig,
   providers: [
+    ...authConfig.providers,
     Credentials({
       name: 'Sign-In with Credentials',
       credentials: {
@@ -48,12 +51,4 @@ export const {
       },
     }),
   ],
-  callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      return !nextUrl.pathname.startsWith('/dashboard') || !!auth?.user;
-    },
-  },
-  pages: {
-    signIn: '/login',
-  },
 });
