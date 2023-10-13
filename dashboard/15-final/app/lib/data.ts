@@ -1,14 +1,14 @@
 import { sql } from '@vercel/postgres';
-import { formatCurrency } from './utils';
 import {
-  Revenue,
-  InvoicesTable,
+  CustomerField,
   CustomersTable,
   InvoiceForm,
-  CustomerName,
+  InvoicesTable,
   LatestInvoiceRaw,
   User,
+  Revenue,
 } from './definitions';
+import { formatCurrency } from './utils';
 
 export async function fetchRevenue() {
   try {
@@ -142,11 +142,10 @@ export async function fetchInvoiceById(id: string) {
     const data = await sql<InvoiceForm>`
       SELECT
         invoices.id,
+        invoices.customer_id,
         invoices.amount,
-        invoices.status,
-        customers.name
+        invoices.status
       FROM invoices
-      JOIN customers ON invoices.customer_id = customers.id
       WHERE invoices.id = ${id};
     `;
 
@@ -163,9 +162,9 @@ export async function fetchInvoiceById(id: string) {
   }
 }
 
-export async function fetchCustomerNames() {
+export async function fetchCustomers() {
   try {
-    const data = await sql<CustomerName>`
+    const data = await sql<CustomerField>`
       SELECT
         id,
         name
