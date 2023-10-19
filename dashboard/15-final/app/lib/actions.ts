@@ -67,7 +67,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
     };
   }
 
-  // Revalidate cache and redirect user to invoices page
+  // Revalidate the cache for the invoices page and redirect the user.
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
 }
