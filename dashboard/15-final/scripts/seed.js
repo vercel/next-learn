@@ -4,7 +4,7 @@ const {
   customers,
   revenue,
   users,
-} = require('../app/lib/dummy-data.js');
+} = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
 async function seedUsers() {
@@ -142,7 +142,7 @@ async function seedRevenue() {
         (rev) => sql`
         INSERT INTO revenue (month, revenue)
         VALUES (${rev.month}, ${rev.revenue})
-        ON CONFLICT (month) DO NOTHING;      
+        ON CONFLICT (month) DO NOTHING;
       `,
       ),
     );

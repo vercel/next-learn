@@ -1,4 +1,4 @@
-// This file contains dummy data that you'll be replacing with real data in Chapter 7.
+// This file contains placeholder data that you'll be replacing with real data in Chapter 7.
 const users = [
   {
     id: 1,
