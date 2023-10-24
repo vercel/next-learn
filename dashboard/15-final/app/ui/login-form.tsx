@@ -17,7 +17,10 @@ export default async function LoginForm() {
         <form
           action={async (formData) => {
             'use server';
-            await signIn('credentials', Object.fromEntries(formData));
+            await signIn('credentials', {
+              ...Object.fromEntries(formData),
+              redirectTo: '/dashboard',
+            });
           }}
           className="space-y-3"
         >
@@ -64,7 +67,7 @@ export default async function LoginForm() {
               </div>
             </div>
           </div>
-          <Button className="w-full" type="submit">
+          <Button className="w-full">
             Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
           </Button>
         </form>
