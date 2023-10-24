@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   },
   description: 'The official Next.js Learn Dashboard built with App Router.',
 };
-
 export default function RootLayout({
   children,
 }: {
