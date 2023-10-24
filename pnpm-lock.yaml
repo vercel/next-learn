@@ -244,8 +244,8 @@ importers:
         specifier: 13.5.7-canary.23
         version: 13.5.7-canary.23(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)
       next-auth:
-        specifier: 5.0.0-beta.0
-        version: 5.0.0-beta.0(next@13.5.7-canary.23)(react@18.2.0)
+        specifier: 5.0.0-beta.2
+        version: 5.0.0-beta.2(next@13.5.7-canary.23)(react@18.2.0)
       postcss:
         specifier: 8.4.31
         version: 8.4.31
@@ -3819,8 +3819,8 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-auth@5.0.0-beta.0(next@13.5.7-canary.23)(react@18.2.0):
-    resolution: {integrity: sha512-xR16llhTIWwuL5Cf/9Sp2LQSCmTWVnen/ZEGTOuml0/TVEvyM85+tmo6tpe8+t2EJSlBOR7e6NRAiayh9V+ftw==}
+  /next-auth@5.0.0-beta.2(next@13.5.7-canary.23)(react@18.2.0):
+    resolution: {integrity: sha512-iObWfRlUoQM8qk/ZOZrN9iHC1Yf+jsTN1J8PPFyzIGEL1GP2zclFt0AH/SVZAqXP3EPPKuE/9xfCc99SMp3MMQ==}
     peerDependencies:
       next: ^13.5.3
       nodemailer: ^6.6.5
