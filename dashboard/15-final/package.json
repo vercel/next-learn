@@ -10,9 +10,9 @@
   "dependencies": {
     "@heroicons/react": "^2.0.18",
     "@tailwindcss/forms": "^0.5.6",
-    "@types/node": "20.8.3",
-    "@types/react": "18.2.25",
-    "@types/react-dom": "18.2.11",
+    "@types/node": "18.18.0",
+    "@types/react": "18.2.31",
+    "@types/react-dom": "18.2.14",
     "@vercel/postgres": "^0.5.0",
     "autoprefixer": "10.4.16",
     "bcryptjs": "^2.4.3",
