@@ -2,8 +2,9 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { sql } from '@vercel/postgres';
-import type { User } from '@/app/lib/definitions';
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
+import type { User } from '@/app/lib/definitions';
 
 async function getUser(email: string) {
   try {
@@ -29,15 +30,17 @@ export const {
         email: { label: 'Email', type: 'email' },
       },
       async authorize(credentials) {
-        const { email, password } = credentials ?? {};
-        // @ts-expect-error TODO: Validate email type with zod
-        const user = await getUser(email);
-        if (!user || !password) {
-          console.log('Missing credentials');
+        const validatedCredentials = z
+          .object({ email: z.string().email(), password: z.string().min(6) })
+          .safeParse(credentials);
+
+        if (!validatedCredentials.success) {
+          console.log('Invalid credentials');
           return null;
         }
 
-        // @ts-expect-error TODO: Validate password type with zod
+        const { email, password } = validatedCredentials.data;
+        const user = await getUser(email);
         const passwordsMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordsMatch) {
