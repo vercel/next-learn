@@ -2,9 +2,9 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { sql } from '@vercel/postgres';
-import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import type { User } from '@/app/lib/definitions';
+import { authConfig } from './auth.config';
 
 async function getUser(email: string) {
   try {
@@ -16,12 +16,8 @@ async function getUser(email: string) {
   }
 }
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
+export const { auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   providers: [
     Credentials({
       name: 'Sign-In with Credentials',
@@ -52,23 +48,4 @@ export const {
       },
     }),
   ],
-  callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-      if (isOnDashboard) {
-        nextUrl.pathname = '/login';
-        if (!isLoggedIn) return NextResponse.redirect(nextUrl);
-        return true;
-      } else if (isLoggedIn) {
-        nextUrl.pathname = '/dashboard';
-        return NextResponse.redirect(nextUrl);
-      }
-
-      return true;
-    },
-  },
-  pages: {
-    signIn: '/login',
-  },
 });
