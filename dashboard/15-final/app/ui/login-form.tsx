@@ -17,10 +17,7 @@ export default async function LoginForm() {
         <form
           action={async (formData) => {
             'use server';
-            await signIn('credentials', {
-              ...Object.fromEntries(formData),
-              redirectTo: '/dashboard',
-            });
+            await signIn('credentials', Object.fromEntries(formData));
           }}
           className="space-y-3"
         >

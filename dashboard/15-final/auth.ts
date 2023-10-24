@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { sql } from '@vercel/postgres';
 import type { User } from '@/app/lib/definitions';
+import { NextResponse } from 'next/server';
 
 async function getUser(email: string) {
   try {
@@ -50,7 +51,18 @@ export const {
   ],
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      return !nextUrl.pathname.startsWith('/dashboard') || !!auth?.user;
+      const isLoggedIn = !!auth?.user;
+      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+      if (isOnDashboard) {
+        nextUrl.pathname = '/login';
+        if (!isLoggedIn) return NextResponse.redirect(nextUrl);
+        return true;
+      } else if (isLoggedIn) {
+        nextUrl.pathname = '/dashboard';
+        return NextResponse.redirect(nextUrl);
+      }
+
+      return true;
     },
   },
   pages: {
