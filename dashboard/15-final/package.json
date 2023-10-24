@@ -1,6 +1,4 @@
 {
-  "name": "15-final",
-  "version": "0.1.0",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -19,8 +17,8 @@
     "autoprefixer": "10.4.15",
     "bcrypt": "^5.1.1",
     "clsx": "^2.0.0",
-    "next": "^13.5.3",
-    "next-auth": "^4.23.2",
+    "next": "13.5.7-canary.23",
+    "next-auth": "5.0.0-beta.2",
     "postcss": "8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -30,7 +28,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0",
+    "@types/bcrypt": "^5.0.1",
     "dotenv": "^16.3.1",
     "prettier": "^3.0.3"
   },
