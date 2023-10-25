@@ -1,4 +1,4 @@
-// This file contains placeholder data that you'll be replacing with real data in Chapter 7.
+// This file contains placeholder data that you'll be replacing with real data in Fetching Data chapter.
 const users = [
   {
     id: 1,
