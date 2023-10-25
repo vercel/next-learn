@@ -11,7 +11,7 @@ import {
 import { Button } from '../button';
 import { createInvoice } from '@/app/lib/actions';
 // @ts-ignore React types do not yet include useFormState
-import { useFormState } from 'react-dom';
+import { experimental_useFormState as useFormState } from 'react-dom';
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState = { message: null, errors: [] };
