@@ -8,7 +8,7 @@ import { Button } from '../ui/button';
 import { authenticate } from '../lib/actions';
 
 export default function LoginForm() {
-  const [message, action] = useFormState(authenticate, undefined);
+  const [code, action] = useFormState(authenticate, undefined);
 
   return (
     <main className="flex items-center justify-center md:h-screen">
@@ -65,7 +65,7 @@ export default function LoginForm() {
               </div>
             </div>
             <p aria-live="polite" className="mt-2 text-sm text-red-500">
-              {message === 'CredentialsSignin' ? 'Invalid credentials' : ''}
+              {code === 'CredentialsSignin' ? 'Invalid credentials' : ''}
             </p>
           </div>
           <Button className="w-full">
