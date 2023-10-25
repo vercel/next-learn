@@ -1,5 +1,5 @@
 // This file contains placeholder data that you'll be replacing with real data in Fetching Data chapter:
-// https://nextjs.org/learnx/dashboard-app/fetching-data
+// https://nextjs.org/learn/dashboard-app/fetching-data
 const users = [
   {
     id: 1,
