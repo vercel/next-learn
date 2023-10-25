@@ -65,7 +65,7 @@ export default function LoginForm() {
               </div>
             </div>
             <p aria-live="polite" className="mt-2 text-sm text-red-500">
-              {message}
+              {message === 'CredentialsSignin' ? 'Invalid credentials' : ''}
             </p>
           </div>
           <Button className="w-full">
