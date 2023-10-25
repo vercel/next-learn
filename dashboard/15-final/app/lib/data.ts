@@ -12,7 +12,7 @@ import { formatCurrency } from './utils';
 
 export async function fetchRevenue() {
   try {
-    // We artificially delay a reponse for demo purposes.
+    // We artificially delay a response for demo purposes.
     // Don't do this in real life :)
     console.log('Fetching revenue data...');
     await new Promise((resolve) => setTimeout(resolve, 3000));

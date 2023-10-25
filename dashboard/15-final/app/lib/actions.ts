@@ -105,7 +105,7 @@ export async function updateInvoice(prevState: State, formData: FormData) {
 }
 
 export async function deleteInvoice(formData: FormData) {
-  throw new Error('Failed to Delete Invoice');
+  // throw new Error('Failed to Delete Invoice');
 
   const { id } = DeleteInvoice.parse({
     id: formData.get('id'),
