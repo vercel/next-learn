@@ -1,7 +1,7 @@
 // This file contains placeholder data that you'll be replacing with real data in Chapter 7.
 const users = [
   {
-    id: 1,
+    id: '410544b2-4001-4271-9855-68f1c4f65645',
     name: 'User',
     email: 'user@nextmail.com',
     password: '123456',

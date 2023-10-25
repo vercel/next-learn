@@ -3,7 +3,7 @@
 // For simplicity of teaching, we're manually defining these types.
 // However, you're using an ORM such as Prisma, these types are generated automatically.
 export type User = {
-  id: number;
+  id: string;
   name: string;
   email: string;
   password: string;
