@@ -222,12 +222,6 @@ importers:
       '@types/node':
         specifier: 20.5.7
         version: 20.5.7
-      '@types/react':
-        specifier: 18.2.21
-        version: 18.2.21
-      '@types/react-dom':
-        specifier: 18.2.14
-        version: 18.2.14
       '@vercel/postgres':
         specifier: ^0.5.0
         version: 0.5.0
@@ -271,6 +265,12 @@ importers:
       '@types/bcrypt':
         specifier: ^5.0.1
         version: 5.0.1
+      '@types/react':
+        specifier: 18.2.32
+        version: 18.2.32
+      '@types/react-dom':
+        specifier: 18.2.14
+        version: 18.2.14
       dotenv:
         specifier: ^16.3.1
         version: 16.3.1
@@ -1035,12 +1035,13 @@ packages:
 
   /@types/prop-types@15.7.7:
     resolution: {integrity: sha512-FbtmBWCcSa2J4zL781Zf1p5YUBXQomPEcep9QZCfRfQgTxz3pJWiDFLebohZ9fFntX5ibzOkSsrJ0TEew8cAog==}
+    dev: true
 
   /@types/react-dom@18.2.14:
     resolution: {integrity: sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==}
     dependencies:
-      '@types/react': 18.2.21
-    dev: false
+      '@types/react': 18.2.32
+    dev: true
 
   /@types/react@18.2.21:
     resolution: {integrity: sha512-neFKG/sBAwGxHgXiIxnbm3/AAVQ/cMRS93hvBpg8xYRbeQSPVABp9U2bRnPf0iI4+Ucdv3plSxKK+3CW2ENJxA==}
@@ -1048,9 +1049,19 @@ packages:
       '@types/prop-types': 15.7.7
       '@types/scheduler': 0.16.4
       csstype: 3.1.2
+    dev: true
+
+  /@types/react@18.2.32:
+    resolution: {integrity: sha512-F0FVIZQ1x5Gxy/VYJb7XcWvCcHR28Sjwt1dXLspdIatfPq1MVACfnBDwKe6ANLxQ64riIJooXClpUR6oxTiepg==}
+    dependencies:
+      '@types/prop-types': 15.7.7
+      '@types/scheduler': 0.16.4
+      csstype: 3.1.2
+    dev: true
 
   /@types/scheduler@0.16.4:
     resolution: {integrity: sha512-2L9ifAGl7wmXwP4v3pN4p2FLhD0O1qsJpvKmNin5VA8+UvNVb447UDaAEV6UdrkA+m/Xs58U1RFps44x6TFsVQ==}
+    dev: true
 
   /@types/semver@7.5.3:
     resolution: {integrity: sha512-OxepLK9EuNEIPxWNME+C6WwbRAOOI2o2BaQEGzz5Lu2e4Z5eDnEo+/aVEDMIXywoJitJ7xWd641wrGLZdtwRyw==}
@@ -1785,6 +1796,7 @@ packages:
 
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
+    dev: true
 
   /damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
