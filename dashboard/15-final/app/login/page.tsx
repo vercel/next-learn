@@ -8,8 +8,7 @@ import { Button } from '../ui/button';
 import { authenticate } from '../lib/actions';
 
 export default function LoginForm() {
-  const initialState = {};
-  const [state, dispatch] = useFormState(authenticate, initialState);
+  const [message, action] = useFormState(authenticate, undefined);
 
   return (
     <main className="flex items-center justify-center md:h-screen">
@@ -19,7 +18,7 @@ export default function LoginForm() {
             <AcmeLogo />
           </div>
         </div>
-        <form action={dispatch} className="space-y-3">
+        <form action={action} className="space-y-3">
           <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-6 pt-5">
             <h1 className={`${lusitana.className} mb-3 text-2xl`}>
               Please log in to continue.
@@ -66,7 +65,7 @@ export default function LoginForm() {
               </div>
             </div>
             <p aria-live="polite" className="mt-2 text-sm text-red-500">
-              {state.message}
+              {message}
             </p>
           </div>
           <Button className="w-full">

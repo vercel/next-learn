@@ -122,15 +122,14 @@ export async function deleteInvoice(formData: FormData) {
 }
 
 export async function authenticate(
-  prevState: { message?: string; errors?: string[] },
+  prevState: string | undefined,
   formData: FormData,
 ) {
   try {
     await signIn('credentials', Object.fromEntries(formData));
-    return {};
   } catch (error) {
     if ((error as Error).message.includes('CredentialsSignin')) {
-      return { message: 'Invalid Credentials' };
+      return 'Invalid Credentials';
     }
     throw error;
   }
