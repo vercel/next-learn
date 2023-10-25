@@ -1,11 +1,16 @@
-import { signIn } from '@/auth';
+'use client';
+import { useFormState } from 'react-dom';
 import { lusitana } from '@/app/ui/fonts';
 import AcmeLogo from '@/app/ui/acme-logo';
 import { AtSymbolIcon, KeyIcon } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '../ui/button';
+import { authenticate } from '../lib/actions';
 
-export default async function LoginForm() {
+export default function LoginForm() {
+  const initialState = {};
+  const [state, dispatch] = useFormState(authenticate, initialState);
+
   return (
     <main className="flex items-center justify-center md:h-screen">
       <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
@@ -14,13 +19,7 @@ export default async function LoginForm() {
             <AcmeLogo />
           </div>
         </div>
-        <form
-          action={async (formData) => {
-            'use server';
-            await signIn('credentials', Object.fromEntries(formData));
-          }}
-          className="space-y-3"
-        >
+        <form action={dispatch} className="space-y-3">
           <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-6 pt-5">
             <h1 className={`${lusitana.className} mb-3 text-2xl`}>
               Please log in to continue.
