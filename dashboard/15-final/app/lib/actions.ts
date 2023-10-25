@@ -133,5 +133,6 @@ export async function authenticate(
     if ((error as Error).message.includes('CredentialsSignin')) {
       return { message: 'Invalid Credentials' };
     }
+    throw error;
   }
 }
