@@ -65,6 +65,9 @@ export default function LoginForm() {
                 </div>
               </div>
             </div>
+            <p aria-live="polite" className="mt-2 text-sm text-red-500">
+              {state.message}
+            </p>
           </div>
           <Button className="w-full">
             Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />

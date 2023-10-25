@@ -130,8 +130,8 @@ export async function authenticate(
     await signIn('credentials', Object.fromEntries(formData));
     return {};
   } catch (error) {
-    // if ((error as Error).name === 'CredentialsSignin') {
-    return { message: 'Invalid Credentials' };
-    // }
+    if ((error as Error).message.includes('CredentialsSignin')) {
+      return { message: 'Invalid Credentials' };
+    }
   }
 }
