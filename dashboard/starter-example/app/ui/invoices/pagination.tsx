@@ -6,43 +6,49 @@ import Link from 'next/link';
 import { generatePagination } from '@/app/lib/utils';
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
-  const allPages = generatePagination(currentPage, totalPages);
+  // NOTE: comment in this code when you get to this point in the course
+
+  // const allPages = generatePagination(currentPage, totalPages);
 
   return (
-    <div className="inline-flex">
-      <PaginationArrow
-        direction="left"
-        href={createPageURL(currentPage - 1)}
-        isDisabled={currentPage <= 1}
-      />
+    <>
+      {/* NOTE: comment in this code when you get to this point in the course */}
 
-      <div className="flex -space-x-px">
-        {allPages.map((page, index) => {
-          let position: 'first' | 'last' | 'single' | 'middle' | undefined;
+      {/* <div className="inline-flex">
+        <PaginationArrow
+          direction="left"
+          href={createPageURL(currentPage - 1)}
+          isDisabled={currentPage <= 1}
+        />
 
-          if (index === 0) position = 'first';
-          if (index === allPages.length - 1) position = 'last';
-          if (allPages.length === 1) position = 'single';
-          if (page === '...') position = 'middle';
+        <div className="flex -space-x-px">
+          {allPages.map((page, index) => {
+            let position: 'first' | 'last' | 'single' | 'middle' | undefined;
 
-          return (
-            <PaginationNumber
-              key={page}
-              href={createPageURL(page)}
-              page={page}
-              position={position}
-              isActive={currentPage === page}
-            />
-          );
-        })}
-      </div>
+            if (index === 0) position = 'first';
+            if (index === allPages.length - 1) position = 'last';
+            if (allPages.length === 1) position = 'single';
+            if (page === '...') position = 'middle';
 
-      <PaginationArrow
-        direction="right"
-        href={createPageURL(currentPage + 1)}
-        isDisabled={currentPage >= totalPages}
-      />
-    </div>
+            return (
+              <PaginationNumber
+                key={page}
+                href={createPageURL(page)}
+                page={page}
+                position={position}
+                isActive={currentPage === page}
+              />
+            );
+          })}
+        </div>
+
+        <PaginationArrow
+          direction="right"
+          href={createPageURL(currentPage + 1)}
+          isDisabled={currentPage >= totalPages}
+        />
+      </div> */}
+    </>
   );
 }
 
