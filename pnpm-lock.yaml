@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      next:
+        specifier: ^14.0.0
+        version: 14.0.0(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)
     devDependencies:
       '@vercel/style-guide':
         specifier: ^5.0.1
