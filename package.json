@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@vercel/style-guide": "^5.0.1",
-    "eslint": "8.48.0",
+    "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
     "eslint-config-prettier": "9.0.0",
     "prettier": "3.0.3",
