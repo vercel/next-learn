@@ -7,7 +7,7 @@ import {
   RevenueChartSkeleton,
   LatestInvoicesSkeleton,
   CardsSkeleton,
-} from '@/app/ui/dashboard/skeletons';
+} from '@/app/ui/skeletons';
 
 export default async function Page() {
   return (
