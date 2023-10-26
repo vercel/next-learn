@@ -211,7 +211,7 @@ importers:
         specifier: ^4.8.4
         version: 4.9.5
 
-  dashboard/15-final:
+  dashboard/final-example:
     dependencies:
       '@heroicons/react':
         specifier: ^2.0.18
