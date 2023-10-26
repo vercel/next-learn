@@ -266,8 +266,8 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1
       '@types/react':
-        specifier: 18.2.32
-        version: 18.2.32
+        specifier: 18.2.21
+        version: 18.2.21
       '@types/react-dom':
         specifier: 18.2.14
         version: 18.2.14
