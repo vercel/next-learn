@@ -2,11 +2,10 @@
 // https://nextjs.org/learn/dashboard-app/fetching-data
 const users = [
   {
-    id: '410544b2-4001-4271-9855-68f1c4f65645',
+    id: '410544b2-4001-4271-9855-fec4b6a6442a',
     name: 'User',
     email: 'user@nextmail.com',
     password: '123456',
-    CredentialsSignin,
   },
 ];
 
@@ -25,15 +24,15 @@ const customers = [
   },
   {
     id: '3958dc9e-737f-4377-85e9-fec4b6a6442a',
-    name: 'Guillermo Rauch',
-    email: 'guillermo@rauch.com',
-    image_url: '/customers/guillermo-rauch.png',
+    name: 'Hector Simpson',
+    email: 'hector@simpson.com',
+    image_url: '/customers/hector-simpson.png',
   },
   {
     id: '50ca3e18-62cd-11ee-8c99-0242ac120002',
-    name: 'Jared Palmer',
-    email: 'jared@palmer.com',
-    image_url: '/customers/jared-palmer.png',
+    name: 'Steven Tey',
+    email: 'steven@tey.com',
+    image_url: '/customers/steven-tey.png',
   },
   {
     id: '3958dc9e-787f-4377-85e9-fec4b6a6442a',
@@ -43,9 +42,9 @@ const customers = [
   },
   {
     id: '76d65c26-f784-44a2-ac19-586678f7c2f2',
-    name: 'Tom Occhino',
-    email: 'tom@occhino.com',
-    image_url: '/customers/tom-occhino.png',
+    name: 'Michael Novotny',
+    email: 'michael@novotny.com',
+    image_url: '/customers/michael-novotny.png',
   },
   {
     id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
