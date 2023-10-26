@@ -11,6 +11,7 @@
     "@types/node": "20.5.7",
     "@vercel/postgres": "^0.5.0",
     "autoprefixer": "10.4.15",
+    "bcrypt": "^5.1.1",
     "clsx": "^2.0.0",
     "next": "^14.0.0",
     "postcss": "8.4.31",
