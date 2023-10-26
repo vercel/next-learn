@@ -13,6 +13,7 @@ import { useFormState, useFormStatus } from 'react-dom';
 
 export default function LoginForm() {
   const [code, action] = useFormState(authenticate, undefined);
+  const { pending } = useFormStatus();
 
   return (
     <form action={action} className="space-y-3">
@@ -61,7 +62,9 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        <LoginButton />
+        <Button className="mt-4 w-full" aria-disabled={pending}>
+          Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+        </Button>
         <div className="flex h-8 items-end space-x-1">
           {code === 'CredentialsSignin' && (
             <>
