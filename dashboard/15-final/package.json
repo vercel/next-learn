@@ -11,13 +11,11 @@
     "@heroicons/react": "^2.0.18",
     "@tailwindcss/forms": "^0.5.6",
     "@types/node": "20.5.7",
-    "@types/react": "18.2.21",
-    "@types/react-dom": "18.2.14",
     "@vercel/postgres": "^0.5.0",
     "autoprefixer": "10.4.15",
     "bcrypt": "^5.1.1",
     "clsx": "^2.0.0",
-    "next": "13.5.7-canary.23",
+    "next": "13.5.7-canary.27",
     "next-auth": "5.0.0-beta.2",
     "postcss": "8.4.31",
     "react": "18.2.0",
@@ -29,6 +27,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.1",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.14",
     "dotenv": "^16.3.1",
     "prettier": "^3.0.3"
   },
