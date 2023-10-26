@@ -2,7 +2,7 @@
 
 This repository contains starter templates and final code for [Learn Next.js](https://nextjs.org/learn) courses:
 
-- 🆕 [Learn Next.js App Router, Data Fetching, Databases, and Auth](https://nextjs.org/learn) ([demo](https://next-learn-dashboard.vercel.sh/dashboard))
+- 🆕 [Learn Next.js App Router, Data Fetching, Databases, and Auth](https://nextjs.org/learn) ([demo](https://next-learn-dashboard.vercel.sh))
 - [Learn Basics and TypeScript](https://nextjs.org/learn-pages-router/basics/create-nextjs-app) ([demo](https://next-learn-starter.vercel.app))
 - [Learn SEO](https://nextjs.org/learn-pages-router/seo/introduction-to-seo) ([demo](https://next-seo-starter.vercel.app))
 
