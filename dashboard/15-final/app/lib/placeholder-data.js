@@ -1,10 +1,12 @@
-// This file contains placeholder data that you'll be replacing with real data in Chapter 7.
+// This file contains placeholder data that you'll be replacing with real data in the Data Fetching chapter:
+// https://nextjs.org/learn/dashboard-app/fetching-data
 const users = [
   {
-    id: 1,
+    id: '410544b2-4001-4271-9855-68f1c4f65645',
     name: 'User',
     email: 'user@nextmail.com',
     password: '123456',
+    CredentialsSignin,
   },
 ];
 
@@ -56,6 +58,18 @@ const customers = [
     name: 'Emil Kowalski',
     email: 'emil@kowalski.com',
     image_url: '/customers/emil-kowalski.png',
+  },
+  {
+    id: 'CC27C14A-0ACF-4F4A-A6C9-D45682C144B9',
+    name: 'Amy Burns',
+    email: 'amy.burns@vercel.com',
+    image_url: '/customers/amy-burns.png',
+  },
+  {
+    id: '13D07535-C59E-4157-A011-F8D2EF4E0CBB',
+    name: 'Balazs Orban',
+    email: 'balazs.orban@vercel.com',
+    image_url: '/customers/balazs-orban.png',
   },
 ];
 
