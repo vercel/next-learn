@@ -10,8 +10,7 @@ import {
 import Link from 'next/link';
 import { Button } from '../button';
 import { updateInvoice } from '@/app/lib/actions';
-// @ts-ignore React types do not yet include useFormState
-import { experimental_useFormState as useFormState } from 'react-dom';
+import { useFormState } from 'react-dom';
 
 export default function EditInvoiceForm({
   invoice,
