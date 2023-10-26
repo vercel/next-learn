@@ -61,13 +61,13 @@ const customers = [
   {
     id: 'CC27C14A-0ACF-4F4A-A6C9-D45682C144B9',
     name: 'Amy Burns',
-    email: 'amy.burns@vercel.com',
+    email: 'amy@burns.com',
     image_url: '/customers/amy-burns.png',
   },
   {
     id: '13D07535-C59E-4157-A011-F8D2EF4E0CBB',
     name: 'Balazs Orban',
-    email: 'balazs.orban@vercel.com',
+    email: 'balazs@orban.com',
     image_url: '/customers/balazs-orban.png',
   },
 ];
