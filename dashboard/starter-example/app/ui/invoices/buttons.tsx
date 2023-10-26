@@ -28,6 +28,8 @@ export function UpdateInvoice({ id }: { id: string }) {
 export function DeleteInvoice({ id }: { id: string }) {
   return (
     <>
+    {/* NOTE: comment in this code and above import when you get to this point in the course */}
+
     {/* <form action={deleteInvoice}>
       <input type="hidden" name="id" value={id} />
       <button className="rounded-md border p-2 hover:bg-gray-100">
