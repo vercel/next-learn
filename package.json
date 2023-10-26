@@ -7,6 +7,9 @@
     "start": "next start",
     "test": "npm run lint && npm run prettier:check"
   },
+  "dependencies": {
+    "next": "^14.0.0"
+  },
   "devDependencies": {
     "@vercel/style-guide": "^5.0.1",
     "eslint": "8.52.0",
@@ -18,8 +21,5 @@
   "packageManager": "pnpm@8.7.0",
   "engines": {
     "node": ">=18"
-  },
-  "dependencies": {
-    "next": "^14.0.0"
   }
 }
