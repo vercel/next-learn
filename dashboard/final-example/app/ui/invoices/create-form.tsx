@@ -10,15 +10,10 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button } from '../button';
 import { createInvoice } from '@/app/lib/actions';
-// @ts-ignore React types do not yet include useFormState
-import { experimental_useFormState as useFormState } from 'react-dom';
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
-  const initialState = { message: null, errors: [] };
-  const [state, dispatch] = useFormState(createInvoice, initialState);
-
   return (
-    <form action={dispatch}>
+    <form>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
