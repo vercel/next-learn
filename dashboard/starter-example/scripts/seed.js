@@ -18,16 +18,17 @@ async function seedUsers() {
     console.log(`Created "users" table`);
 
     // Insert data into the "users" table
-    const insertedUsers = await Promise.all(
-      users.map(async user => {
-        const hashedPassword = await bcrypt.hash(user.password, 10);
-        return sql`
+    const insertedUsers = [];
+    for (const user of users) {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      insertedUsers.push(
+        await sql`
         INSERT INTO users (id, name, email, password)
         VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
         ON CONFLICT (id) DO NOTHING;
-      `;
-      }),
-    );
+      `,
+      );
+    }
 
     console.log(`Seeded ${insertedUsers.length} users`);
 
