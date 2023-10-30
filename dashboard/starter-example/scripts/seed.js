@@ -1,5 +1,10 @@
 const { sql } = require('@vercel/postgres');
-const { invoices, customers, revenue, users } = require('../app/lib/placeholder-data.js');
+const {
+  invoices,
+  customers,
+  revenue,
+  users,
+} = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
 async function seedUsers() {
@@ -102,7 +107,8 @@ async function seedCustomers() {
     // Insert data into the "customers" table
     const insertedCustomers = [];
     for (const customer of customers) {
-      insertedCustomers.push(await sql`
+      insertedCustomers.push(
+        await sql`
         INSERT INTO customers (id, name, email, image_url)
         VALUES (${customer.id}, ${customer.name}, ${customer.email}, ${customer.image_url})
         ON CONFLICT (id) DO NOTHING;`,
@@ -136,7 +142,8 @@ async function seedRevenue() {
     // Insert data into the "revenue" table
     const insertedRevenue = [];
     for (const rev of revenue) {
-      insertedRevenue.push(await sql`
+      insertedRevenue.push(
+        await sql`
         INSERT INTO revenue (month, revenue)
         VALUES (${rev.month}, ${rev.revenue})
         ON CONFLICT (month) DO NOTHING;
