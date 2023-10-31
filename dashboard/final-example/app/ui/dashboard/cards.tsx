@@ -14,7 +14,7 @@ const iconMap = {
   invoices: InboxIcon,
 };
 
-export default async function Cards() {
+export default async function CardWrapper() {
   const {
     numberOfInvoices,
     numberOfCustomers,
