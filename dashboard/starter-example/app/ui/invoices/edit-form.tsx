@@ -20,8 +20,6 @@ export default function EditInvoiceForm({
   return (
     <form>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
-        {/* Invoice ID */}
-        <input type="hidden" name="id" value={invoice.id} />
         {/* Customer Name */}
         <div className="mb-4">
           <label htmlFor="customer" className="mb-2 block text-sm font-medium">
@@ -68,10 +66,10 @@ export default function EditInvoiceForm({
         </div>
 
         {/* Invoice Status */}
-        <div>
-          <label htmlFor="status" className="mb-2 block text-sm font-medium">
+        <fieldset>
+          <legend className="mb-2 block text-sm font-medium">
             Set the invoice status
-          </label>
+          </legend>
           <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
             <div className="flex gap-4">
               <div className="flex items-center">
@@ -108,7 +106,7 @@ export default function EditInvoiceForm({
               </div>
             </div>
           </div>
-        </div>
+        </fieldset>
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link
