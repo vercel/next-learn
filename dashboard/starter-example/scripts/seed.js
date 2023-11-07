@@ -168,7 +168,7 @@ async function main() {
   await seedInvoices(client);
   await seedRevenue(client);
 
-  await client.end();
+  await db.end();
 }
 
 main().catch((err) => {
