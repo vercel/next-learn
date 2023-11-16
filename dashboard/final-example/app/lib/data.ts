@@ -16,8 +16,8 @@ export async function fetchRevenue() {
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
   noStore();
   try {
-    // Artificially delay a reponse for demo purposes.
-    // Don't do this in real life :)
+    // Artificially delay a response for demo purposes.
+    // Don't do this in production :)
 
     // console.log('Fetching revenue data...');
     // await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -86,7 +86,7 @@ export async function fetchCardData() {
     };
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to card data.');
+    throw new Error('Failed to fetch card data.');
   }
 }
 
