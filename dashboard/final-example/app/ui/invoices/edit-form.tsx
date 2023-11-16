@@ -35,7 +35,7 @@ export default function EditInvoiceForm({
             <select
               id="customer"
               name="customerId"
-              className="peer block cursor-pointer w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               defaultValue={invoice.customer_id}
               aria-describedby="customer-error"
             >
@@ -115,7 +115,7 @@ export default function EditInvoiceForm({
                 />
                 <label
                   htmlFor="pending"
-                  className="ml-2 cursor-pointer flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-300"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-300"
                 >
                   Pending <ClockIcon className="h-4 w-4" />
                 </label>
@@ -131,7 +131,7 @@ export default function EditInvoiceForm({
                 />
                 <label
                   htmlFor="paid"
-                  className="ml-2 cursor-pointer flex items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white dark:text-gray-300"
+                  className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white dark:text-gray-300"
                 >
                   Paid <CheckIcon className="h-4 w-4" />
                 </label>
