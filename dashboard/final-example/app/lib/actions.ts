@@ -132,7 +132,7 @@ export async function authenticate(
         case 'CredentialsSignin':
           return 'Invalid credentials.';
         default:
-          return 'Something went wrong. Check the logs for more information.';
+          return 'Something went wrong.';
       }
     }
     throw error;
