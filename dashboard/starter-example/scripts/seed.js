@@ -61,6 +61,8 @@ async function seedInvoices(client) {
   );
 `;
 
+    await client.sql`DELETE FROM invoices;`;
+
     console.log(`Created "invoices" table`);
 
     // Insert data into the "invoices" table
