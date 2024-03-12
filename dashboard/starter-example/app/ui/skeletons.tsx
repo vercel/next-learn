@@ -72,10 +72,10 @@ export function LatestInvoicesSkeleton() {
           <InvoiceSkeleton />
           <InvoiceSkeleton />
           <InvoiceSkeleton />
-          <div className="flex items-center pb-2 pt-6">
-            <div className="h-5 w-5 rounded-full bg-gray-200" />
-            <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
-          </div>
+        </div>
+        <div className="flex items-center pb-2 pt-6">
+          <div className="h-5 w-5 rounded-full bg-gray-200" />
+          <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
         </div>
       </div>
     </div>
