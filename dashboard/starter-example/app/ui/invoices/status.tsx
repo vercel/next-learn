@@ -12,6 +12,7 @@ export default function InvoiceStatus({ status }: { status: string }) {
         },
       )}
     >
+      /* using the clsx library to toggle class names*/
       {status === 'pending' ? (
         <>
           Pending
