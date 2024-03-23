@@ -1,7 +1,8 @@
 import { CheckIcon, ClockIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+import { InvoicesTable } from '@/app/lib/definitions';
 
-export default function InvoiceStatus({ status }: { status: string }) {
+export default function InvoiceStatus({ status }: { status: InvoicesTable['status'] }) {
   return (
     <span
       className={clsx(
