@@ -1,0 +1,59 @@
+name: Create PR on Merge to Next
+
+on:
+  push:
+    branches:
+      - next
+
+jobs:
+  create-pr:
+    name: 'pr_main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create or update PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.PULL_REQUEST_TOKEN }}
+        run: |
+          #!/bin/bash
+
+          commitMessage="${{ github.event.head_commit.message }}"
+
+
+          # Función para transformar el texto
+          transform_text() {
+            input="${1}"
+            nroPR_branch=$(echo "$input" | sed -E 's/[^ ]*:[^:]*$//') # Extraer todo el texto desde el inicio hasta el último ":"
+
+            result=" - *${{ github.event.pull_request.title }}* ${nroPR_branch}"  # Escapar el símbolo $
+            echo "${result}"
+          }
+
+          transformed_text=$(transform_text "${commitMessage}")
+
+          pr_title="[PROD :red_circle:] : 🚀 Integración de cambios diversos para release 🚀"
+
+          pr_description=" # 🚀 Pull Request para Producción 🚀
+
+          ## Cambios propuestos
+
+          $transformed_text"            
+
+          existing_pr=$(gh pr list -B main -H next --state open --json "number" | jq -r '.[0].number')
+
+          re='^[0-9]+$'
+          if ! [[ $existing_pr =~ $re ]] ; then
+            echo "Creating PR"
+            gh pr create --base main --head next --title "$pr_title" --body "$pr_description"
+          else
+            echo "Updating PR"
+            existing_description=$(gh pr view $existing_pr --json body -q '.body')
+            updated_description="$existing_description"$'\n \n---\n \n'"$transformed_text"
+            gh pr edit $existing_pr --title "$pr_title" --body "$updated_description"
+          fi
+
+
+      
+     
