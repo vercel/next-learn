@@ -1,25 +1,40 @@
 {
   "private": true,
   "scripts": {
-    "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
+    "build": "next build",
+    "dev": "next dev",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
-    "start": "next start",
-    "test": "npm run lint && npm run prettier:check"
+    "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "@tailwindcss/forms": "^0.5.7",
-    "next": "^14.0.0"
+    "@types/node": "20.5.7",
+    "@vercel/postgres": "^0.5.0",
+    "autoprefixer": "10.4.15",
+    "bcrypt": "^5.1.1",
+    "clsx": "^2.0.0",
+    "next": "^14.0.2",
+    "postcss": "8.4.31",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.2.2",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.1",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.14",
     "@vercel/style-guide": "^5.0.1",
-    "eslint": "8.52.0",
-    "eslint-config-next": "14.0.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^14.0.0",
     "eslint-config-prettier": "9.0.0",
-    "prettier": "3.0.3",
+    "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "0.5.4"
   },
-  "packageManager": "pnpm@8.7.0",
   "engines": {
     "node": ">=18.17.0"
   }
