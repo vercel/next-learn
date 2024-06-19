@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.1",
-    "@types/react": "18.2.21",
-    "@types/react-dom": "18.2.14",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
     "@vercel/style-guide": "^5.0.1",
     "dotenv": "^16.3.1",
     "eslint": "^8.52.0",
