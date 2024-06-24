@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: 'pnpm'
-          node-version-file: '.nvmrc'
+          node-version: '20'
       - name: Cache node_modules
         id: node-modules-cache
         uses: actions/cache@v4
