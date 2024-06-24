@@ -29,12 +29,6 @@ const customers = [
     image_url: '/customers/lee-robinson.png',
   },
   {
-    id: '3958dc9e-787f-4377-85e9-fec4b6a6442a',
-    name: 'Steph Dietz',
-    email: 'steph@dietz.com',
-    image_url: '/customers/steph-dietz.png',
-  },
-  {
     id: '76d65c26-f784-44a2-ac19-586678f7c2f2',
     name: 'Michael Novotny',
     email: 'michael@novotny.com',
@@ -86,7 +80,7 @@ const invoices = [
     date: '2023-08-05',
   },
   {
-    customer_id: customers[7].id,
+    customer_id: customers[2].id,
     amount: 54246,
     status: 'pending',
     date: '2023-07-16',
@@ -150,9 +144,4 @@ const revenue = [
   { month: 'Dec', revenue: 4800 },
 ];
 
-module.exports = {
-  users,
-  customers,
-  invoices,
-  revenue,
-};
+export { users, customers, invoices, revenue };
