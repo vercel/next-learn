@@ -6,13 +6,13 @@ import Link from 'next/link';
 import { generatePagination } from '@/app/lib/utils';
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
-  // NOTE: Uncomment this code in Chapter 7
+  // NOTE: Uncomment this code in Chapter 11
 
   // const allPages = generatePagination(currentPage, totalPages);
 
   return (
     <>
-      {/*  NOTE: Uncomment this code in Chapter 7 */}
+      {/*  NOTE: Uncomment this code in Chapter 11 */}
 
       {/* <div className="inline-flex">
         <PaginationArrow
