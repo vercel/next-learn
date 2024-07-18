@@ -93,6 +93,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
             <div className="flex gap-4">
               <div className="flex items-center">
                 <input
+                  required
                   id="pending"
                   name="status"
                   type="radio"
@@ -108,6 +109,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
               </div>
               <div className="flex items-center">
                 <input
+                  required
                   id="paid"
                   name="status"
                   type="radio"
