@@ -15,7 +15,7 @@ const iconMap = {
 
 export default async function CardWrapper() {
   return (
-    <>
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {/* NOTE: Uncomment this code in Chapter 9 */}
 
       {/* <Card title="Collected" value={totalPaidInvoices} type="collected" />
@@ -26,7 +26,7 @@ export default async function CardWrapper() {
         value={numberOfCustomers}
         type="customers"
       /> */}
-    </>
+    </div>
   );
 }
 
