@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Fuse from 'fuse.js';
 import _ from 'lodash';
 
+import { countries } from '../countries';
 import styles from '../styles/Home.module.css';
 import CodeSampleModal from '../components/CodeSampleModal';
 
@@ -100,13 +101,10 @@ export default function Start({ countries }) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch('https://restcountries.com/v3.1/all');
-  const countries = await response.json();
-
   return {
     props: {
       countries: countries.map((country) => ({
-        name: country.name.common,
+        name: country.name,
         cca2: country.cca2,
         population: country.population,
       })),
