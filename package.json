@@ -4,6 +4,7 @@
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
+    "dev": "next dev",
     "start": "next start",
     "test": "npm run lint && npm run prettier:check"
   },
