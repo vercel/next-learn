@@ -8,6 +8,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/postcss": "^4",
     "autoprefixer": "10.4.20",
     "bcrypt": "^5.1.1",
     "clsx": "^2.1.1",
@@ -17,7 +18,7 @@
     "postgres": "^3.4.5",
     "react": "latest",
     "react-dom": "latest",
-    "tailwindcss": "3.4.17",
+    "tailwindcss": "4.1.4",
     "typescript": "5.7.3",
     "use-debounce": "^10.0.4",
     "zod": "^3.24.1"
