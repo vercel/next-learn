@@ -3,8 +3,10 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchLatestInvoices } from '@/app/lib/data';
+import { connection } from 'next/server';
 
 export default async function LatestInvoices() {
+  await connection();
   const latestInvoices = await fetchLatestInvoices();
 
   return (
