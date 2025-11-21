@@ -34,6 +34,7 @@
     "remark-html": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "tw-animate-css": "latest",
     "use-debounce": "latest",
     "zod": "4.1.12"
   },
