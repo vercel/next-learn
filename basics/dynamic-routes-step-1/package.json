@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "next": "16.0.7",
+    "next": "latest",
     "react": "latest",
     "react-dom": "latest"
   },

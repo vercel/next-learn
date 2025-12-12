@@ -8,7 +8,7 @@
   "dependencies": {
     "fuse.js": "^6.6.2",
     "lodash": "^4.17.21",
-    "next": "15.1.9",
+    "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-modal": "^3.16.3",
