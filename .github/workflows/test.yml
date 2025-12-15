@@ -19,7 +19,7 @@ jobs:
           node-version: '20'
       - name: Cache node_modules
         id: node-modules-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: '**/node_modules'
           key: node-modules-cache-${{ hashFiles('**/pnpm-lock.yaml') }}
