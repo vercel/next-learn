@@ -22,7 +22,7 @@ body:
     attributes:
       label: Chapter URL
       description: Paste the URL of the chapter where you encountered the issue
-      placeholder: "https://nextjs.org/learn/..."
+      placeholder: 'https://nextjs.org/learn/...'
     validations:
       required: true
 
