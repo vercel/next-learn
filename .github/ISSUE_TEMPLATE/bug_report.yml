@@ -1,0 +1,82 @@
+name: Bug Report / Documentation Issue
+description: Report an issue with the Next.js Learn course
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report an issue! Please fill out the form below.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have searched existing issues to make sure this isn't a duplicate
+          required: true
+        - label: I have completed this chapter and encountered the issue myself
+          required: true
+
+  - type: input
+    id: chapter_url
+    attributes:
+      label: Chapter URL
+      description: Paste the URL of the chapter where you encountered the issue
+      placeholder: 'https://nextjs.org/learn/...'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: Issue Type
+      description: What kind of issue is this?
+      options:
+        - Typo or grammatical error
+        - Outdated code or instructions
+        - Build or runtime error
+        - Unclear or confusing instructions
+        - Missing information
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the issue clearly
+      placeholder: "What's wrong? Be specific about what you found."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_vs_actual
+    attributes:
+      label: Expected vs Actual Behavior
+      description: What did you expect to happen, and what actually happened?
+      placeholder: |
+        Expected: The code should compile without errors
+        Actual: I get a TypeScript error on line 42
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment (optional)
+      description: Your setup details if relevant
+      placeholder: |
+        - Node version:
+        - OS:
+        - Browser:
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots (optional)
+      description: Add screenshots if they help explain the issue
+    validations:
+      required: false
