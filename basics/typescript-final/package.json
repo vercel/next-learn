@@ -8,7 +8,7 @@
   "dependencies": {
     "date-fns": "^2.29.3",
     "gray-matter": "^4.0.3",
-    "next": "^13.0.2",
+    "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "remark": "^14.0.2",

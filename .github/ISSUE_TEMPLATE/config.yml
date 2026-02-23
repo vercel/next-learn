@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Next.js Documentation
+    url: https://nextjs.org/docs
+    about: For general Next.js questions, check the official documentation
+  - name: GitHub Discussions
+    url: https://github.com/vercel/next.js/discussions
+    about: For general discussions about Next.js
