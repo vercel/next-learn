@@ -7,12 +7,13 @@ import { generatePagination } from '@/app/lib/utils';
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   // NOTE: Uncomment this code in Chapter 10
-
+  // Step 1: Uncomment the line below before uncommenting the JSX return block
   // const allPages = generatePagination(currentPage, totalPages);
 
   return (
     <>
-      {/*  NOTE: Uncomment this code in Chapter 10 */}
+      {/* NOTE: Uncomment this code in Chapter 10 */}
+      {/* Step 2: Make sure the allPages variable above is also uncommented */}
 
       {/* <div className="inline-flex">
         <PaginationArrow
